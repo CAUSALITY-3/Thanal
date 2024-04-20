@@ -1,0 +1,20 @@
+.carousel{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    overflow: scroll;
+    white-space: nowrap;
+}
+.carousel-title{
+        margin-left: 10px;
+    }
+    .child{
+        display: flex;
+        cursor: grab;
+    }
+
+.carousel::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}

@@ -1,0 +1,21 @@
+svg:hover {
+    fill: #d2ffd2;
+  }
+  
+  svg:hover path {
+    fill:  #d2ffd2;
+    transition: all ease 0.5s;
+  }
+  
+  svg path {
+    transition: all ease 0.5s;
+  }
+
+  svg:hover text {
+    fill:  #d2ffd2;
+    transition: all ease 0.5s;
+  }
+  
+  svg text {
+    transition: all ease 0.5s;
+  }
