@@ -5,6 +5,7 @@ import { Sections } from "./Sections";
 import Image from "next/image";
 import homePage from "@public/homePage.jpg";
 import { dbCall } from "@/api/sevice";
+import { ProductMainList } from "@/api/types";
 
 const styles = stylex.create({
   home: {
@@ -25,27 +26,6 @@ const styles = stylex.create({
     justifyContent: "center",
   },
 });
-
-interface ProductMainList {
-  type: string;
-  data: {
-    [key: string]: {
-      category: string;
-      name: string;
-      description: string;
-      image: string;
-      price: number;
-      productId: string;
-      ratings: { average: number; count: number };
-    };
-  };
-}
-
-// async function getMainData (){
-//   const mainListService: ProductServices = await getservice("productService");
-//   const mainData: ProductMainList[] = await mainListService.getProductMainList();
-//   return mainData
-// }
 
 export default async function Page() {
   const mainData: ProductMainList[] = await dbCall('get', 'PRODUCT_MAINLIST');

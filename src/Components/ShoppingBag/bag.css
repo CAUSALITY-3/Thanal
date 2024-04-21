@@ -1,10 +1,11 @@
 svg:hover {
-    fill: #d2ffd2;
+    fill: black;
   }
   
   svg:hover path {
-    fill:  #d2ffd2;
+    fill:  black;
     transition: all ease 0.5s;
+    cursor: pointer;
   }
   
   svg path {
@@ -12,8 +13,9 @@ svg:hover {
   }
 
   svg:hover text {
-    fill:  #d2ffd2;
+    fill:  black;
     transition: all ease 0.5s;
+    cursor: pointer;
   }
   
   svg text {

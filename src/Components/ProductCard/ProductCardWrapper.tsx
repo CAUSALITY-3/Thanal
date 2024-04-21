@@ -19,13 +19,13 @@ export const ProductCardWrapper: FC<Props> = ({ children, id }) => {
 }
 
   useEffect(() => {
-    router.prefetch(`/product/${id}`, {kind:PrefetchKind.AUTO})
+    router.prefetch(`/products/${id}`, {kind:PrefetchKind.AUTO})
     console.log("sasi", id)
   }, [])
   
   const handleClick = () => {
     // console.log(children)
-    isClick ? router.push(`/product/${id}`) : null;
+    isClick ? router.push(`/products/${id}`) : null;
   };
   let checkForDrag: number;
   const mouseDownCoords = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

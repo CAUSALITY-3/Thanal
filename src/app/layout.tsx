@@ -48,6 +48,7 @@ const styles = stylex.create({
     //   default: "visible",
     //   "@media (max-width: 500px)": "none",
     // }
+    width: "100%",
     position: "absolute",
     top: 0,
     left: 0,

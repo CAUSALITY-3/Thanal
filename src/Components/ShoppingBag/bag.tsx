@@ -1,15 +1,13 @@
 import { FC } from "react";
-import * as stylex from "@stylexjs/stylex";
 import "./bag.css";
 
-const styles = stylex.create({});
 
 export const Bag: FC<{numOfItems: number}>  = ({numOfItems}) => {
   const bagStyle = {
     margin: "0 10px",
     height: 25,
     width: 25,
-    fill: "#F0EAD6",
+    fill: "rgba(0, 0, 0, .8)",
   };
   return (
     <div>

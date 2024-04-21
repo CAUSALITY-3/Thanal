@@ -17,6 +17,7 @@ export const options: NextAuthOptions = {
       const upsertUser = await dbCall(
         "post",
         "UPSERT_USER",
+        {},
         "",
         JSON.stringify(profile),
         {

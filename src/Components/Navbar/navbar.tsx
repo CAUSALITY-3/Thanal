@@ -14,8 +14,7 @@ import { dbCall } from "@/api/sevice";
 const styles = stylex.create({
   navBar: {
     height: 50,
-    width: "100vw",
-    background: "linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7))",
+    background: "rgba(250, 250, 252, .8)",
     "backdrop-filter": "blur(10px)",
     display: "flex",
     alignItems: "center",
@@ -30,12 +29,12 @@ const styles = stylex.create({
   navBarItems: {
     "text-decoration": "none",
     margin: "0 10px",
-    color: "#F0EAD6",
+    color: "rgba(0, 0, 0, .8)",
     fontSize: text.sm,
     transition: "all ease 0.5s",
     ":hover": {
       cursor: "pointer",
-      color: "#d2ffd2",
+      color: "black",
       transition: "all ease 0.5s",
     },
   },
@@ -44,7 +43,7 @@ const styles = stylex.create({
 export const Navbar: FC = async () => {
   const session: any = await getServerSession(options);
   const userProfileResponse = session?.user?.email
-    ? await dbCall("get", "GET_USER_BY_EMAIL", `?email=${session?.user?.email}`)
+    ? await dbCall("get", "GET_USER_BY_EMAIL", {}, `?email=${session?.user?.email}`)
     : null;
   const user = userProfileResponse;
   console.log("kuttu", session);

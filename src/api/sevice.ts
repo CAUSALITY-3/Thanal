@@ -1,35 +1,41 @@
-import axios from "axios";
 import { apiPaths } from "./types";
 import { logger } from "./lib";
+import { revalidateCache } from "./utils";
 const baseUrl = process.env.API_BASE_URL;
 const timeout = +(process.env.API_TIME_OUT || 15000);
 
 export async function dbCall(
   method: string,
   path: string,
+  nextOptions?: {
+    revalidate?: false | number | undefined;
+    tags?: string[];
+    revalidateTags?: string[];
+    revalidatePaths?: string[];
+  },
   params: string = "",
-  data?: any,
-  headers?:any,
+  body?: any,
+  headers?: any,
   errorReplacer?: any
 ) {
   try {
+    const url = baseUrl + apiPaths[path] + params;
     const options = {
       method,
-      url: baseUrl + apiPaths[path] + params,
       headers,
-      timeout,
-      data,
+      body,
+      next: {
+        revalidate: nextOptions?.revalidate,
+        tags: nextOptions?.tags,
+      },
     };
-    logger("INFO", options, "calling DB service, http options ");
-    let responseData: any;
-    if (method === 'get') {
-        const response = await fetch(options.url, { next: { revalidate: 60 } })
-        responseData = await response.json()
-    } else {
-        const response = await axios(options);
-        responseData = response.data;
+    logger("INFO", {url, ...options}, "calling DB service, http options ");
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
     }
-    
+    const responseData = await response.json();
+    revalidateCache(nextOptions?.revalidatePaths, nextOptions?.revalidateTags);
     logger(
       "INFO",
       responseData,

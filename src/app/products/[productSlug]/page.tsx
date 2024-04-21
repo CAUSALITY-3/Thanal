@@ -168,7 +168,7 @@ const styles = stylex.create({
 
 export default async function ProductDetail({ params }: any) {
 
-  const product = await dbCall('get', 'GET_PRODUCT_BY_ID', `?id=${params.productSlug}`);
+  const product = await dbCall('get', 'GET_PRODUCT_BY_ID', {}, `?id=${params.productSlug}`);
   console.log("qwerty",JSON.stringify(params))
   // const resp = await fetch(`${process.env.API_BASE_URL}products/product${params.productSlug}`);
   // const product = await resp.json();
