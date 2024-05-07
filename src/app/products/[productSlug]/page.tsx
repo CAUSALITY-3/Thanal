@@ -4,7 +4,7 @@ import { ImageSlider } from "@Components/ImageSlider/ImageSlider";
 import { Ratings } from "@Components/Ratings/Ratings";
 import { ProductFeatures } from "@Components/ProductFeatures/ProductFeatures";
 import { BuyOrAdd } from "@Components/BuyOrAdd/BuyOrAdd";
-import { dbCall } from "@/api/sevice";
+import { apiCall } from "@/api/sevice";
 
 const styles = stylex.create({
   productDetailOuter: {
@@ -168,12 +168,13 @@ const styles = stylex.create({
 
 export default async function ProductDetail({ params }: any) {
 
-  const product = await dbCall('get', 'GET_PRODUCT_BY_ID', {}, `?id=${params.productSlug}`);
-  console.log("qwerty",JSON.stringify(params))
-  // const resp = await fetch(`${process.env.API_BASE_URL}products/product${params.productSlug}`);
-  // const product = await resp.json();
+  const product = await apiCall('get', 'GET_PRODUCT_BY_ID', {}, `?id=${params.productSlug}`);
+  const path = `?path=products/${product.category}/${product.name}` 
+  const imageFiles = await apiCall('get', 'GET_IMAGES', {}, path);
+  const images = imageFiles.map((file:string)=> {
+    return `${process.env.API_BASE_URL}images/getImage${path}/${file}`
+  })
   const routeLinkText = `Products > ${product.category} > ${product.name}`;
-  const images = [product.image, product.image, ...product.images];
 
   return (
     <div {...stylex.props(styles.productDetailOuter)}>

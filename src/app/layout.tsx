@@ -17,10 +17,10 @@ export default async function RootLayout({
     <html {...stylex.props(styles.html)} lang="en">
       <body {...stylex.props(styles.body)}>
         {/* <AuthProvider> */}
-          <div {...stylex.props(styles.nav)}>
+          {/* <div {...stylex.props(styles.nav)}> */}
             <Navbar />
-          </div>
-          <div id="portal"></div>
+          {/* </div> */}
+          {/* <div id="portal"></div> */}
           {children}
         {/* </AuthProvider> */}
       </body>
@@ -42,15 +42,19 @@ const styles = stylex.create({
   },
   body: {
     background: "white",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center" 
   },
   nav: {
     // display: {
     //   default: "visible",
     //   "@media (max-width: 500px)": "none",
     // }
-    width: "100%",
-    position: "absolute",
-    top: 0,
-    left: 0,
+    // width: "100%",
+    // position: "absolute",
+    // top: 0,
+    // left: 0,
   },
 });

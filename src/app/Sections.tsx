@@ -76,7 +76,7 @@ export async function Sections({ mainData }: any) {
               {Object.values(item.data).map((card, key) => (
                 <div {...stylex.props(styles.marginProvider)} key={key}>
                   <ProductCardWrapper id={card.productId}>
-                    <ProductCard props={card} />
+                    <ProductCard props={card} type={item.type}  />
                   </ProductCardWrapper>
                 </div>
               ))}

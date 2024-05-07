@@ -3,8 +3,6 @@ import { FC, useEffect, useState } from "react";
 import * as stylex from "@stylexjs/stylex";
 import Image from "next/image";
 
-import pdt1 from "@public/pdt1.jpg";
-
 interface Props {
   slides: string[];
 }
@@ -17,6 +15,7 @@ const styles = stylex.create({
   },
   sliderStyles: {
     width: "100%",
+    height: "100%",
     position: "relative",
   },
   dotsContainerStyles: {
@@ -63,6 +62,7 @@ const styles = stylex.create({
     alignItems: "center",
     justifyContent: "center",
     margin: "2px 5px",
+    position: "relative",
   },
   imageTemplateBoxActive: {
     border: "2px solid green",
@@ -73,6 +73,12 @@ const styles = stylex.create({
     backgroundSize: "cover",
     backgroundPosition: "center",
   },
+  imageContainer: {
+    width: "100%",
+    height: "100%",
+    position: "relative",
+    borderRadius: "10px",
+  },
 });
 const stt = {
   height: "90%",
@@ -81,27 +87,24 @@ const stt = {
   backgroundPosition: "center",
 };
 const stt1 = {
-  width: "100%",
-  height: "100%",
   borderRadius: "10px",
   backgroundSize: "cover",
   backgroundPosition: "center",
 };
 
 export const ImageSlider: FC<Props> = ({ slides }) => {
-
   const getCookieValue = (name: string) =>
-  document.cookie.match("(^|;)\\s*" + name + "\\s*=\\s*([^;]+)")?.pop() || ""; 
+    document.cookie.match("(^|;)\\s*" + name + "\\s*=\\s*([^;]+)")?.pop() || "";
 
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
-    const cookie = getCookieValue("isMobile")
-    setIsMobile(cookie === "true")
-  }, [])
+    const cookie = getCookieValue("isMobile");
+    setIsMobile(cookie === "true");
+  }, []);
 
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
@@ -145,10 +148,6 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
     }
   };
 
-  const bgimage = {
-    backgroundImage: `url(${slides[currentIndex]})`,
-  };
-
   return (
     <div {...stylex.props(styles.mainContainer)}>
       {/* {!isMobile && ( */}
@@ -162,7 +161,7 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
             )}
             onMouseOver={() => setCurrentIndex(slideIndex)}
           >
-            <Image src={pdt1} alt="Picture of the author" style={stt} />
+            <Image src={slide} alt="Picture of the author" style={stt} />
             {/* <Image
                 src={}
                 {...stylex.props(styles.templateImage)}
@@ -179,7 +178,15 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
         onTouchEnd={onTouchEnd}
       >
         {/* <div {...stylex.props(styles.slideStylesWidthBackground)} style={bgimage}></div> */}
-        <Image src={pdt1} alt="Picture of the author" style={stt1} />
+        <div {...stylex.props(styles.imageContainer)}>
+        <Image
+          src={slides[currentIndex]}
+          alt="Picture of the author"
+          placeholder="blur"
+          fill
+          style={stt1}
+        />
+        </div>
         {/* {isMobile && ( */}
         <div {...stylex.props(styles.dotsContainerStyles)}>
           {slides.map((slide, slideIndex: number) => (

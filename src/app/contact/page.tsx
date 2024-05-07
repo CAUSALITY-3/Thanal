@@ -1,8 +1,10 @@
+import { getpaths } from "@/api/utils";
 import { options } from "../api/auth/[...nextauth]/options"
 import { getServerSession } from "next-auth/next"
 
 export default async function Contact() {
   const session: any = await getServerSession(options);
+  const folders: any = getpaths();
 
   return (
     <>
@@ -24,6 +26,8 @@ export default async function Contact() {
         <h1 >You Shall Not Pass!</h1>
         </>
       )}
+
+      <div className="">{JSON.stringify(folders)}</div>
     </>
   )
 }

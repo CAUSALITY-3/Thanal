@@ -1,4 +1,4 @@
-import { dbCall } from "@/api/sevice";
+import { apiCall } from "@/api/sevice";
 import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -14,7 +14,7 @@ export const options: NextAuthOptions = {
       if (!profile?.email) {
         throw new Error("No profile");
       }
-      const upsertUser = await dbCall(
+      const upsertUser = await apiCall(
         "post",
         "UPSERT_USER",
         {},

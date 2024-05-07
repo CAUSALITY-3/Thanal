@@ -4,7 +4,7 @@ import { revalidateCache } from "./utils";
 const baseUrl = process.env.API_BASE_URL;
 const timeout = +(process.env.API_TIME_OUT || 15000);
 
-export async function dbCall(
+export async function apiCall(
   method: string,
   path: string,
   nextOptions?: {

@@ -1,6 +1,4 @@
 import { FC } from "react";
-import menu from "@public/menu.svg";
-import close from "@public/close.svg";
 import logo from "@public/logo.svg";
 import * as stylex from "@stylexjs/stylex";
 import { text } from "../../app/globalTokens.stylex";
@@ -9,11 +7,13 @@ import Link from "next/link";
 import Bag from "../ShoppingBag/bag";
 import { options } from "@app/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth/next";
-import { dbCall } from "@/api/sevice";
+import { apiCall } from "@/api/sevice";
+import ScreenWidhChecker from "./screenWidthChecker";
 
 const styles = stylex.create({
   navBar: {
     height: 50,
+    width:"100%",
     background: "rgba(250, 250, 252, .8)",
     "backdrop-filter": "blur(10px)",
     display: "flex",
@@ -43,7 +43,12 @@ const styles = stylex.create({
 export const Navbar: FC = async () => {
   const session: any = await getServerSession(options);
   const userProfileResponse = session?.user?.email
-    ? await dbCall("get", "GET_USER_BY_EMAIL", {}, `?email=${session?.user?.email}`)
+    ? await apiCall(
+        "get",
+        "GET_USER_BY_EMAIL",
+        {},
+        `?email=${session?.user?.email}`
+      )
     : null;
   const user = userProfileResponse;
   console.log("kuttu", session);
@@ -79,6 +84,7 @@ export const Navbar: FC = async () => {
         )}
         <Bag numOfItems={user?.bag?.length} />
       </div>
+      <ScreenWidhChecker />
     </nav>
   );
 };
