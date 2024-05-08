@@ -23,7 +23,10 @@ const styles = stylex.create({
   },
   imageContainer: {
     width: "97vw",
-    height: "90vh",
+    height: {
+      default: "85vh",
+      "@media (max-width: 500px)": "50vh",
+    },
     position: "relative",
     borderRadius: "3px",
   },

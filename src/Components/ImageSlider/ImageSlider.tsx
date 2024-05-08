@@ -88,8 +88,7 @@ const stt = {
 };
 const stt1 = {
   borderRadius: "10px",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
+  "object-fit": "cover"
 };
 
 export const ImageSlider: FC<Props> = ({ slides }) => {
