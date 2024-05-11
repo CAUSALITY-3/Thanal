@@ -2,12 +2,8 @@ import React, { FC } from "react";
 import "./ProductCard.scss";
 import * as stylex from "@stylexjs/stylex";
 import Image from "next/image";
-import pdt1 from "../../../../images/products/plants/bogainvilla/1.jpg";
 import { text } from "../../app/globalTokens.stylex";
 import { Ratings } from "../Ratings/Ratings";
-import Link from "next/link";
-import { types } from "sass";
-import { getImages } from "@/api/utils";
 
 interface Props {
   props: {
@@ -68,14 +64,7 @@ const stt = {
   "object-fit": "cover"
 };
 
-const linkStyle = {
-  textDecoration: "none",
-  WebkitUserDrag: "none",
-  color: "black",
-};
-
 export const ProductCard: FC<Props> = ({ props, type }) => {
-  const href = `/Product/${props.productId}`;
   const img = `http://localhost:5000/images/getImage?path=products/${type}/${props.name}/1.jpg`;
   return (
     // <Link href={href} style={linkStyle}>

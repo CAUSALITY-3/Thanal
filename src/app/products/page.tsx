@@ -3,6 +3,7 @@ import { ProductMainList } from "@/api/types";
 import * as stylex from "@stylexjs/stylex";
 import { text } from "../globalTokens.stylex";
 import Image from "next/image";
+import Link from "next/link";
 
 const styles = stylex.create({
   productContainer: {
@@ -37,7 +38,8 @@ const styles = stylex.create({
     justifyContent: "space-around",
     flexDirection: "column",
     alignItems: "center",
-    background: "radial-gradient(circle at center, transparent, rgba(0,0,0,.7))",
+    background:
+      "radial-gradient(circle at center, transparent, rgba(0,0,0,.7))",
   },
   productTypeNameConainer: {
     width: "90vw",
@@ -54,35 +56,34 @@ const styles = stylex.create({
   prouctItemContainer: {
     height: {
       default: "40vh",
-      '@media (max-width: 500px)': "30vh"
+      "@media (max-width: 500px)": "35vh",
     },
     width: {
       default: "90vw",
-      '@media (max-width: 500px)': "auto"
+      "@media (max-width: 500px)": "auto",
     },
-    
+
     display: {
       default: "flex",
-      '@media (max-width: 500px)': "block"
+      "@media (max-width: 500px)": "block",
     },
     alignItems: "center",
     justifyContent: "center",
     flexWrap: {
       default: "wrap",
-      '@media (max-width: 500px)': "nowrap"
+      "@media (max-width: 500px)": "nowrap",
     },
     flexDirection: {
       default: "row",
-      '@media (max-width: 500px)': "column"
+      "@media (max-width: 500px)": "column",
     },
     overflowY: "auto",
     "::-webkit-scrollbar": {
       width: 0,
       background: "transparent",
     },
-    
   },
-  nmn:{
+  prouctItemContainerOuter: {
     ":hover": {
       opacity: 1,
       transition: "all ease 0.5s",
@@ -93,9 +94,12 @@ const styles = stylex.create({
     },
     opacity: {
       default: 0,
-      '@media (max-width: 500px)': 1
+      "@media (max-width: 500px)": 1,
     },
-    padding: "10px",
+    padding: {
+      default: "10px",
+      "@media (max-width: 500px)": "20px",
+    },
     "backdrop-filter": "blur(10px)",
     backgroundColor: "rgb(0,0,0,.3)",
     transition: "all ease 0.5s",
@@ -112,11 +116,11 @@ const styles = stylex.create({
     alignItems: "center",
     ":hover": {
       cursor: "pointer",
-      "box-shadow": "5px 5px 10px 2px rgb(41, 41, 41, .3)"
+      "box-shadow": "5px 5px 10px 2px rgb(41, 41, 41, .3)",
     },
     ":active": {
       cursor: "pointer",
-      "box-shadow": "5px 5px 10px 2px rgb(41, 41, 41, .3)"
+      "box-shadow": "5px 5px 10px 2px rgb(41, 41, 41, .3)",
     },
   },
   imageContainer: {
@@ -130,7 +134,7 @@ const styles = stylex.create({
     width: 200,
     opacity: {
       default: 0,
-      '@media (max-width: 500px)': 1
+      "@media (max-width: 500px)": 1,
     },
     borderRadius: 5,
     position: "absolute",
@@ -139,8 +143,7 @@ const styles = stylex.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-end",
-    background:
-      "radial-gradient(ellipse at bottom, #00000078, transparent)",
+    background: "radial-gradient(ellipse at bottom, #00000078, transparent)",
     ":hover": {
       cursor: "pointer",
       opacity: 1,
@@ -180,7 +183,7 @@ const boxImageStyle = {
 const stt = {
   WebkitUserDrag: "none",
   borderRadius: "5px",
-  "object-fit": "cover"
+  "object-fit": "cover",
 };
 
 export default async function Products() {
@@ -199,26 +202,26 @@ export default async function Products() {
             <div {...stylex.props(styles.productTypeNameConainer)}>
               <p {...stylex.props(styles.productTypeName)}>{item.type}</p>
             </div>
-            <div {...stylex.props(styles.nmn)}>
-            <div {...stylex.props(styles.prouctItemContainer)}>
-              {Object.values(item.data).map((card, key: any) => (
-                <div {...stylex.props(styles.productBox)} key={key}>
-                  <div {...stylex.props(styles.imageContainer)}>
-                  <Image
-                    src={`http://localhost:5000/images/getImage?path=products/${item.type}/${card.name}/1.jpg`}
-                    alt="Picture of the author"
-                    placeholder="blur"
-                    fill
-                    style={stt}
-                  />
-                  </div>
-                  
-                  <div {...stylex.props(styles.productNameContainer)}>
-                    <p {...stylex.props(styles.productName)}>{card.name}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <div {...stylex.props(styles.prouctItemContainerOuter)}>
+              <div {...stylex.props(styles.prouctItemContainer)}>
+                {Object.values(item.data).map((card, key: any) => (
+                  <Link href={`/products/family/${card.name}`} style={{ textDecoration: "none" }} {...stylex.props(styles.productBox)} key={key}>
+                    <div {...stylex.props(styles.imageContainer)}>
+                      <Image
+                        src={`http://localhost:5000/images/getImage?path=products/${item.type}/${card.name}/1.jpg`}
+                        alt="Picture of the author"
+                        placeholder="blur"
+                        fill
+                        style={stt}
+                      />
+                    </div>
+
+                    <div {...stylex.props(styles.productNameContainer)}>
+                      <p {...stylex.props(styles.productName)}>{card.name}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
