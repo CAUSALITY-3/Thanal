@@ -4,7 +4,8 @@ export const apiPaths: { [key: string]: string } = {
   UPSERT_USER: "users/upsertUser",
   GET_USER_BY_EMAIL: "users/getUserByEmail",
   GET_IMAGES: "images/getImageNames",
-  PRODUCT_FAMILY: "products/getAllUnderFamily"
+  PRODUCT_FAMILY: "products/getAllUnderFamily",
+  GET_ORDER_ID: "payments/createOrder"
 };
 
 export interface ProductMainList {
