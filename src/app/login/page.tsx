@@ -53,7 +53,7 @@ const Login: FC = () => {
   }
   return (
     <>
-      <div {...stylex.props(styles.loginOuterDiv)} onClick={()=> {signIn('google',{callbackUrl: "http://loalhost:3000"}); revalidatePath('/');}}>
+      <div {...stylex.props(styles.loginOuterDiv)} onClick={()=> signIn('google',{callbackUrl: "http://loalhost:3000/signup"})}>
         <div {...stylex.props(styles.loginContainer)}>
           <div {...stylex.props(styles.loginWithhGooleButton)}>
             <div {...stylex.props(styles.loginWithhGooleText)}>

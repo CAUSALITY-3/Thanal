@@ -27,5 +27,11 @@ export const options: NextAuthOptions = {
       console.log("upsetedDoc", upsertUser);
       return true;
     },
+    async redirect({url, baseUrl}) {
+      console.log('url', url);
+      console.log('baseUrl', baseUrl);
+      
+      return url.startsWith(baseUrl) ? url : baseUrl + '/signup';
+    }
   },
 };

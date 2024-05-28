@@ -101,19 +101,20 @@ const SignUp: FC = () => {
       message: "Invalid Entry",
     },
     city: {
-      type: "dropDown",
-      dropDownValues: [
-        "Tiruvannamalai",
-        "Tiruvattur",
-        "Tiruvottiyur",
-        "Vaikom",
-        "Varkala",
-        "Vatakara",
-      ],
+      type: "input",
+      // dropDownValues: [
+      //   "Tiruvannamalai",
+      //   "Tiruvattur",
+      //   "Tiruvottiyur",
+      //   "Vaikom",
+      //   "Varkala",
+      //   "Vatakara",
+      // ],
       required: true,
       label: "City",
       key: "city",
-      value: "",
+      value: "Kozhikode",
+      disabled: true,
       invalid: false,
       validation: [
         (value: string) => {
