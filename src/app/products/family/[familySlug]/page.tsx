@@ -8,7 +8,7 @@ const styles = stylex.create({
       default: "90vw",
       "@media (max-width: 500px)": "auto",
     },
-
+    padding: "20px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
