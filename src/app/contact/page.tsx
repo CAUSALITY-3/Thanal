@@ -1,11 +1,9 @@
-import { getpaths } from "@/api/utils";
 import { options } from "../api/auth/[...nextauth]/options"
 import { getServerSession } from "next-auth/next"
 import MakePaymentComponent from "@/Components/PaymentComponent/MakePaymentComponent";
 
 export default async function Contact() {
   const session: any = await getServerSession(options);
-  const folders: any = getpaths();
 
   return (
     <>

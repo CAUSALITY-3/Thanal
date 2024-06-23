@@ -7,6 +7,7 @@ interface Props {
   height?: string;
   color?: string;
   type?: string;
+  disabled?: boolean;
 }
 const styles = stylex.create({
   buttonContainer: {
@@ -17,16 +18,24 @@ const styles = stylex.create({
     "-webkit-transition-property": "box-shadow",
     "-webkit-transition-duration": "400ms ",
     ":hover": {
-      cursor: "pointer",
       "box-shadow": "3px 3px 6px 1px rgb(41, 41, 41, .2)",
     },
   },
 });
-export const Button: FC<Props> = ({ content, color, width, height }) => {
+export const Button: FC<Props> = ({
+  content,
+  color,
+  width,
+  height,
+  disabled,
+}) => {
   const style = {
     width: width || "100px",
     height: height || "40px",
     background: color || "#77DD77",
+    ":hover": {
+      cursor: disabled ? "not-allowed" : "pointer",
+    },
   };
 
   return (

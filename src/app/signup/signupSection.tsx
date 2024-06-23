@@ -5,6 +5,7 @@ import { Button } from "@Components/Buttons/Button";
 import { Input } from "@Components/Input/Input";
 import { formData } from "../type";
 import { addValidationFunction } from "../util";
+import { useRouter } from "next/navigation";
 
 const styles = stylex.create({
   loginOuterDiv: {
@@ -49,13 +50,14 @@ const styles = stylex.create({
   formControl: {
     display: "flex",
     paddingTop: "16px",
-    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });
 
 const SingnupSection: FC<{ formDataProp: formData }> = ({ formDataProp }) => {
   const step = 2;
-
+  const router = useRouter();
   const [submit, setSubmit] = useState(false);
   const [lastOne, setLastOne] = useState(false);
   const [formData, setFormData] = useState(formDataProp);
@@ -85,14 +87,12 @@ const SingnupSection: FC<{ formDataProp: formData }> = ({ formDataProp }) => {
     }
   }, [formData]);
 
-  const submitButton: any = {
-    pointerEvents: !submit ? "none" : "true",
-  };
   const validate = () => {
     Object.values(formData).forEach((element) => {
       if (element) {
-        const isInValid =
+        const isInValid: boolean =
           element.required &&
+          !element.disabled &&
           !!element.validation.find((fn: any) => fn(element.value) === false);
         if (isInValid) {
           setFormData((prevState: any) => ({
@@ -115,8 +115,33 @@ const SingnupSection: FC<{ formDataProp: formData }> = ({ formDataProp }) => {
     });
   };
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
+  const handleSubmit = async (event: React.SyntheticEvent) => {
     validate();
+    console.log("details", formData);
+    if (submit) {
+      const email = formData.email.value;
+      const payload = {
+        phone: formData.phone.value,
+        address: {
+          house: formData.house.value,
+          landmark: formData.landmark.value,
+          city: formData.city.value,
+          state: formData.state.value,
+          pincode: formData.pincode.value,
+        },
+      };
+
+      const body: any = JSON.stringify({ payload, email });
+      console.log("payload", payload, "email", email);
+      const response: any = await fetch("/api/addDetails", {
+        method: "POST",
+        body,
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+    }
+    router.push("/");
   };
 
   return (
@@ -143,8 +168,18 @@ const SingnupSection: FC<{ formDataProp: formData }> = ({ formDataProp }) => {
                 />
               ))}
               <div {...stylex.props(styles.formControl)}>
-                <div style={submitButton} onClick={handleSubmit}>
-                  <Button content="Login" color={!submit ? "grey" : ""} />
+                <div onClick={handleSubmit}>
+                  <Button
+                    content="Add Details"
+                    color={!submit ? "grey" : ""}
+                    disabled={!submit}
+                  />
+                </div>
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => router.push("/")}
+                >
+                  <Button content="Skip" color="#00aaee" />
                 </div>
               </div>
             </div>
