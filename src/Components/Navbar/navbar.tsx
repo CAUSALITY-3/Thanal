@@ -5,10 +5,9 @@ import { text } from "../../app/globalTokens.stylex";
 import Image from "next/image";
 import Link from "next/link";
 import Bag from "../ShoppingBag/bag";
-import { options } from "@app/api/auth/[...nextauth]/options";
-import { getServerSession } from "next-auth/next";
 import { apiCall } from "@/api/sevice";
 import ScreenWidhChecker from "./screenWidthChecker";
+import { getUserAuthdetails } from "@/app/util";
 
 const styles = stylex.create({
   navBar: {
@@ -41,17 +40,17 @@ const styles = stylex.create({
 });
 
 export const Navbar: FC = async () => {
-  const session: any = await getServerSession(options);
-  const userProfileResponse = session?.user?.email
+  const userAuth: any = await getUserAuthdetails();
+  const userProfileResponse = userAuth?.email
     ? await apiCall(
         "get",
         "GET_USER_BY_EMAIL",
         {},
-        `?email=${session?.user?.email}`
+        `?email=${userAuth?.email}`
       )
     : null;
   const user = userProfileResponse;
-  console.log("kuttu", session);
+  console.log("kuttu", userAuth);
   const navbarItemStyle = {
     margin: "0 10px",
     height: 25,
@@ -75,8 +74,8 @@ export const Navbar: FC = async () => {
         <Link href="/contact" {...stylex.props(styles.navBarItems)}>
           Contact
         </Link>
-        {session?.user?.name ? (
-          <div {...stylex.props(styles.navBarItems)}>{session?.user?.name}</div>
+        {userAuth?.name ? (
+          <div {...stylex.props(styles.navBarItems)}>{userAuth?.name}</div>
         ) : (
           <Link href="/login" {...stylex.props(styles.navBarItems)}>
             Login

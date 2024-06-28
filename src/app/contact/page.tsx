@@ -1,9 +1,8 @@
-import { options } from "../api/auth/[...nextauth]/options"
-import { getServerSession } from "next-auth/next"
 import MakePaymentComponent from "@/Components/PaymentComponent/MakePaymentComponent";
+import { getUserAuthdetails } from "../util";
 
 export default async function Contact() {
-  const session: any = await getServerSession(options);
+  const session: any = await getUserAuthdetails();
 
   return (
     <>

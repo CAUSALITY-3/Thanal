@@ -6,7 +6,8 @@ export const apiPaths: { [key: string]: string } = {
   GET_USER_BY_EMAIL: "users/getUserByEmail",
   GET_IMAGES: "images/getImageNames",
   PRODUCT_FAMILY: "products/getAllUnderFamily",
-  GET_ORDER_ID: "payments/createOrder"
+  GET_ORDER_ID: "payments/createOrder",
+  ADD_TO_BAG: "users/addToBag"
 };
 
 export interface ProductMainList {

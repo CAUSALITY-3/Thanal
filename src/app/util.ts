@@ -5,7 +5,9 @@
 // import { ProductFeatureServices } from "@api/services/productFeatures";
 // import { UserServices } from "@api/services/users";
 // import { InjectedType } from "@api/types/types";
+import { getServerSession } from "next-auth";
 import { formData } from "./type";
+import { options } from "./api/auth/[...nextauth]/options";
 
 // const returnType = (servicename: string) => {
 //   switch (servicename) {
@@ -59,4 +61,9 @@ export function addValidationFunction(formData: formData) {
     }
   }
   return formData;
+}
+
+export async function getUserAuthdetails() {
+  const session: any = await getServerSession(options);
+  return session?.user?.email ? session.user : null;
 }

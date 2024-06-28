@@ -5,6 +5,7 @@ import { Ratings } from "@Components/Ratings/Ratings";
 import { ProductFeatures } from "@Components/ProductFeatures/ProductFeatures";
 import { BuyOrAdd } from "@Components/BuyOrAdd/BuyOrAdd";
 import { apiCall } from "@/api/sevice";
+import { getUserAuthdetails } from "@/app/util";
 
 const styles = stylex.create({
   productDetailOuter: {
@@ -168,6 +169,7 @@ const styles = stylex.create({
 
 export default async function ProductDetail({ params }: any) {
 
+  const user: any = await getUserAuthdetails();
   const product = await apiCall('get', 'GET_PRODUCT_BY_ID', {}, `?id=${params.productSlug}`);
   const path = `?path=products/${product.category}/${product.name}` 
   const imageFiles = await apiCall('get', 'GET_IMAGES', {}, path);
@@ -187,7 +189,7 @@ export default async function ProductDetail({ params }: any) {
             </div>
 
             <div {...stylex.props(styles.buyOrAdd)}>
-              <BuyOrAdd />
+              <BuyOrAdd email={user?.email} productId={params.productSlug}/>
             </div>
           </div>
           <div {...stylex.props(styles.productDetails)}>
@@ -213,7 +215,7 @@ export default async function ProductDetail({ params }: any) {
           </div>
           <div {...stylex.props(styles.buyOrAddMobile)}>
               <div {...stylex.props(styles.buyOrAddMobileOuter)}>
-                <BuyOrAdd />
+                <BuyOrAdd email={user?.email} productId={params.productSlug}/>
               </div>
             </div>
         </div>

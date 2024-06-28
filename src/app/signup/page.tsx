@@ -1,14 +1,13 @@
 "use server";
-import { getServerSession } from "next-auth";
 import { FC } from "react";
-import { options } from "../api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import SingnupSection from "./signupSection";
 import { formData } from "../type";
+import { getUserAuthdetails } from "../util";
 
 const SignUp: FC = async () => {
-  const session: any = await getServerSession(options);
-  if (!session || !session?.user?.name) {
+  const user: any = await getUserAuthdetails();
+  if (user?.name) {
     return redirect("/"); // need to update this to profile page
   }
   const formData: formData = {
@@ -16,8 +15,8 @@ const SignUp: FC = async () => {
       required: true,
       label: "Name",
       key: "name",
-      value: session?.user?.name || "",
-      disabled: !!session?.user?.name,
+      value: user?.name || "",
+      disabled: !!user?.name,
       type: "input",
       invalid: false,
       validationArray: [{ method: "length", value: [2, 20] }],
@@ -39,8 +38,8 @@ const SignUp: FC = async () => {
       required: true,
       label: "Name",
       key: "name",
-      value: session?.user?.email || "",
-      disabled: !!session?.user?.email,
+      value: user?.email || "",
+      disabled: !!user?.email,
       type: "input",
       invalid: false,
       validationArray: [
