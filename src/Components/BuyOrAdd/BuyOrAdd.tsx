@@ -6,6 +6,8 @@ import buyIcon from "@/assets/buy_icon.svg";
 import cartIcon from "@/assets/cart_icon.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { count } from "@/app/signal";
+import { effect } from "@preact/signals-react";
 
 interface Props {
   email: string;
@@ -68,6 +70,12 @@ export const BuyOrAdd: FC<Props> = ({ email, productId }) => {
           method: "POST",
           body,
         });
+        // const ct = count.value;
+        console.log("sasi", count.value)
+        effect(()=>{
+          count.value = count.value+1;
+        })
+        
       } else {
         router.push("/login");
       }
