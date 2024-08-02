@@ -1,0 +1,40 @@
+.sections {
+  margin: 10px 0;
+  display: flex;
+  width: 98%;
+  overflow: hidden;
+  flex-direction: column;
+  .section {
+    border-radius: 10px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    background-color: #f5f5f5;
+
+    &:hover,
+    &:active {
+      background-color: #dcdcdc;
+    }
+
+    @media (max-width: 500px) {
+      &:hover,
+      &:active {
+        background-color: #f5f5f5;
+      }
+    }
+    .title {
+      padding-left: 10px;
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
+    .wrapper {
+      display: flex;
+      .marginProvider {
+        margin: 10px;
+      }
+    }
+  }
+}

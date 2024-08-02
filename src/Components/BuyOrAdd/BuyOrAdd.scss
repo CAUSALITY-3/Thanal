@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .buttonBox {
+    width: 48%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .buttonIcon {
+      margin-right: 3px;
+    }
+    .buttonName {
+    }
+  }
+}

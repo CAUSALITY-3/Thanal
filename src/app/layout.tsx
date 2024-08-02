@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import * as stylex from "@stylexjs/stylex";
+// import * as stylex from "@stylexjs/stylex";
 import Navbar from "@/Components/Navbar/navbar";
 // import AuthProvider from "./context/authProvider";
+import "./homeLayout.scss";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,14 +15,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return await (
-    <html {...stylex.props(styles.html)} lang="en">
-      <body {...stylex.props(styles.body)}>
+    <html className="html" lang="en">
+      <body className="body">
         {/* <AuthProvider> */}
-          {/* <div {...stylex.props(styles.nav)}> */}
-            <Navbar />
-          {/* </div> */}
-          {/* <div id="portal"></div> */}
-          {children}
+        {/* <div {...stylex.props(styles.nav)}> */}
+        <Navbar />
+        {/* </div> */}
+        {/* <div id="portal"></div> */}
+        {children}
         {/* </AuthProvider> */}
       </body>
     </html>
@@ -31,30 +32,30 @@ export default async function RootLayout({
 // const DARK = "@media (prefers-color-scheme: dark)";
 // const fgColor = `rgba(${$.foregroundR}, ${$.foregroundG}, ${$.foregroundB}, 1)`;
 
-const styles = stylex.create({
-  html: {
-    margin: 0,
-    padding: 0,
-    width: "100%",
-    // display: "flex",
-    // justifyContent: "center",
-    "font-family": "'Roboto', sans-serif",
-  },
-  body: {
-    background: "white",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center" 
-  },
-  nav: {
-    // display: {
-    //   default: "visible",
-    //   "@media (max-width: 500px)": "none",
-    // }
-    // width: "100%",
-    // position: "absolute",
-    // top: 0,
-    // left: 0,
-  },
-});
+// const styles = stylex.create({
+//   html: {
+//     margin: 0,
+//     padding: 0,
+//     width: "100%",
+//     // display: "flex",
+//     // justifyContent: "center",
+//     "font-family": "'Roboto', sans-serif",
+//   },
+//   body: {
+//     background: "white",
+//     display: "flex",
+//     flexDirection: "column",
+//     alignItems: "center",
+//     justifyContent: "center"
+//   },
+//   nav: {
+//     // display: {
+//     //   default: "visible",
+//     //   "@media (max-width: 500px)": "none",
+//     // }
+//     // width: "100%",
+//     // position: "absolute",
+//     // top: 0,
+//     // left: 0,
+//   },
+// });

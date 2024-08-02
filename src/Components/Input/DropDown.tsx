@@ -1,6 +1,7 @@
 "use client";
 import { FC, useRef, useState } from "react";
-import * as stylex from "@stylexjs/stylex";
+// import * as stylex from "@stylexjs/stylex";
+import "./DropDown.scss";
 
 interface Props {
   keyName: string;
@@ -11,67 +12,67 @@ interface Props {
   dropDownValues: string[];
 }
 
-const styles = stylex.create({
-  mainDiv: {
-    position: "relative",
-    width: "95%",
-  },
-  formInput: {
-    display: "flex",
-    position: "relative",
-    alignItems: "center",
-    fontSize: "12px",
-    padding: "0 10px",
-    width: "95%",
-    height: "35px",
-    marginTop: "8px",
-    background: "rgba(0, 0, 0, .03)",
-    "border-radius": "5px",
-    border: "none",
-    "-webkit-transition-property": "background, box-shadow",
-    "-webkit-transition-duration": "400ms, 400ms ",
-    ":focus": {
-      "box-shadow": "0px 0px 1px 1px grey",
-      background: "rgba(0, 0, 0, 0.1)",
-      outline: "none",
-    },
-  },
-  dropDown: {
-    position: "absolute",
-    marginTop: "5px",
-    "background-color": "#f9f9f9",
-    "box-shadow": "0px 8px 16px 0px rgba(0, 0, 0, 0.2)",
-    "z-index": 1,
-    "overflow-y": "auto",
-    animationDuration: ".4s",
-    "::-webkit-scrollbar": {
-      width: "5px",
-    },
-    "::-webkit-scrollbar-thumb": {
-      background: "#888",
-    },
-    "::-webkit-scrollbar-track": {
-      background: "#f1f1f1",
-    },
-    padding: "5px",
-    width: 340,
-  },
-  drop: {
-    "-webkit-transition-property": "background, box-shadow",
-    "-webkit-transition-duration": "400ms, 400ms ",
-    ":hover": {
-      "box-shadow": "0px 0px 1px 1px grey",
-      background: "rgba(0, 0, 0, 0.1)",
-      outline: "none",
-    },
-    cursor: "pointer",
-    padding: "3px",
-    fontSize: "13px",
-  },
-  noResult: {
-    color: "grey",
-  },
-});
+// const styles = stylex.create({
+//   mainDiv: {
+//     position: "relative",
+//     width: "95%",
+//   },
+//   formInput: {
+//     display: "flex",
+//     position: "relative",
+//     alignItems: "center",
+//     fontSize: "12px",
+//     padding: "0 10px",
+//     width: "95%",
+//     height: "35px",
+//     marginTop: "8px",
+//     background: "rgba(0, 0, 0, .03)",
+//     "border-radius": "5px",
+//     border: "none",
+//     "-webkit-transition-property": "background, box-shadow",
+//     "-webkit-transition-duration": "400ms, 400ms ",
+//     ":focus": {
+//       "box-shadow": "0px 0px 1px 1px grey",
+//       background: "rgba(0, 0, 0, 0.1)",
+//       outline: "none",
+//     },
+//   },
+//   dropDown: {
+//     position: "absolute",
+//     marginTop: "5px",
+//     "background-color": "#f9f9f9",
+//     "box-shadow": "0px 8px 16px 0px rgba(0, 0, 0, 0.2)",
+//     "z-index": 1,
+//     "overflow-y": "auto",
+//     animationDuration: ".4s",
+//     "::-webkit-scrollbar": {
+//       width: "5px",
+//     },
+//     "::-webkit-scrollbar-thumb": {
+//       background: "#888",
+//     },
+//     "::-webkit-scrollbar-track": {
+//       background: "#f1f1f1",
+//     },
+//     padding: "5px",
+//     width: 340,
+//   },
+//   drop: {
+//     "-webkit-transition-property": "background, box-shadow",
+//     "-webkit-transition-duration": "400ms, 400ms ",
+//     ":hover": {
+//       "box-shadow": "0px 0px 1px 1px grey",
+//       background: "rgba(0, 0, 0, 0.1)",
+//       outline: "none",
+//     },
+//     cursor: "pointer",
+//     padding: "3px",
+//     fontSize: "13px",
+//   },
+//   noResult: {
+//     color: "grey",
+//   },
+// });
 export const DropDown: FC<Props> = ({
   value,
   handleChange,
@@ -116,10 +117,10 @@ export const DropDown: FC<Props> = ({
     // });
   };
 
-  const fadeIn = stylex.keyframes({
-    "0%": { opacity: 0 },
-    "100%": { opacity: 1 },
-  });
+  // const fadeIn = stylex.keyframes({
+  //   "0%": { opacity: 0 },
+  //   "100%": { opacity: 1 },
+  // });
 
   const clickOrTouchDrop = (key: string, drop: string) => {
     handleChange(key, drop);
@@ -133,14 +134,14 @@ export const DropDown: FC<Props> = ({
   };
 
   const dropDownStyle = {
-    animationName: fadeIn,
+    animation: "fadeIn 2s ease-in-out",
     "max-height": dropDownValues.length > 10 ? "200px" : "auto",
   };
 
   const drop = () => {
     return (
       <div
-        {...stylex.props(styles.dropDown)}
+        className="dropDown"
         style={dropDownStyle}
         onMouseOver={() => setMouseOverDpropDown(true)}
         onMouseLeave={() => setMouseOverDpropDown(false)}
@@ -148,7 +149,7 @@ export const DropDown: FC<Props> = ({
         {filteredValues.map((drop) => (
           // eslint-disable-next-line react/jsx-key
           <div
-            {...stylex.props(styles.drop)}
+            className="drop"
             onClick={() => {
               clickOrTouchDrop(keyName, drop);
             }}
@@ -167,7 +168,7 @@ export const DropDown: FC<Props> = ({
     <div>
       <div
         ref={parentRef}
-        {...stylex.props(styles.formInput)}
+        className="formInput"
         style={formInputStyle}
         tabIndex={0}
         onFocus={() => setBlur(false)}
@@ -181,7 +182,7 @@ export const DropDown: FC<Props> = ({
     <div>
       <input
         ref={parentRef}
-        {...stylex.props(styles.formInput)}
+        className="formInput"
         type="text"
         value={searchText || (blur ? value || "Select one from list ..." : "")}
         onFocus={() => {
@@ -196,9 +197,7 @@ export const DropDown: FC<Props> = ({
         filteredValues.length ? (
           drop()
         ) : (
-          <div {...stylex.props(styles.noResult, styles.drop)}>
-            0 results...
-          </div>
+          <div className="noResult drop">0 results...</div>
         )
       ) : (
         <></>

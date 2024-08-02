@@ -1,0 +1,19 @@
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 3px 3px 6px 1px rgb(41, 41, 41, 0.2);
+    transform: translate(0.5px, -0.5px);
+  }
+  .buttonIcon {
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 3px;
+  }
+
+  .buttonName {
+  }
+}

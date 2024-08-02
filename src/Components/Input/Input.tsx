@@ -1,7 +1,8 @@
 "use client";
 import { FC, useState } from "react";
-import * as stylex from "@stylexjs/stylex";
+// import * as stylex from "@stylexjs/stylex";
 import DropDown from "./DropDown";
+import "./Input.scss";
 
 interface Props {
   formData: FormData;
@@ -22,37 +23,37 @@ interface FormData {
   disabled?: boolean;
 }
 
-const styles = stylex.create({
-  formControl: {
-    display: "flex",
-    paddingTop: "16px",
-    flexDirection: "column",
-  },
-  formlabel: {
-    color: "grey",
-  },
-  formInvalidMessage: {
-    color: "#F08080",
-    fontSize: "12px",
-    marginTop: "3px",
-  },
-  formInput: {
-    padding: "0 10px",
-    width: "90hw",
-    height: "35px",
-    marginTop: "8px",
-    background: "rgba(0, 0, 0, .03)",
-    "border-radius": "5px",
-    border: "none",
-    "-webkit-transition-property": "background, box-shadow",
-    "-webkit-transition-duration": "400ms, 400ms ",
-    ":focus": {
-      "box-shadow": "0px 0px 1px 1px grey",
-      background: "rgba(0, 0, 0, 0.1)",
-      outline: "none",
-    },
-  },
-});
+// const styles = stylex.create({
+//   formControl: {
+//     display: "flex",
+//     paddingTop: "16px",
+//     flexDirection: "column",
+//   },
+//   formlabel: {
+//     color: "grey",
+//   },
+//   formInvalidMessage: {
+//     color: "#F08080",
+//     fontSize: "12px",
+//     marginTop: "3px",
+//   },
+//   formInput: {
+//     padding: "0 10px",
+//     width: "90hw",
+//     height: "35px",
+//     marginTop: "8px",
+//     background: "rgba(0, 0, 0, .03)",
+//     "border-radius": "5px",
+//     border: "none",
+//     "-webkit-transition-property": "background, box-shadow",
+//     "-webkit-transition-duration": "400ms, 400ms ",
+//     ":focus": {
+//       "box-shadow": "0px 0px 1px 1px grey",
+//       background: "rgba(0, 0, 0, 0.1)",
+//       outline: "none",
+//     },
+//   },
+// });
 
 export const Input: FC<Props> = ({ formData, setFormData, lastOne }) => {
   const {
@@ -116,17 +117,15 @@ export const Input: FC<Props> = ({ formData, setFormData, lastOne }) => {
   const cursorStyle = { cursor: disabled ? "not-allowed" : "auto" };
 
   return (
-    <div {...stylex.props(styles.formControl)}>
-      <label {...stylex.props(styles.formlabel)}>
+    <div className="formControl">
+      <label className="formlabel">
         {label}
         {required && <span style={{ color: "#F08080" }}>*</span>}
       </label>
-      {invalid && blured && (
-        <p {...stylex.props(styles.formInvalidMessage)}>{message}</p>
-      )}
+      {invalid && blured && <p className="formInvalidMessage">{message}</p>}
       {type === "input" ? (
         <input
-          {...stylex.props(styles.formInput)}
+          className="formInput"
           style={cursorStyle}
           type="text"
           disabled={disabled}

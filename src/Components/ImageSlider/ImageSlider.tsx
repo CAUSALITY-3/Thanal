@@ -1,85 +1,86 @@
 "use client";
 import { FC, useEffect, useState } from "react";
-import * as stylex from "@stylexjs/stylex";
+// import * as stylex from "@stylexjs/stylex";
 import Image from "next/image";
+import "./ImageSlider.scss";
 
 interface Props {
   slides: string[];
 }
 
-const styles = stylex.create({
-  mainContainer: {
-    display: "flex",
-    height: "100%",
-    maxHeight: "60vh",
-  },
-  sliderStyles: {
-    width: "100%",
-    height: "100%",
-    position: "relative",
-  },
-  dotsContainerStyles: {
-    position: "absolute",
-    bottom: "0px",
-    left: "50%",
-    right: "50%",
-    display: {
-      default: "none",
-      "@media (max-width: 500px)": "flex",
-    },
-    justifyContent: "center",
-  },
-  dotStyle: {
-    margin: "10px 3px",
-    cursor: "pointer",
-    fontSize: "20px",
-    color: "white",
-  },
-  dotStyleSelect: {
-    color: "green",
-  },
-  slideStylesWidthBackground: {
-    width: "100%",
-    height: "100%",
-    borderRadius: "10px",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  },
-  imageTemplateContainer: {
-    display: {
-      default: "flex",
-      "@media (max-width: 500px)": "none",
-    },
-    alignItems: "center",
-    flexDirection: "column",
-  },
-  imageTemplateBox: {
-    width: "50px",
-    height: "50px",
-    borderRadius: "2px",
-    border: "1px solid green",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: "2px 5px",
-    position: "relative",
-  },
-  imageTemplateBoxActive: {
-    border: "2px solid green",
-  },
-  templateImage: {
-    height: "90%",
-    width: "90%",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  },
-  imageContainer: {
-    width: "100%",
-    height: "100%",
-    position: "relative",
-    borderRadius: "10px",
-  },
-});
+// const styles = stylex.create({
+//   mainContainer: {
+//     display: "flex",
+//     height: "100%",
+//     maxHeight: "60vh",
+//   },
+//   sliderStyles: {
+//     width: "100%",
+//     height: "100%",
+//     position: "relative",
+//   },
+//   dotsContainerStyles: {
+//     position: "absolute",
+//     bottom: "0px",
+//     left: "50%",
+//     right: "50%",
+//     display: {
+//       default: "none",
+//       "@media (max-width: 500px)": "flex",
+//     },
+//     justifyContent: "center",
+//   },
+//   dotStyle: {
+//     margin: "10px 3px",
+//     cursor: "pointer",
+//     fontSize: "20px",
+//     color: "white",
+//   },
+//   dotStyleSelect: {
+//     color: "green",
+//   },
+//   slideStylesWidthBackground: {
+//     width: "100%",
+//     height: "100%",
+//     borderRadius: "10px",
+//     backgroundSize: "cover",
+//     backgroundPosition: "center",
+//   },
+//   imageTemplateContainer: {
+//     display: {
+//       default: "flex",
+//       "@media (max-width: 500px)": "none",
+//     },
+//     alignItems: "center",
+//     flexDirection: "column",
+//   },
+//   imageTemplateBox: {
+//     width: "50px",
+//     height: "50px",
+//     borderRadius: "2px",
+//     border: "1px solid green",
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     margin: "2px 5px",
+//     position: "relative",
+//   },
+//   imageTemplateBoxActive: {
+//     border: "2px solid green",
+//   },
+//   templateImage: {
+//     height: "90%",
+//     width: "90%",
+//     backgroundSize: "cover",
+//     backgroundPosition: "center",
+//   },
+//   imageContainer: {
+//     width: "100%",
+//     height: "100%",
+//     position: "relative",
+//     borderRadius: "10px",
+//   },
+// });
 const stt = {
   height: "90%",
   width: "90%",
@@ -88,7 +89,7 @@ const stt = {
 };
 const stt1 = {
   borderRadius: "10px",
-  "object-fit": "cover"
+  "object-fit": "cover",
 };
 
 export const ImageSlider: FC<Props> = ({ slides }) => {
@@ -148,16 +149,17 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
   };
 
   return (
-    <div {...stylex.props(styles.mainContainer)}>
+    <div className="mainContainer">
       {/* {!isMobile && ( */}
-      <div {...stylex.props(styles.imageTemplateContainer)}>
+      <div className="imageTemplateContainer">
         {slides.map((slide, slideIndex: number) => (
           <div
             key={slideIndex}
-            {...stylex.props(
-              styles.imageTemplateBox,
-              slideIndex === currentIndex ? styles.imageTemplateBoxActive : null
-            )}
+            className={
+              slideIndex === currentIndex
+                ? "imageTemplateBox imageTemplateBoxActive"
+                : "imageTemplateBox"
+            }
             onMouseOver={() => setCurrentIndex(slideIndex)}
           >
             <Image src={slide} alt="Picture of the author" style={stt} />
@@ -171,29 +173,30 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
       </div>
       {/* )} */}
       <div
-        {...stylex.props(styles.sliderStyles)}
+        className="sliderStyles"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
         {/* <div {...stylex.props(styles.slideStylesWidthBackground)} style={bgimage}></div> */}
-        <div {...stylex.props(styles.imageContainer)}>
-        <Image
-          src={slides[currentIndex]}
-          alt="Picture of the author"
-          placeholder="blur"
-          fill
-          style={stt1}
-        />
+        <div className="imageContainer">
+          <Image
+            src={slides[currentIndex]}
+            alt="Picture of the author"
+            placeholder="blur"
+            fill
+            style={stt1}
+          />
         </div>
         {/* {isMobile && ( */}
-        <div {...stylex.props(styles.dotsContainerStyles)}>
+        <div className="dotsContainerStyles">
           {slides.map((slide, slideIndex: number) => (
             <div
-              {...stylex.props(
-                styles.dotStyle,
-                currentIndex === slideIndex ? styles.dotStyleSelect : null
-              )}
+              className={
+                currentIndex === slideIndex
+                  ? "dotStyle dotStyleSelect"
+                  : "dotStyle"
+              }
               key={slide}
               onClick={() => goToSlide(slideIndex)}
             >

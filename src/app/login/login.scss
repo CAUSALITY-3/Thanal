@@ -1,0 +1,36 @@
+.loginOuterDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 70vh;
+  .loginContainer {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.03);
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    height: 60%;
+    .loginWithhGooleButton {
+      display: flex;
+      padding: 5px 10px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 3px;
+      &:hover {
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.1);
+      }
+      .loginWithhGooleText {
+        margin-right: 20px;
+      }
+    }
+  }
+}
+
+.steps {
+  color: grey;
+  margin-bottom: 25px;
+}

@@ -1,0 +1,19 @@
+.ratingsContainer {
+  display: flex;
+  align-items: center;
+  .ratingCount {
+    color: #a4a3a3;
+  }
+  .starContainer {
+    background: rgb(75, 175, 25);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    .svg {
+      margin-left: 5px;
+      color: #ffd700;
+    }
+  }
+}

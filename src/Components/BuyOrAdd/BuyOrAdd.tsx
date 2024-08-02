@@ -1,6 +1,6 @@
 "use client";
 import { FC } from "react";
-import * as stylex from "@stylexjs/stylex";
+// import * as stylex from "@stylexjs/stylex";
 import { Button } from "../Buttons/Button";
 import buyIcon from "@/assets/buy_icon.svg";
 import cartIcon from "@/assets/cart_icon.svg";
@@ -8,32 +8,33 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { count } from "@/app/signal";
 import { effect } from "@preact/signals-react";
+import "./BuyOrAdd.scss";
 
 interface Props {
   email: string;
   productId: string;
 }
 
-const styles = stylex.create({
-  container: {
-    width: "100%",
-    height: "60px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  buttonBox: {
-    width: "48%",
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonIcon: {
-    marginRight: "3px",
-  },
-  buttonName: {},
-});
+// const styles = stylex.create({
+//   container: {
+//     width: "100%",
+//     height: "60px",
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "space-between",
+//   },
+//   buttonBox: {
+//     width: "48%",
+//     height: "100%",
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+//   buttonIcon: {
+//     marginRight: "3px",
+//   },
+//   buttonName: {},
+// });
 export const BuyOrAdd: FC<Props> = ({ email, productId }) => {
   const router = useRouter();
   const data = [
@@ -71,34 +72,32 @@ export const BuyOrAdd: FC<Props> = ({ email, productId }) => {
           body,
         });
         // const ct = count.value;
-        console.log("sasi", count.value)
-        effect(()=>{
-          count.value = count.value+1;
-        })
-        
+        console.log("sasi", count.value);
+        effect(() => {
+          count.value = count.value + 1;
+        });
       } else {
         router.push("/login");
       }
     } else {
-
       router.push("/contact");
     }
   };
   return (
-    <div {...stylex.props(styles.container)}>
+    <div className="container">
       {data.map((type, index) => (
         <div
-          {...stylex.props(styles.buttonBox)}
+          className="buttonBox"
           key={index}
           onClick={() => handleClick(type.action)}
         >
           <Button
             content={
               <>
-                <div {...stylex.props(styles.buttonIcon)}>
+                <div className="buttonIcon">
                   <Image src={type.icon} alt="" style={iconStyle} />
                 </div>
-                <div {...stylex.props(styles.buttonName)}>{type.text}</div>
+                <div className="buttonName">{type.text}</div>
               </>
             }
             width={type.width}

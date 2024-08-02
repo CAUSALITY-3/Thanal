@@ -1,0 +1,17 @@
+.prouctItemContainer {
+  width: 90vw;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  overflow-y: auto;
+  @media (max-width: 500px) {
+    width: auto;
+  }
+  &::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+}

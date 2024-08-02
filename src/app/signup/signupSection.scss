@@ -1,0 +1,45 @@
+.loginOuterDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 70vh;
+  margin: 30px 0;
+  .loginContainer {
+    display: flex;
+    align-items: center;
+    padding: 40px 20px;
+    flex-direction: column;
+    // background: rgba(0; 0; 0; .03);
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    min-height: 40vh;
+    .steps {
+      color: grey;
+      margin-bottom: 25px;
+    }
+    .loginWithhGooleButton {
+      display: flex;
+      padding: 5px 10px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 3px;
+      &:hover {
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.1);
+      }
+      .loginWithhGooleText {
+        margin-right: 20px;
+      }
+    }
+    .formContainer {
+      width: 70%;
+      .formControl {
+        display: flex;
+        padding-top: 16px;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+  }
+}

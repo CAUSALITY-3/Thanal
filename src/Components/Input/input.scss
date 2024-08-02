@@ -1,0 +1,29 @@
+.formControl {
+  display: flex;
+  padding-top: 16px;
+  flex-direction: column;
+  .formlabel {
+    color: grey;
+  }
+  .formInvalidMessage {
+    color: #f08080;
+    font-size: 12px;
+    margin-top: 3px;
+  }
+  .formInput {
+    padding: 0 10px;
+    width: 90hw;
+    height: 35px;
+    margin-top: 8px;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 5px;
+    border: none;
+    -webkit-transition-property: background-color, box-shadow;
+    -webkit-transition-duration: 400ms, 400ms;
+    &:focus {
+      box-shadow: 0px 0px 1px 1px grey;
+      background: rgba(0, 0, 0, 0.1);
+      outline: none;
+    }
+  }
+}

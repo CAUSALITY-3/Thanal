@@ -1,26 +1,27 @@
 import { apiCall } from "@/api/sevice";
-import * as stylex from "@stylexjs/stylex";
+// import * as stylex from "@stylexjs/stylex";
 import { ProductCard } from "@/Components/ProductCard/ProductCard";
+import "./family.scss";
 
-const styles = stylex.create({
-  prouctItemContainer: {
-    width: {
-      default: "90vw",
-      "@media (max-width: 500px)": "auto",
-    },
-    padding: "20px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    flexDirection: "row",
-    overflowY: "auto",
-    "::-webkit-scrollbar": {
-      width: 0,
-      background: "transparent",
-    },
-  },
-});
+// const styles = stylex.create({
+//   prouctItemContainer: {
+//     width: {
+//       default: "90vw",
+//       "@media (max-width: 500px)": "auto",
+//     },
+//     padding: "20px",
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     flexWrap: "wrap",
+//     flexDirection: "row",
+//     overflowY: "auto",
+//     "::-webkit-scrollbar": {
+//       width: 0,
+//       background: "transparent",
+//     },
+//   },
+// });
 
 export default async function ProductFamily({ params }: any) {
   const familyData: any = await apiCall(
@@ -37,13 +38,13 @@ export default async function ProductFamily({ params }: any) {
       price: item.price,
       productId: item.productId,
       ratings: item.ratings,
-      category: item.category
+      category: item.category,
     };
   });
 
   return (
-    <div {...stylex.props(styles.prouctItemContainer)}>
-      {formattedData.map((product: any, key:any) => (
+    <div className="prouctItemContainer">
+      {formattedData.map((product: any, key: any) => (
         <ProductCard key={key} props={product} type={product.category} />
       ))}
     </div>
