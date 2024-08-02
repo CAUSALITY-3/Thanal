@@ -2,7 +2,7 @@
 import { FC, useState } from "react";
 // import * as stylex from "@stylexjs/stylex";
 import DropDown from "./DropDown";
-import "./Input.scss";
+import "./input.scss";
 
 interface Props {
   formData: FormData;
