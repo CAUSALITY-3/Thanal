@@ -65,7 +65,7 @@ const stt = {
 };
 
 export const ProductCard: FC<Props> = ({ props, type }) => {
-  const img = `http://localhost:5000/images/getImage?path=products/${type}/${props.name}/1.jpg`;
+  const img = `${process.env.IMAGE_URL}/images/getImage?path=products/${type}/${props.name}/1.jpg`;
   return (
     // <Link href={href} style={linkStyle}>
     <div className="productBox">

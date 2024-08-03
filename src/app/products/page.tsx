@@ -195,7 +195,7 @@ export default async function Products() {
       {mainData.map((item: ProductMainList, key: any) => (
         <div className="productTypeBox" key={key}>
           <Image
-            src={`http://localhost:5000/images/getImage?path=products/${item.type}/${item.type}.jpg`}
+            src={`${process.env.IMAGE_URL}/images/getImage?path=products/${item.type}/${item.type}.jpg`}
             alt="Picture of the author"
             style={imageStyle}
           />
@@ -214,7 +214,7 @@ export default async function Products() {
                   >
                     <div className="imageContainer">
                       <Image
-                        src={`http://localhost:5000/images/getImage?path=products/${item.type}/${card.name}/1.jpg`}
+                        src={`${process.env.IMAGE_URL}/images/getImage?path=products/${item.type}/${card.name}/1.jpg`}
                         alt="Picture of the author"
                         placeholder="blur"
                         fill
