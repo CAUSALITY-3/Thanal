@@ -1,12 +1,10 @@
-"use client"
+"use client";
 import { FC } from "react";
 import "./bag.css";
 import { count } from "@/app/signal";
 
-
-export const Bag: FC<{numOfItems: number}>  = ({numOfItems}) => {
-
-  count.value = numOfItems
+export const Bag: FC<{ numOfItems: number }> = ({ numOfItems }) => {
+  count.value = numOfItems;
   const bagStyle = {
     margin: "0 10px",
     height: 25,
@@ -31,7 +29,16 @@ export const Bag: FC<{numOfItems: number}>  = ({numOfItems}) => {
 		 M363.05,459h-243c-26,0-47.2-17.3-47.5-38.8l26.8-301.7h47.6v42.1c0,6.6,5.4,12,12,12s12-5.4,12-12v-42.1h141.2v42.1
 		c0,6.6,5.4,12,12,12s12-5.4,12-12v-42.1h47.6l26.8,301.8C410.25,441.7,389.05,459,363.05,459z"
         />
-        <text x="50%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="240px" font-weight="bold">{count.value}</text>
+        <text
+          x="50%"
+          y="70%"
+          dominantBaseline="middle"
+          textAnchor="middle"
+          fontSize="240px"
+          fontWeight="bold"
+        >
+          {count.value}
+        </text>
       </svg>
     </div>
   );

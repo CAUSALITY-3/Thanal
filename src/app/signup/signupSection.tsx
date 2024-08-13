@@ -1,6 +1,5 @@
 "use client";
 import { FC, useEffect, useState } from "react";
-// import * as stylex from "@stylexjs/stylex";
 import { Button } from "@Components/Buttons/Button";
 import { Input } from "@Components/Input/Input";
 import { formData } from "../type";
@@ -8,65 +7,12 @@ import { addValidationFunction } from "../util";
 import { useRouter } from "next/navigation";
 import "./signupSection.scss";
 
-// const styles = stylex.create({
-//   loginOuterDiv: {
-//     display: "flex",
-//     alignItems: "center",
-//     justifyContent: "center",
-//     width: "100%",
-//     minHeight: "70vh",
-//     margin: "30px 0",
-//   },
-//   loginContainer: {
-//     display: "flex",
-//     alignItems: "center",
-//     padding: "40px 20px",
-//     flexDirection: "column",
-//     // background: "rgba(0, 0, 0, .03)",
-//     justifyContent: "center",
-//     width: "100%",
-//     maxWidth: "500px",
-//     minHeight: "40vh",
-//   },
-//   steps: {
-//     color: "grey",
-//     marginBottom: "25px",
-//   },
-//   loginWithhGooleButton: {
-//     display: "flex",
-//     padding: "5px 10px",
-//     background: "rgba(0, 0, 0, .05)",
-//     borderRadius: "3px",
-//     ":hover": {
-//       cursor: "pointer",
-//       background: "rgba(0, 0, 0, .1)",
-//     },
-//   },
-//   loginWithhGooleText: {
-//     marginRight: "20px",
-//   },
-//   formContainer: {
-//     width: "70%",
-//   },
-//   formControl: {
-//     display: "flex",
-//     paddingTop: "16px",
-//     alignItems: "center",
-//     justifyContent: "space-between",
-//   },
-// });
-
 const SingnupSection: FC<{ formDataProp: formData }> = ({ formDataProp }) => {
   const step = 2;
   const router = useRouter();
   const [submit, setSubmit] = useState(false);
   const [lastOne, setLastOne] = useState(false);
   const [formData, setFormData] = useState(formDataProp);
-
-  //   const loginWithhGooleIcon = {
-  //     width: "18px",
-  //     height: "18px",
-  //   }
 
   useEffect(() => {
     if (formDataProp) {
@@ -155,7 +101,7 @@ const SingnupSection: FC<{ formDataProp: formData }> = ({ formDataProp }) => {
               <div className="loginWithhGooleText">
                 Sign Up with Google
               </div>
-              <Image src={googleIcon} alt="" className="loginWithhGooleIcon"/>
+              <img src={googleIcon} alt="" className="loginWithhGooleIcon"/>
             </div>
           ) : ( */}
           <div className="formContainer">

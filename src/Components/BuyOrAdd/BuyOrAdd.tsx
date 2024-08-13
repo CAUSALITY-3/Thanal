@@ -1,10 +1,6 @@
 "use client";
 import { FC } from "react";
-// import * as stylex from "@stylexjs/stylex";
 import { Button } from "../Buttons/Button";
-import buyIcon from "@/assets/buy_icon.svg";
-import cartIcon from "@/assets/cart_icon.svg";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { count } from "@/app/signal";
 import { effect } from "@preact/signals-react";
@@ -15,31 +11,11 @@ interface Props {
   productId: string;
 }
 
-// const styles = stylex.create({
-//   container: {
-//     width: "100%",
-//     height: "60px",
-//     display: "flex",
-//     alignItems: "center",
-//     justifyContent: "space-between",
-//   },
-//   buttonBox: {
-//     width: "48%",
-//     height: "100%",
-//     display: "flex",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-//   buttonIcon: {
-//     marginRight: "3px",
-//   },
-//   buttonName: {},
-// });
 export const BuyOrAdd: FC<Props> = ({ email, productId }) => {
   const router = useRouter();
   const data = [
     {
-      icon: cartIcon,
+      icon: `${process.env.IMAGE_URL}/images/getImage?path=products/plants/plants.jpg`,
       text: "Add To Cart",
       width: "100%",
       height: "95%",
@@ -47,7 +23,7 @@ export const BuyOrAdd: FC<Props> = ({ email, productId }) => {
       action: "cart",
     },
     {
-      icon: buyIcon,
+      icon: `${process.env.IMAGE_URL}/images/getImage?path=products/plants/plants.jpg`,
       text: "Buy Now",
       width: "100%",
       height: "95%",
@@ -95,7 +71,12 @@ export const BuyOrAdd: FC<Props> = ({ email, productId }) => {
             content={
               <>
                 <div className="buttonIcon">
-                  <Image src={type.icon} alt="" style={iconStyle} />
+                  <img
+                    className="buttonIcon"
+                    src={type.icon}
+                    alt=""
+                    style={iconStyle}
+                  />
                 </div>
                 <div className="buttonName">{type.text}</div>
               </>

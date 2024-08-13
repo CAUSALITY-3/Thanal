@@ -1,20 +1,3 @@
-// .prouctBox{
-//   display: none;
-// }
-
-// .productTypeBox {
-//   height: 100px;
-//   width:120px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   background-color:lightblue;
-// }
-
-// .productTypeBox:hover .prouctBox {
-//   display: visible;
-// }
-
 .productContainer {
   width: 100vw;
   display: flex;
@@ -91,9 +74,9 @@
             background: transparent;
           }
           .productBox {
-            height: 200;
-            width: 200;
-            margin: 5;
+            height: 200px;
+            width: 200px;
+            margin: 5px;
             position: relative;
             display: flex;
             justify-content: center;
@@ -104,17 +87,24 @@
               cursor: pointer;
               box-shadow: 5px 5px 10px 2px rgb(41, 41, 41, 0.3);
             }
-            .imageContainer {
+            .product-imageContainer {
               height: 200px;
               width: 200px;
               position: relative;
               border-radius: 5px;
+              img {
+                height: 200px;
+                width: 200px;
+                webkit-user-drag: none;
+                border-radius: 5px;
+                object-fit: cover;
+              }
             }
             .productNameContainer {
-              height: 200;
-              width: 200;
+              height: 200px;
+              width: 200px;
               opacity: 0;
-              border-radius: 5;
+              border-radius: 5px;
               position: absolute;
               transition: all ease 0.5s;
               display: flex;
@@ -150,6 +140,11 @@
           }
         }
       }
+    }
+    .imageStyle {
+      height: 60vh;
+      width: 100vw;
+      object-fit: cover;
     }
   }
 }

@@ -1,5 +1,4 @@
 import { FC } from "react";
-// import * as stylex from "@stylexjs/stylex";
 import "./Ratings.scss";
 
 interface Ratings {
@@ -12,28 +11,6 @@ interface Props {
   type?: "star" | undefined;
   reviewCount?: number | undefined;
 }
-
-// const styles = stylex.create({
-//   ratingsContainer: {
-//     display: "flex",
-//     alignItems: "center"
-//   },
-//   starContainer: {
-//     background: "rgb(75, 175, 25)",
-//     color: "white",
-//     display: "flex",
-//     alignItems: "center",
-//     justifyContent: "center",
-//     width: "fit-content"
-//   },
-//   ratingCount: {
-//     color: "#A4A3A3",
-//   },
-//   svg: {
-//     marginLeft: "5px",
-//     color: "#ffd700",
-//   },
-// });
 
 export const Ratings: FC<Props> = ({
   ratings,
@@ -80,7 +57,6 @@ export const Ratings: FC<Props> = ({
     <div className="ratingsContainer" style={{ height: sizes[size].height }}>
       {type === "star" ? (
         <>
-          {/* <div {...stylex.props(styles.ratingCount)} style={{marginRight: "2px"}}>{ratings.average}</div> */}
           <div style={stars}>★★★★★</div>
           <div
             className="ratingCount"

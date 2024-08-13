@@ -28,34 +28,3 @@ export default async function RootLayout({
     </html>
   );
 }
-
-// const DARK = "@media (prefers-color-scheme: dark)";
-// const fgColor = `rgba(${$.foregroundR}, ${$.foregroundG}, ${$.foregroundB}, 1)`;
-
-// const styles = stylex.create({
-//   html: {
-//     margin: 0,
-//     padding: 0,
-//     width: "100%",
-//     // display: "flex",
-//     // justifyContent: "center",
-//     "font-family": "'Roboto', sans-serif",
-//   },
-//   body: {
-//     background: "white",
-//     display: "flex",
-//     flexDirection: "column",
-//     alignItems: "center",
-//     justifyContent: "center"
-//   },
-//   nav: {
-//     // display: {
-//     //   default: "visible",
-//     //   "@media (max-width: 500px)": "none",
-//     // }
-//     // width: "100%",
-//     // position: "absolute",
-//     // top: 0,
-//     // left: 0,
-//   },
-// });

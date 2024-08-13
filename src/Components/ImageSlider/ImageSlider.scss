@@ -19,20 +19,38 @@
       justify-content: center;
       margin: 2px 5px;
       position: relative;
+      img {
+        height: 90%;
+        width: 90%;
+        background-size: cover;
+        background-position: center;
+      }
     }
     .imageTemplateBoxActive {
       border: 2px solid green;
+      img {
+        height: 90%;
+        width: 90%;
+        background-size: cover;
+        background-position: center;
+      }
     }
   }
   .sliderStyles {
     width: 100%;
     height: 100%;
     position: relative;
-    .imageContainer {
+    .slider-imageContainer {
       width: 100%;
       height: 100%;
       position: relative;
       border-radius: 10px;
+      img {
+        border-radius: 10px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
     .dotsContainerStyles {
       position: absolute;

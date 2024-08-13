@@ -1,44 +1,10 @@
 import { FC } from "react";
-import logo from "@public/logo.svg";
-// import * as stylex from "@stylexjs/stylex";
-// import { text } from "../../app/globalTokens.stylex";
-import Image from "next/image";
 import Link from "next/link";
 import Bag from "../ShoppingBag/bag";
 import { apiCall } from "@/api/sevice";
 import ScreenWidhChecker from "./screenWidthChecker";
 import { getUserAuthdetails } from "@/app/util";
 import "./navbar.scss";
-
-// const styles = stylex.create({
-//   navBar: {
-//     height: 50,
-//     width:"100%",
-//     background: "rgba(250, 250, 252, .8)",
-//     "backdrop-filter": "blur(10px)",
-//     display: "flex",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-//   navBarContents: {
-//     display: "flex",
-//     height: "100%",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-//   navBarItems: {
-//     "text-decoration": "none",
-//     margin: "0 10px",
-//     color: "rgba(0, 0, 0, .8)",
-//     fontSize: text.sm,
-//     transition: "all ease 0.5s",
-//     ":hover": {
-//       cursor: "pointer",
-//       color: "black",
-//       transition: "all ease 0.5s",
-//     },
-//   },
-// });
 
 export const Navbar: FC = async () => {
   const userAuth: any = await getUserAuthdetails();
@@ -62,7 +28,11 @@ export const Navbar: FC = async () => {
     <nav className="navBar">
       <div className="navBarContents">
         <Link href="/" style={{ textDecoration: "none" }}>
-          <Image src={logo} alt="" style={navbarItemStyle} />
+          <img
+            src={`${process.env.IMAGE_URL}/images/getImage?path=products/plants/plants.jpg`}
+            alt=""
+            style={navbarItemStyle}
+          />
         </Link>
         <Link href="/products" className="navBarItems">
           Products
