@@ -3,10 +3,17 @@ import { FC } from "react";
 import { redirect } from "next/navigation";
 import SingnupSection from "./signupSection";
 import { formData } from "../type";
-import { getUserAuthdetails } from "../util";
+import { cookies } from "next/headers";
 
 const SignUp: FC = async () => {
-  const user: any = await getUserAuthdetails();
+  const cookieStore = cookies();
+  const userData: any = cookieStore.get("user");
+  console.log(userData);
+  const user =
+    userData.value && typeof userData.value === "string"
+      ? JSON.parse(userData.value)
+      : null;
+
   if (user?.name) {
     return redirect("/"); // need to update this to profile page
   }

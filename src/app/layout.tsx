@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 // import * as stylex from "@stylexjs/stylex";
-import Navbar from "@/Components/Navbar/navbar";
 // import AuthProvider from "./context/authProvider";
 import "./homeLayout.scss";
+import { ReactQueryClientProvider } from "./queryClient";
+import Navbar from "@/Components/Navbar/navbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,16 +16,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return await (
-    <html className="html" lang="en">
-      <body className="body">
-        {/* <AuthProvider> */}
-        {/* <div {...stylex.props(styles.nav)}> */}
-        <Navbar />
-        {/* </div> */}
-        {/* <div id="portal"></div> */}
-        {children}
-        {/* </AuthProvider> */}
-      </body>
-    </html>
+    <ReactQueryClientProvider>
+      <html className="html" lang="en">
+        <body className="body">
+          <>
+            <Navbar />
+            {children}
+          </>
+        </body>
+      </html>
+    </ReactQueryClientProvider>
   );
 }

@@ -12,7 +12,9 @@ export default async function Products() {
         <div className="productTypeBox" key={key}>
           <img
             className="imageStyle"
-            src={`${process.env.IMAGE_URL}/images/getImage?path=products/${item.type}/${item.type}.jpg`}
+            src={`${
+              process.env.IMAGE_URL
+            }${item.type.toLowerCase()}/${item.type.toLowerCase()}.jpg`}
             alt="Picture of the author"
           />
           <div className="prouctAbsoluteContainer">
@@ -29,10 +31,7 @@ export default async function Products() {
                     key={key}
                   >
                     <div className="product-imageContainer">
-                      <img
-                        src={`${process.env.IMAGE_URL}/images/getImage?path=products/${item.type}/${card.name}/1.jpg`}
-                        alt="Picture of the author"
-                      />
+                      <img src={card.image} alt="Picture of the author" />
                     </div>
 
                     <div className="productNameContainer">

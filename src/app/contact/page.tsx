@@ -1,31 +1,32 @@
 import MakePaymentComponent from "@/Components/PaymentComponent/MakePaymentComponent";
-import { getUserAuthdetails } from "../util";
+import { cookies } from "next/headers";
 
 export default async function Contact() {
-  const session: any = await getUserAuthdetails();
+  const cookieStore = cookies();
+  const userData: any = cookieStore.get("user");
+  console.log(userData);
+  const session =
+    userData.value && typeof userData.value === "string"
+      ? JSON.parse(userData.value)
+      : null;
 
   return (
     <>
       {session ? (
         <>
-        <div>{JSON.stringify(session)}</div>
-        <div>{JSON.stringify(session)}</div>
-        <div>{JSON.stringify(session)}</div>
-        <div>{JSON.stringify(session)}</div>
-        <div>{JSON.stringify(session)}</div>
+          <div>{session}</div>
         </>
-        
       ) : (
         <>
-        <h1 >You Shall Not Pass!</h1>
-        <h1 >You Shall Not Pass!</h1>
-        <h1 >You Shall Not Pass!</h1>
-        <h1 >You Shall Not Pass!</h1>
-        <h1 >You Shall Not Pass!</h1>
+          <h1>You Shall Not Pass!</h1>
+          <h1>You Shall Not Pass!</h1>
+          <h1>You Shall Not Pass!</h1>
+          <h1>You Shall Not Pass!</h1>
+          <h1>You Shall Not Pass!</h1>
         </>
       )}
 
-      <MakePaymentComponent/>
+      <MakePaymentComponent />
     </>
-  )
+  );
 }

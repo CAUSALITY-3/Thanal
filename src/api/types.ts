@@ -7,11 +7,13 @@ export const apiPaths: { [key: string]: string } = {
   GET_IMAGES: "images/getImageNames",
   PRODUCT_FAMILY: "products/getAllUnderFamily",
   GET_ORDER_ID: "payments/createOrder",
-  ADD_TO_BAG: "users/addToBag"
+  ADD_TO_BAG: "users/addToBag",
+  GET_USER_DETAILS: "auth/getUserDetails",
 };
 
 export interface ProductMainList {
   type: string;
+  image: string;
   data: {
     [key: string]: {
       category: string;

@@ -1,18 +1,20 @@
+"use client";
 import { FC } from "react";
 import Link from "next/link";
 import Bag from "../ShoppingBag/bag";
-import { apiCall } from "@/api/sevice";
 import ScreenWidhChecker from "./screenWidthChecker";
-import { getUserAuthdetails } from "@/app/util";
+import { getUserAuth } from "@/app/util";
 import "./navbar.scss";
+import { useQuery } from "@tanstack/react-query";
 
-export const Navbar: FC = async () => {
-  const userAuth: any = await getUserAuthdetails();
-  const userProfileResponse = userAuth?.email
-    ? await apiCall("get", "GET_USER_BY_EMAIL", {}, `?email=${userAuth?.email}`)
-    : null;
-  const user = userProfileResponse;
-  console.log("kuttu", userAuth);
+export const Navbar: FC = () => {
+  const { data, isLoading, isError } = useQuery({
+    queryFn: () => getUserAuth(),
+    queryKey: ["user"], //Array according to Documentation
+  });
+  console.log("ha ha", { data });
+  const user = data ? JSON.parse(data) : null;
+  console.log("kuttu", data);
   const navbarItemStyle = {
     margin: "0 10px",
     height: 25,
@@ -40,8 +42,8 @@ export const Navbar: FC = async () => {
         <Link href="/contact" className="navBarItems">
           Contact
         </Link>
-        {userAuth?.name ? (
-          <div className="navBarItems">{userAuth?.name}</div>
+        {user?.name ? (
+          <div className="navBarItems">{user?.name}</div>
         ) : (
           <Link href="/login" className="navBarItems">
             Login

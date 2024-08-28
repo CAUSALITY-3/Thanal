@@ -5,9 +5,10 @@
 // import { ProductFeatureServices } from "@api/services/productFeatures";
 // import { UserServices } from "@api/services/users";
 // import { InjectedType } from "@api/types/types";
-import { getServerSession } from "next-auth";
+// import { getServerSession } from "next-auth";
 import { formData } from "./type";
-import { options } from "./api/auth/[...nextauth]/options";
+// import { options } from "./api/auth/[...nextauth]/options";
+import { apiCall } from "@/api/sevice";
 
 // const returnType = (servicename: string) => {
 //   switch (servicename) {
@@ -63,7 +64,46 @@ export function addValidationFunction(formData: formData) {
   return formData;
 }
 
-export async function getUserAuthdetails() {
-  const session: any = await getServerSession(options);
-  return session?.user?.email ? session.user : null;
+// expors
+
+export function getCookie(name: string) {
+  if (!document) null;
+  const value = `; ${document?.cookie}`;
+  console.log("&&&&&", value);
+  const parts = value?.split(`; ${name}=`);
+  if (parts.length === 2) {
+    const userCookie = parts.pop()?.split(";").shift();
+    return userCookie ? decodeURIComponent(userCookie) : null;
+  }
+  return null;
+}
+
+export async function getUserDetails(
+  data: any
+): Promise<{ newData: boolean; loginRequired: boolean; cache: any }> {
+  const user = await apiCall(
+    "get",
+    "GET_USER_DETAILS",
+    {},
+    `?email=${data.email}&updatedAt=${data.updatedAt}`
+  );
+  return user;
+}
+
+export async function getUserAuth() {
+  const user = getCookie("user");
+  console.log("!!!!!!!!!", typeof user, { user });
+  if (user) return user;
+  if (!localStorage) return null;
+  const data = localStorage.getItem("user");
+  console.log("!!!!!!!!!", { data });
+  if (!data) return null;
+  const latestUserData = await getUserDetails(JSON.parse(data));
+  const { newData, loginRequired, cache } = latestUserData;
+  if (newData) {
+    localStorage.setItem("user", JSON.stringify(cache));
+    return JSON.stringify(cache);
+  }
+  if (loginRequired) return null;
+  return JSON.stringify(cache);
 }

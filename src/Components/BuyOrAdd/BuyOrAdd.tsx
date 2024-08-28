@@ -3,8 +3,9 @@ import { FC } from "react";
 import { Button } from "../Buttons/Button";
 import { useRouter } from "next/navigation";
 import { count } from "@/app/signal";
-import { effect } from "@preact/signals-react";
 import "./BuyOrAdd.scss";
+import { apiCall } from "@/api/sevice";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface Props {
   email: string;
@@ -13,7 +14,8 @@ interface Props {
 
 export const BuyOrAdd: FC<Props> = ({ email, productId }) => {
   const router = useRouter();
-  const data = [
+  const queryClient = useQueryClient();
+  const metadata = [
     {
       icon: `${process.env.IMAGE_URL}/images/getImage?path=products/plants/plants.jpg`,
       text: "Add To Cart",
@@ -41,17 +43,33 @@ export const BuyOrAdd: FC<Props> = ({ email, productId }) => {
   const handleClick = async (action: string) => {
     if (action === "cart") {
       if (email) {
-        const body: any = JSON.stringify({ productId, email });
-        console.log("payload", body, "email", email);
-        await fetch("/api/addToBag", {
-          method: "POST",
-          body,
-        });
-        // const ct = count.value;
-        console.log("sasi", count.value);
-        effect(() => {
-          count.value = count.value + 1;
-        });
+        // const body: any = JSON.stringify({ productId, email });
+        // console.log("payload", body, "email", email);
+        // await fetch("/api/addToBag", {
+        //   method: "POST",
+        //   body,
+        // });
+
+        console.log("ADD_TO_BAG", { productId }, email);
+        const data = await apiCall(
+          "POST",
+          "ADD_TO_BAG",
+          {},
+          `?email=${email}`,
+          JSON.stringify({ productId }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        const user = data.email ? data : null;
+
+        if (user) {
+          localStorage.setItem("user", JSON.stringify(data));
+          queryClient.setQueryData(["user"], JSON.stringify(data));
+          // const ct = count.value;
+          console.log("sasi", count.value);
+        }
+        router.push("/");
       } else {
         router.push("/login");
       }
@@ -61,7 +79,7 @@ export const BuyOrAdd: FC<Props> = ({ email, productId }) => {
   };
   return (
     <div className="container">
-      {data.map((type, index) => (
+      {metadata.map((type, index) => (
         <div
           className="buttonBox"
           key={index}

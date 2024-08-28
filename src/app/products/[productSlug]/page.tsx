@@ -3,22 +3,29 @@ import { Ratings } from "@Components/Ratings/Ratings";
 import { ProductFeatures } from "@Components/ProductFeatures/ProductFeatures";
 import { BuyOrAdd } from "@Components/BuyOrAdd/BuyOrAdd";
 import { apiCall } from "@/api/sevice";
-import { getUserAuthdetails } from "@/app/util";
 import "./productSlug.scss";
+import { cookies } from "next/headers";
 
 export default async function ProductDetail({ params }: any) {
-  const user: any = await getUserAuthdetails();
+  const cookieStore = cookies();
+  const userData: any = cookieStore.get("user");
+  console.log(userData);
+  const user =
+    userData.value && typeof userData.value === "string"
+      ? JSON.parse(userData.value)
+      : null;
+
   const product = await apiCall(
     "get",
     "GET_PRODUCT_BY_ID",
     {},
     `?id=${params.productSlug}`
   );
-  const path = `?path=products/${product.category}/${product.name}`;
-  const imageFiles = await apiCall("get", "GET_IMAGES", {}, path);
-  const images = imageFiles.map((file: string) => {
-    return `${process.env.API_BASE_URL}images/getImage${path}/${file}`;
-  });
+  // const path = `?path=products/${product.category}/${product.name}`;
+  // const imageFiles = await apiCall("get", "GET_IMAGES", {}, path);
+  // const images = imageFiles.map((file: string) => {
+  //   return `${process.env.API_BASE_URL}images/getImage${path}/${file}`;
+  // });
   const routeLinkText = `Products > ${product.category} > ${product.name}`;
 
   return (
@@ -28,7 +35,7 @@ export default async function ProductDetail({ params }: any) {
         <div className="productDetailContainer">
           <div className="productImageSection">
             <div className="imageSliderContainerStyles">
-              <ImageSlider slides={images} />
+              <ImageSlider slides={product.images} />
             </div>
 
             <div className="buyOrAdd">

@@ -1,7 +1,7 @@
 import { apiPaths } from "./types";
 import { logger } from "./lib";
 import { revalidateCache } from "./utils";
-const baseUrl = process.env.API_BASE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 const timeout = +(process.env.API_TIME_OUT || 15000);
 
 export async function apiCall(
@@ -29,7 +29,7 @@ export async function apiCall(
         tags: nextOptions?.tags,
       },
     };
-    logger("INFO", {url, ...options}, "calling DB service, http options ");
+    logger("INFO", { url, ...options }, "calling DB service, http options ");
     const response = await fetch(url, options);
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -43,6 +43,7 @@ export async function apiCall(
     );
     return responseData;
   } catch (error) {
+    console.log("Sasi", error);
     logger("ERROR", error, "Error on DB service call, error ");
     if (errorReplacer) return errorReplacer;
     throw error;

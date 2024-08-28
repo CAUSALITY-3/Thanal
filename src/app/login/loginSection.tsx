@@ -1,5 +1,5 @@
 "use client";
-import { signIn } from "next-auth/react";
+// import { signIn } from "next-auth/react";
 import React from "react";
 import "./loginSection.scss";
 
@@ -10,7 +10,7 @@ export const LoginSection = ({ provider }: any) => {
         <div className="loginContainer">
           <div
             className="loginWithhGooleButton"
-            onClick={() => signIn(provider.id)}
+            // onClick={() => signIn(provider.id)}
           >
             <div className="loginWithhGooleText">Login/SingnUp with Google</div>
             <img

@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const ProductCard: FC<Props> = ({ props, type }) => {
-  const img = `${process.env.IMAGE_URL}/images/getImage?path=products/${type}/${props.name}/1.jpg`;
+  const img = `${process.env.IMAGE_URL}${type}/${props.name}/1.jpg`;
   return (
     <div className="productBox">
       <div className="product-card-imageContainer">
