@@ -9,6 +9,7 @@ export const apiPaths: { [key: string]: string } = {
   GET_ORDER_ID: "payments/createOrder",
   ADD_TO_BAG: "users/addToBag",
   GET_USER_DETAILS: "auth/getUserDetails",
+  VERIFY_ORDER: "payments/verifyPayment",
 };
 
 export interface ProductMainList {

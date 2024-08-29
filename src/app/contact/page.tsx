@@ -6,15 +6,15 @@ export default async function Contact() {
   const userData: any = cookieStore.get("user");
   console.log(userData);
   const session =
-    userData.value && typeof userData.value === "string"
+    userData?.value && typeof userData?.value === "string"
       ? JSON.parse(userData.value)
-      : null;
+      : {};
 
   return (
     <>
       {session ? (
         <>
-          <div>{session}</div>
+          <div>{JSON.stringify(session)}</div>
         </>
       ) : (
         <>

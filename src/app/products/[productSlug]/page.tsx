@@ -11,7 +11,7 @@ export default async function ProductDetail({ params }: any) {
   const userData: any = cookieStore.get("user");
   console.log(userData);
   const user =
-    userData.value && typeof userData.value === "string"
+    userData?.value && typeof userData?.value === "string"
       ? JSON.parse(userData.value)
       : null;
 
