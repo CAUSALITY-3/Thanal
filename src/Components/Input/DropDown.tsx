@@ -134,8 +134,11 @@ export const DropDown: FC<Props> = ({
   };
 
   const dropDownStyle = {
-    animation: "fadeIn 2s ease-in-out",
-    "max-height": dropDownValues.length > 10 ? "200px" : "auto",
+    animation: "fadeIn 1s ease-in-out",
+    maxHeight: dropDownValues.length > 10 ? "200px" : "auto",
+    width: parentRef.current
+      ? `${parentRef.current.offsetWidth - 10}px`
+      : "350px",
   };
 
   const drop = () => {
@@ -179,10 +182,10 @@ export const DropDown: FC<Props> = ({
       {!blur ? drop() : <></>}
     </div>
   ) : (
-    <div>
+    <div style={{ width: "100%" }}>
       <input
         ref={parentRef}
-        className="formInput"
+        className="formInputDropDown"
         type="text"
         value={searchText || (blur ? value || "Select one from list ..." : "")}
         onFocus={() => {

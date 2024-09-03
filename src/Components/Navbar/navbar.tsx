@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export const Navbar: FC = () => {
   const { data, isLoading, isError } = useQuery({
-    queryFn: () => getUserAuth(),
+    queryFn: getUserAuth,
     queryKey: ["user"], //Array according to Documentation
   });
   console.log("ha ha", { data });
@@ -31,7 +31,7 @@ export const Navbar: FC = () => {
       <div className="navBarContents">
         <Link href="/" style={{ textDecoration: "none" }}>
           <img
-            src={`${process.env.IMAGE_URL}/images/getImage?path=products/plants/plants.jpg`}
+            src={`${process.env.IMAGE_URL}plants/plants.jpg`}
             alt=""
             style={navbarItemStyle}
           />
@@ -43,7 +43,9 @@ export const Navbar: FC = () => {
           Contact
         </Link>
         {user?.name ? (
-          <div className="navBarItems">{user?.name}</div>
+          <Link href="/profile" className="navBarItems">
+            {user?.name}
+          </Link>
         ) : (
           <Link href="/login" className="navBarItems">
             Login

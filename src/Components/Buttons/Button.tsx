@@ -21,9 +21,7 @@ export const Button: FC<Props> = ({
     width: width || "100px",
     height: height || "40px",
     background: color || "#77DD77",
-    ":hover": {
-      cursor: disabled ? "not-allowed" : "pointer",
-    },
+    cursor: disabled ? "not-allowed" : "pointer",
   };
 
   return (

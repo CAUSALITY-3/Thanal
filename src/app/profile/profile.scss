@@ -1,0 +1,44 @@
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .profileOuter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    .profileContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      .profileImage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .profileDetails {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        .profileName {
+          font-size: 25px;
+        }
+        .profileEmail {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}

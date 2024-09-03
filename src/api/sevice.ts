@@ -1,6 +1,7 @@
 import { apiPaths } from "./types";
 import { logger } from "./lib";
 import { revalidateCache } from "./utils";
+import { getCookie, getCookieAndUpdateLocalStorage } from "@/app/util";
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 const timeout = +(process.env.API_TIME_OUT || 15000);
 
@@ -18,6 +19,8 @@ export async function apiCall(
   headers?: any,
   errorReplacer?: any
 ) {
+  let updatedAt: string = "";
+  const isBrowser = typeof window === "object" && typeof document === "object";
   try {
     const url = baseUrl + apiPaths[path] + params;
     const options = {
@@ -29,6 +32,15 @@ export async function apiCall(
         tags: nextOptions?.tags,
       },
     };
+
+    if (isBrowser) {
+      const user = isBrowser ? getCookie("user") : null;
+      if (user) {
+        const userData = JSON.parse(user);
+        updatedAt = userData?.updatedAt;
+      }
+    }
+
     logger("INFO", { url, ...options }, "calling DB service, http options ");
     const response = await fetch(url, options);
     if (!response.ok) {
@@ -41,6 +53,16 @@ export async function apiCall(
       responseData,
       "Successful response from DB service, responseData "
     );
+
+    if (isBrowser) {
+      const user = isBrowser ? getCookie("user") : null;
+      if (user) {
+        const userData = JSON.parse(user);
+        if (updatedAt !== userData?.updatedAt) {
+          getCookieAndUpdateLocalStorage("user");
+        }
+      }
+    }
     return responseData;
   } catch (error) {
     console.log("Sasi", error);

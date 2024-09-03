@@ -2,7 +2,7 @@
   position: relative;
   width: 95%;
 }
-.formInput {
+.formInputDropDown {
   display: flex;
   position: relative;
   align-items: center;
@@ -21,41 +21,46 @@
     background: rgba(0, 0, 0, 0.1);
     outline: none;
   }
-  .dropDown {
-    position: absolute;
-    margin-top: 5px;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    overflow-y: auto;
-    animation-duration: 0.4s;
-    &::-webkit-scrollbar {
-      width: 5px;
+}
+.noResult {
+  color: rgb(155, 0, 0);
+  padding: 5px;
+  font-size: 15px;
+}
+input {
+  width: 95%;
+}
+.dropDown {
+  position: absolute;
+  margin-top: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  overflow-y: auto;
+  animation-duration: 0.4s;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  padding: 5px;
+  // width: 95%;
+  animation: fadeIn 1s ease-in-out;
+  .drop {
+    -webkit-transition-property: background-color box-shadow;
+    -webkit-transition-duration: 400ms, 400ms;
+    &:hover {
+      box-shadow: 0px 0px 1px 1px grey;
+      background: rgba(0, 0, 0, 0.1);
+      outline: none;
     }
-    &::-webkit-scrollbar-thumb {
-      background: #888;
-    }
-    &::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-    padding: 5px;
-    width: 340;
-    animation: fadeIn 2s ease-in-out;
-    .drop {
-      -webkit-transition-property: background-color box-shadow;
-      -webkit-transition-duration: 400ms, 400ms;
-      &:hover {
-        box-shadow: 0px 0px 1px 1px grey;
-        background: rgba(0, 0, 0, 0.1);
-        outline: none;
-      }
-      cursor: pointer;
-      padding: 3px;
-      font-size: 13px;
-    }
-    .noResult {
-      color: grey;
-    }
+    cursor: pointer;
+    padding: 3px;
+    font-size: 13px;
   }
 }
 

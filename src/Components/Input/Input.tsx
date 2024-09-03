@@ -90,7 +90,7 @@ export const Input: FC<Props> = ({ formData, setFormData, lastOne }) => {
   };
 
   const handleValidation = (fieldName: string, inputValue: string) => {
-    if (required) {
+    if (required && !disabled) {
       const isInValid = !!validation.find(
         (fn: any) => fn(inputValue) === false
       );
@@ -115,20 +115,25 @@ export const Input: FC<Props> = ({ formData, setFormData, lastOne }) => {
   };
 
   const cursorStyle = { cursor: disabled ? "not-allowed" : "auto" };
+  console.log(formData.label, formData.disabled);
 
   return (
     <div className="formControl">
-      <label className="formlabel">
+      <label
+        className="formlabel"
+        onClick={() => console.log(formData, disabled)}
+      >
         {label}
+        {JSON.stringify(disabled)}
         {required && <span style={{ color: "#F08080" }}>*</span>}
       </label>
       {invalid && blured && <p className="formInvalidMessage">{message}</p>}
       {type === "input" ? (
         <input
           className="formInput"
-          style={cursorStyle}
+          style={{ cursor: disabled ? "not-allowed" : "auto" }}
           type="text"
-          disabled={disabled}
+          readOnly={disabled}
           value={value}
           onBlur={(e) => handleBlur(key, e.target.value)}
           onChange={(e) => handleChange(key, e.target.value)}

@@ -1,15 +1,15 @@
 .home {
   width: 100%;
   max-width: 1050;
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: #888;
-  }
-  &::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
+  // &::-webkit-scrollbar {
+  //   width: 5px;
+  // }
+  // &::-webkit-scrollbar-thumb {
+  //   background: #888;
+  // }
+  // &::-webkit-scrollbar-track {
+  //   background: #f1f1f1;
+  // }
 
   .home-imageContainer {
     position: relative;

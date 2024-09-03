@@ -7,7 +7,7 @@ import { getUserAuth } from "../util";
 const LogedIn: FC = async () => {
   // Get the cookie and parse it back to JSON
   try {
-    console.log("&&&&&&&&&&&&&&", document);
+    // console.log("&&&&&&&&&&&&&&", document);
 
     // return redirect("/");
     let userObject: any = await getUserAuth();

@@ -67,7 +67,8 @@ export function addValidationFunction(formData: formData) {
 // expors
 
 export function getCookie(name: string) {
-  if (!document) null;
+  const isBrowser = typeof window === "object" && typeof document === "object";
+  if (!isBrowser || !document) return null;
   const value = `; ${document?.cookie}`;
   console.log("&&&&&", value);
   const parts = value?.split(`; ${name}=`);
@@ -92,9 +93,10 @@ export async function getUserDetails(
 
 export async function getUserAuth() {
   const user = getCookie("user");
+  const isBrowser = typeof window === "object" && typeof document === "object";
   console.log("!!!!!!!!!", typeof user, { user });
   if (user) return user;
-  if (!localStorage) return null;
+  if (!isBrowser || !localStorage) return null;
   const data = localStorage.getItem("user");
   console.log("!!!!!!!!!", { data });
   if (!data) return null;
@@ -106,4 +108,11 @@ export async function getUserAuth() {
   }
   if (loginRequired) return null;
   return JSON.stringify(cache);
+}
+
+export function getCookieAndUpdateLocalStorage(name: string) {
+  const user = getCookie(name);
+  if (!user) return null;
+  localStorage.setItem("user", user);
+  return user;
 }
