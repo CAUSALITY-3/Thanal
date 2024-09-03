@@ -21,10 +21,10 @@ const Profile: FC = () => {
     <>
       {/* <div className="profile">
         <div className="profileOuter">
-          <div className="profileContainer">
-            <div className="profileImage"> */}
-      <img src={user?.profilePic} alt="" />
-      {/* </div> */}
+          <div className="profileContainer"> */}
+      <div className="profileImage">
+        <img src={user?.profilePic} alt="" />
+      </div>
       <div className="profileDetails">
         <div className="profileName">{user?.name}</div>
         <div className="profileEmail">{user?.email}</div>
