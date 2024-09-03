@@ -17,39 +17,23 @@
       "static/css/app/signup/page.css",
       "static/chunks/app/signup/page.js"
     ],
-    "/profile/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/profile/page.css",
-      "static/chunks/app/profile/page.js"
-    ],
-    "/products/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/products/page.css",
-      "static/chunks/app/products/page.js"
-    ],
     "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/page.css",
       "static/chunks/app/page.js"
     ],
-    "/products/[productSlug]/page": [
+    "/login/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/products/[productSlug]/page.css",
-      "static/chunks/app/products/[productSlug]/page.js"
+      "static/css/app/login/page.css",
+      "static/chunks/app/login/page.js"
     ],
-    "/products/[productSlug]/loading": [
+    "/profile/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/products/[productSlug]/loading.js"
-    ],
-    "/not-found": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/not-found.js"
+      "static/css/app/profile/page.css",
+      "static/chunks/app/profile/page.js"
     ]
   }
 }

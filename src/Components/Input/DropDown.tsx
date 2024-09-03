@@ -81,6 +81,7 @@ export const DropDown: FC<Props> = ({
   disabled,
   handleBlur,
 }) => {
+  let num: number = 0;
   const [mouseOverDpropDown, setMouseOverDpropDown] = useState(false);
   const [blur, setBlur] = useState(true);
   const [filteredValues, setFilteredValues] = useState(dropDownValues);
@@ -102,19 +103,23 @@ export const DropDown: FC<Props> = ({
   };
 
   const closeDrop = () => {
-    if (!mouseOverDpropDown) {
-      setBlur(true);
-      setMouseOverDpropDown(false);
-    } else {
+    console.log("focus out", blur, num);
+    if (num) {
+      if (!mouseOverDpropDown) {
+        setBlur(true);
+        setMouseOverDpropDown(false);
+      } else {
+        // setTimeout(() => {
+        setMouseOverDpropDown(false);
+        // });
+      }
+      setSearchText("");
+      // console.log("qwerty", blur, mouseOverDpropDown )
       // setTimeout(() => {
-      setMouseOverDpropDown(false);
+      handleBlur(keyName, value);
       // });
     }
-    setSearchText("");
-    // console.log("qwerty", blur, mouseOverDpropDown )
-    // setTimeout(() => {
-    handleBlur(keyName, value);
-    // });
+    num++;
   };
 
   // const fadeIn = stylex.keyframes({
@@ -123,6 +128,7 @@ export const DropDown: FC<Props> = ({
   // });
 
   const clickOrTouchDrop = (key: string, drop: string) => {
+    console.log("qwerty", key, drop);
     handleChange(key, drop);
     setBlur(true);
     setSearchText("");
@@ -149,12 +155,14 @@ export const DropDown: FC<Props> = ({
         onMouseOver={() => setMouseOverDpropDown(true)}
         onMouseLeave={() => setMouseOverDpropDown(false)}
       >
-        {filteredValues.map((drop) => (
+        {filteredValues.map((drop, index) => (
           // eslint-disable-next-line react/jsx-key
           <div
+            key={index}
             className="drop"
             onClick={() => {
               clickOrTouchDrop(keyName, drop);
+              console.log("click");
             }}
             onTouchStart={() => {
               clickOrTouchDrop(keyName, drop);

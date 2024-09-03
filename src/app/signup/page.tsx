@@ -4,13 +4,14 @@ import { Button } from "@Components/Buttons/Button";
 import { Input } from "@Components/Input/Input";
 import { formData } from "../type";
 import { getCookie, getCookieAndUpdateLocalStorage } from "../util";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import "./signupSection.scss";
 import { apiCall } from "@/api/sevice";
 import Link from "next/link";
 
 const SingnupSection: FC = () => {
   const step = 2;
+  const router = useRouter();
 
   const [submit, setSubmit] = useState(false);
   const [lastOne, setLastOne] = useState(false);
@@ -25,7 +26,6 @@ const SingnupSection: FC = () => {
   useEffect(() => {
     if (!formData) {
       const data = getCookie("user");
-      console.log("ha ha", { data });
       data ? localStorage.setItem("user", data) : null;
       const user = data ? JSON.parse(data) : null;
       if (!user) {
@@ -343,7 +343,7 @@ const SingnupSection: FC = () => {
       const payload = {
         phone: formData.phone.value,
         address: {
-          house: formData.house.value,
+          houseName: formData.house.value,
           landmark: formData.landmark.value,
           city: formData.city.value,
           state: formData.state.value,
@@ -351,7 +351,6 @@ const SingnupSection: FC = () => {
         },
       };
 
-      console.log("payload", payload, "email", email);
       const response: any = await apiCall(
         "PUT",
         "UPDATE_USER_BY_QUERY",
@@ -362,10 +361,9 @@ const SingnupSection: FC = () => {
           "Content-Type": "application/json",
         }
       );
-      console.log(response);
       if (response) {
         getCookieAndUpdateLocalStorage("user");
-        redirect("/");
+        router.push("/");
       }
     }
   };

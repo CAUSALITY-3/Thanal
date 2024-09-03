@@ -114,9 +114,6 @@ export const Input: FC<Props> = ({ formData, setFormData, lastOne }) => {
     }
   };
 
-  const cursorStyle = { cursor: disabled ? "not-allowed" : "auto" };
-  console.log(formData.label, formData.disabled);
-
   return (
     <div className="formControl">
       <label
@@ -124,7 +121,6 @@ export const Input: FC<Props> = ({ formData, setFormData, lastOne }) => {
         onClick={() => console.log(formData, disabled)}
       >
         {label}
-        {JSON.stringify(disabled)}
         {required && <span style={{ color: "#F08080" }}>*</span>}
       </label>
       {invalid && blured && <p className="formInvalidMessage">{message}</p>}
