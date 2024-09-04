@@ -2,7 +2,8 @@ import { apiPaths } from "./types";
 import { logger } from "./lib";
 import { revalidateCache } from "./utils";
 import { getCookie, getCookieAndUpdateLocalStorage } from "@/app/util";
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+let baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 const timeout = +(process.env.API_TIME_OUT || 15000);
 
 export async function apiCall(
@@ -21,6 +22,14 @@ export async function apiCall(
 ) {
   let updatedAt: string = "";
   const isBrowser = typeof window === "object" && typeof document === "object";
+  if (isBrowser) {
+    const fullUrl = window.location.href;
+    const currentBaseUrl = new URL(fullUrl).origin;
+    baseUrl = currentBaseUrl + "/thanalApi/";
+    console.log({ baseUrl });
+    console.log("isBrowser", isBrowser);
+  }
+
   try {
     const url = baseUrl + apiPaths[path] + params;
     const options = {

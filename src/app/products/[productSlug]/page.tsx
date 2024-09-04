@@ -39,7 +39,7 @@ export default async function ProductDetail({ params }: any) {
             </div>
 
             <div className="buyOrAdd">
-              <BuyOrAdd email={user?.email} productId={params.productSlug} />
+              <BuyOrAdd productId={params.productSlug} />
             </div>
           </div>
           <div className="productDetails">
@@ -62,7 +62,7 @@ export default async function ProductDetail({ params }: any) {
           </div>
           <div className="buyOrAddMobile">
             <div className="buyOrAddMobileOuter">
-              <BuyOrAdd email={user?.email} productId={params.productSlug} />
+              <BuyOrAdd productId={params.productSlug} />
             </div>
           </div>
         </div>

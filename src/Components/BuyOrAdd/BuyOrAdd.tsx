@@ -6,15 +6,17 @@ import { count } from "@/app/signal";
 import "./BuyOrAdd.scss";
 import { apiCall } from "@/api/sevice";
 import { useQueryClient } from "@tanstack/react-query";
+import { getCookie } from "@/app/util";
 
 interface Props {
-  email: string;
   productId: string;
 }
 
-export const BuyOrAdd: FC<Props> = ({ email, productId }) => {
+export const BuyOrAdd: FC<Props> = ({ productId }) => {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const user = getCookie("user");
+  const email = user ? JSON.parse(user).email : null;
   const metadata = [
     {
       icon: `https://ik.imagekit.io/0vf688mrkg/thanal/svg/cart.svg`,
