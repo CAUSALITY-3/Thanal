@@ -17,8 +17,8 @@ export const Navbar: FC = () => {
   console.log("kuttu", data);
   const navbarItemStyle = {
     margin: "0 10px",
-    height: 25,
-    width: 25,
+    height: 27,
+    width: 27,
     fill: "#F0EAD6",
     ":hover": {
       cursor: "pointer",
@@ -31,7 +31,7 @@ export const Navbar: FC = () => {
       <div className="navBarContents">
         <Link href="/" style={{ textDecoration: "none" }}>
           <img
-            src={`${process.env.IMAGE_URL}plants/plants.jpg`}
+            src={`https://ik.imagekit.io/0vf688mrkg/thanal/svg/logo.svg`}
             alt=""
             style={navbarItemStyle}
           />

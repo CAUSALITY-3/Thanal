@@ -19,12 +19,12 @@ export const BuyCartButton: FC<Props> = ({ type, width, height }) => {
       <div className="buttonIcon">
         {type === "buy" ? (
           <img
-            src={`${process.env.IMAGE_URL}/images/getImage?path=products/plants/plants.jpg`}
+            src={"https://ik.imagekit.io/0vf688mrkg/thanal/svg/buy.svg"}
             alt=""
           />
         ) : (
           <img
-            src={`${process.env.IMAGE_URL}/images/getImage?path=products/plants/plants.jpg`}
+            src={`https://ik.imagekit.io/0vf688mrkg/thanal/svg/cart.svg`}
             alt=""
           />
         )}

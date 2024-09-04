@@ -17,7 +17,7 @@ export const BuyOrAdd: FC<Props> = ({ email, productId }) => {
   const queryClient = useQueryClient();
   const metadata = [
     {
-      icon: `${process.env.IMAGE_URL}/images/getImage?path=products/plants/plants.jpg`,
+      icon: `https://ik.imagekit.io/0vf688mrkg/thanal/svg/cart.svg`,
       text: "Add To Cart",
       width: "100%",
       height: "95%",
@@ -25,7 +25,7 @@ export const BuyOrAdd: FC<Props> = ({ email, productId }) => {
       action: "cart",
     },
     {
-      icon: `${process.env.IMAGE_URL}/images/getImage?path=products/plants/plants.jpg`,
+      icon: `https://ik.imagekit.io/0vf688mrkg/thanal/svg/buy.svg`,
       text: "Buy Now",
       width: "100%",
       height: "95%",

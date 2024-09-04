@@ -31,7 +31,10 @@ export default async function Products() {
                     key={key}
                   >
                     <div className="product-imageContainer">
-                      <img src={card.image} alt="Picture of the author" />
+                      <img
+                        src={`${process.env.IMAGE_URL}${item.type}/${card.name}/1.jpg`}
+                        alt="Picture of the author"
+                      />
                     </div>
 
                     <div className="productNameContainer">
