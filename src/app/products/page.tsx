@@ -29,6 +29,7 @@ export default async function Products() {
                     style={{ textDecoration: "none" }}
                     className="productBox"
                     key={key}
+                    prefetch={false}
                   >
                     <div className="product-imageContainer">
                       <img

@@ -405,6 +405,7 @@ const SingnupSection: FC = () => {
                       />
                     </div>
                     <Link
+                      prefetch={false}
                       style={{ cursor: "pointer", textDecoration: "none" }}
                       href={"/profile"}
                     >

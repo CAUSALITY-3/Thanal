@@ -1,7 +1,6 @@
-"use client"
+"use client";
 import { useRouter } from "next/navigation";
 import React, { FC, useState, ReactNode, useEffect } from "react";
-
 
 interface Props {
   children: ReactNode;
@@ -10,19 +9,19 @@ interface Props {
 
 export const ProductCardWrapper: FC<Props> = ({ children, id }) => {
   const [isClick, setIsClick] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
-  enum PrefetchKind {
-    AUTO = "auto",
-    FULL = "full",
-    TEMPORARY = "temporary"
-}
+  //   enum PrefetchKind {
+  //     AUTO = "auto",
+  //     FULL = "full",
+  //     TEMPORARY = "temporary"
+  // }
 
-  useEffect(() => {
-    router.prefetch(`/products/${id}`, {kind:PrefetchKind.AUTO})
-    console.log("sasi", id)
-  }, [])
-  
+  // useEffect(() => {
+  //   router.prefetch(`/products/${id}`, {kind:PrefetchKind.AUTO})
+  //   console.log("sasi", id)
+  // }, [])
+
   const handleClick = () => {
     // console.log(children)
     isClick ? router.push(`/products/${id}`) : null;

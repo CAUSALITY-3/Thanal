@@ -13,6 +13,7 @@ const Login: FC = () => {
         // onClick={() =>
         //   signIn("google", { callbackUrl: "http://loalhost:5000/signup" })
         // }
+        prefetch={false}
         href={"/thanalApi/auth/google"}
       >
         <div className="loginContainer">

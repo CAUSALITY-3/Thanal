@@ -29,25 +29,25 @@ export const Navbar: FC = () => {
   return (
     <nav className="navBar">
       <div className="navBarContents">
-        <Link href="/" style={{ textDecoration: "none" }}>
+        <Link href="/" style={{ textDecoration: "none" }} prefetch={false}>
           <img
             src={`https://ik.imagekit.io/0vf688mrkg/thanal/svg/logo.svg`}
             alt=""
             style={navbarItemStyle}
           />
         </Link>
-        <Link href="/products" className="navBarItems">
+        <Link href="/products" className="navBarItems" prefetch={false}>
           Products
         </Link>
-        <Link href="/contact" className="navBarItems">
+        <Link href="/contact" className="navBarItems" prefetch={false}>
           Contact
         </Link>
         {user?.name ? (
-          <Link href="/profile" className="navBarItems">
+          <Link href="/profile" className="navBarItems" prefetch={false}>
             {user?.name}
           </Link>
         ) : (
-          <Link href="/login" className="navBarItems">
+          <Link href="/login" className="navBarItems" prefetch={false}>
             Login
           </Link>
         )}
