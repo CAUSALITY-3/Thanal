@@ -1,9 +1,9 @@
+"use client";
 import MakePaymentComponent from "@/Components/PaymentComponent/MakePaymentComponent";
-import { cookies } from "next/headers";
+import { getCookie } from "../util";
 
 export default async function Contact() {
-  const cookieStore = cookies();
-  const userData: any = cookieStore.get("user");
+  const userData: any = getCookie("user");
   console.log(userData);
   const session =
     userData?.value && typeof userData?.value === "string"
@@ -14,6 +14,7 @@ export default async function Contact() {
     <>
       {session ? (
         <>
+          <h1>Hello</h1>
           <div>{JSON.stringify(session)}</div>
         </>
       ) : (

@@ -92,6 +92,7 @@ export const BuyOrAdd: FC<Props> = ({ productId }) => {
               <>
                 <div className="buttonIcon">
                   <img
+                    loading="lazy"
                     className="buttonIcon"
                     src={type.icon}
                     alt=""

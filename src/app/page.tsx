@@ -11,6 +11,7 @@ export default async function Page() {
       <div className="home">
         <div className="home-imageContainer">
           <img
+            loading="lazy"
             src={`https://ik.imagekit.io/0vf688mrkg/thanal/pdt1.webp`}
             alt="Picture of the author"
           />

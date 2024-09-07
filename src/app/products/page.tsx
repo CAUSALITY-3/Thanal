@@ -12,6 +12,7 @@ export default async function Products() {
         <div className="productTypeBox" key={key}>
           <img
             className="imageStyle"
+            loading="lazy"
             src={`${
               process.env.IMAGE_URL
             }${item.type.toLowerCase()}/${item.type.toLowerCase()}.jpg`}
@@ -23,9 +24,9 @@ export default async function Products() {
             </div>
             <div className="prouctItemContainerOuter">
               <div className="prouctItemContainer">
-                {Object.values(item.data).map((card, key: any) => (
+                {Object.entries(item.data).map(([family, card], key: any) => (
                   <Link
-                    href={`/products/family/${card.name}`}
+                    href={`/products/family/${family}`}
                     style={{ textDecoration: "none" }}
                     className="productBox"
                     key={key}
@@ -33,6 +34,7 @@ export default async function Products() {
                   >
                     <div className="product-imageContainer">
                       <img
+                        loading="lazy"
                         src={`${process.env.IMAGE_URL}${item.type}/${card.name}/1.jpg`}
                         alt="Picture of the author"
                       />

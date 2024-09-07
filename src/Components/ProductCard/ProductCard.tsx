@@ -19,7 +19,7 @@ export const ProductCard: FC<Props> = ({ props, type }) => {
   return (
     <div className="productBox">
       <div className="product-card-imageContainer">
-        <img src={img} alt="Picture of the author" />
+        <img loading="lazy" src={img} alt="Picture of the author" />
       </div>
 
       <div className="productDetails">

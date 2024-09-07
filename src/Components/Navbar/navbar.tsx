@@ -31,6 +31,7 @@ export const Navbar: FC = () => {
       <div className="navBarContents">
         <Link href="/" style={{ textDecoration: "none" }} prefetch={false}>
           <img
+            loading="lazy"
             src={`https://ik.imagekit.io/0vf688mrkg/thanal/svg/logo.svg`}
             alt=""
             style={navbarItemStyle}

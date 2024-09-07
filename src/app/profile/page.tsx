@@ -23,7 +23,7 @@ const Profile: FC = () => {
         <div className="profileOuter">
           <div className="profileContainer"> */}
       <div className="profileImage">
-        <img src={user?.profilePic} alt="" />
+        <img loading="lazy" src={user?.profilePic} alt="" />
       </div>
       <div className="profileDetails">
         <div className="profileName">{user?.name}</div>

@@ -14,6 +14,7 @@ export const LoginSection = ({ provider }: any) => {
           >
             <div className="loginWithhGooleText">Login/SingnUp with Google</div>
             <img
+              loading="lazy"
               src={`${process.env.IMAGE_URL}/images/getImage?path=products/plants/plants.jpg`}
               alt=""
               className="loginWithhGooleIcon"

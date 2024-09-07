@@ -75,7 +75,7 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
             }
             onMouseOver={() => setCurrentIndex(slideIndex)}
           >
-            <img src={slide} alt="Picture of the author" />
+            <img loading="lazy" src={slide} alt="Picture of the author" />
           </div>
         ))}
       </div>
@@ -86,7 +86,11 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
         onTouchEnd={onTouchEnd}
       >
         <div className="slider-imageContainer">
-          <img src={slides[currentIndex]} alt="Picture of the author" />
+          <img
+            loading="lazy"
+            src={slides[currentIndex]}
+            alt="Picture of the author"
+          />
         </div>
         <div className="dotsContainerStyles">
           {slides.map((slide, slideIndex: number) => (
