@@ -102,7 +102,7 @@ export async function getUserAuth() {
   if (!data) return null;
   const latestUserData = await getUserDetails(JSON.parse(data));
   const { newData, loginRequired, cache } = latestUserData;
-  if (newData) {
+  if (newData && cache) {
     localStorage.setItem("user", JSON.stringify(cache));
     return JSON.stringify(cache);
   }
