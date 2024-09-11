@@ -32,7 +32,7 @@ export const Navbar: FC = () => {
         <Link href="/" style={{ textDecoration: "none" }} prefetch={false}>
           <img
             loading="lazy"
-            src={`https://ik.imagekit.io/0vf688mrkg/thanal/svg/logo.svg`}
+            src={`https://ik.imagekit.io/0vf688mrkg/thanal/svg/navBarLogo.svg`}
             alt=""
             style={navbarItemStyle}
           />

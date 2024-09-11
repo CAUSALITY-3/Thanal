@@ -1,10 +1,9 @@
-"use client"
+"use client";
 
 import { FC, ReactNode, useEffect, useRef, useState } from "react";
 
 import { motion } from "framer-motion";
 import "./Carousel.css";
-
 
 interface Props {
   children?: ReactNode;
@@ -23,12 +22,15 @@ export const Carousel: FC<Props> = ({ children }) => {
 
   return (
     <>
-      <motion.div className="carousel">
+      <motion.div id="carousel">
         <motion.div
           drag="x"
+          initial={{ x: -200 }}
+          animate={{ x: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
           dragConstraints={{ right: 0, left: -width }}
           ref={carousel}
-          className="child"
+          id="carousel-child"
         >
           {children}
         </motion.div>

@@ -4,17 +4,8 @@ import { ProductFeatures } from "@Components/ProductFeatures/ProductFeatures";
 import { BuyOrAdd } from "@Components/BuyOrAdd/BuyOrAdd";
 import { apiCall } from "@/api/sevice";
 import "./productSlug.scss";
-import { cookies } from "next/headers";
 
 export default async function ProductDetail({ params }: any) {
-  const cookieStore = cookies();
-  const userData: any = cookieStore.get("user");
-  console.log(userData);
-  const user =
-    userData?.value && typeof userData?.value === "string"
-      ? JSON.parse(userData.value)
-      : null;
-
   const product = await apiCall(
     "get",
     "GET_PRODUCT_BY_ID",
