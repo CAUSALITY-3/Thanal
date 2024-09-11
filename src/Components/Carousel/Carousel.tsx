@@ -27,7 +27,7 @@ export const Carousel: FC<Props> = ({ children }) => {
           drag="x"
           initial={{ x: -200 }}
           animate={{ x: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           dragConstraints={{ right: 0, left: -width }}
           ref={carousel}
           id="carousel-child"
