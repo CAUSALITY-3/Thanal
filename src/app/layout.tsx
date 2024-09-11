@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-// import * as stylex from "@stylexjs/stylex";
-// import AuthProvider from "./context/authProvider";
 import "./homeLayout.scss";
 import { ReactQueryClientProvider } from "./queryClient";
 import Navbar from "@/Components/Navbar/navbar";
+import { roboto } from "../utils/fonts";
 
 export const metadata: Metadata = {
   title: "Thanal",
@@ -18,7 +17,7 @@ export default async function RootLayout({
   return await (
     <ReactQueryClientProvider>
       <html className="html" lang="en">
-        <body className="body">
+        <body className={`body ${roboto}`}>
           <>
             <Navbar />
             {children}
