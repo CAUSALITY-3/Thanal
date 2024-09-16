@@ -19,7 +19,9 @@ export default async function RootLayout({
       <html className="html" lang="en">
         <body className={`body ${roboto}`}>
           <>
-            <Navbar />
+            <div className="navbarOuter">
+              <Navbar />
+            </div>
             {children}
           </>
         </body>

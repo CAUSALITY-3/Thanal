@@ -11,17 +11,34 @@ export default async function Products() {
     <div className="productContainer">
       {mainData.map((item: ProductMainList, key: any) => (
         <div className="productTypeBox" key={key}>
-          <img
+          {/* <img
             className="imageStyle"
             loading="lazy"
             src={`${
               process.env.IMAGE_URL
-            }${item.type.toLowerCase()}/${item.type.toLowerCase()}.jpg`}
+            }${item.type.toLowerCase()}/${item.type.toLowerCase()}.webp`}
             alt="Picture of the author"
-          />
-          <div className="productAbsoluteContainer">
+          /> */}
+          <div
+            className="productAbsoluteContainer"
+            style={{
+              backgroundImage: `radial-gradient(circle at center,
+                transparent,
+                rgba(0, 0, 0, 0.7)), url(${
+                  process.env.IMAGE_URL
+                }${item.type.toLowerCase()}/${item.type.toLowerCase()}.webp)`,
+              // `url(${
+              //   process.env.IMAGE_URL
+              // }${item.type.toLowerCase()}/${item.type.toLowerCase()}.webp)`,
+              // background: radial-gradient(
+              //   circle at center,
+              //   transparent,
+              //   rgba(0, 0, 0, 0.7)
+              // )
+            }}
+          >
             <div className="productTypeNameConainer">
-              <p className="productTypeName">{item.type}</p>
+              <div className="productTypeName">{item.type}</div>
             </div>
             <ProductItems>
               <div className="productItemContainerOuter">

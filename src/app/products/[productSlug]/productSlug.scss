@@ -66,6 +66,9 @@
           font-size: x-large;
           font-weight: bolder;
           margin: 10px 0;
+          &::first-letter {
+            text-transform: uppercase;
+          }
         }
         .featureContainer {
           margin: 30px 0;

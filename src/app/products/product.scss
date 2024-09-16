@@ -4,34 +4,35 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: #e1f4e1;
   .productTypeBox {
     margin: 10px 0;
-    height: 60vh;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     position: relative;
     .productAbsoluteContainer {
-      height: 60vh;
-      width: 100vw;
-      position: absolute;
+      width: 98vw;
+      border-radius: 5px;
+      padding-bottom: 10px;
+      background-size: cover; /* This makes sure the image covers the entire div */
       display: flex;
       justify-content: space-around;
       flex-direction: column;
       align-items: center;
-      background: radial-gradient(
-        circle at center,
-        transparent,
-        rgba(0, 0, 0, 0.7)
-      );
+      background-color: #e1f4e1;
       .productTypeNameConainer {
-        width: 90vw;
+        width: 93vw;
         .productTypeName {
-          color: white;
+          margin: 10px 0;
+          color: rgb(174, 218, 173);
+          background-color: #313131;
+          padding: 10px;
+          border-radius: 5px;
+          backdrop-filter: blur(10px);
           font-weight: 600;
-          font-size: 24px;
+          font-size: 28px;
+          width: fit-content;
           &::first-letter {
             text-transform: uppercase;
           }
@@ -39,25 +40,23 @@
       }
       .productItemContainerOuter {
         padding: 10px;
+        backdrop-filter: blur(2px);
+        background-color: rgb(41, 41, 41, 0.3);
+        border-radius: 5px;
         @media (max-width: 500px) {
-          padding: 20px;
+          padding: 10px;
         }
-        backdrop-filter: blur(10px);
-        background-color: rgb(0, 0, 0, 0.3);
         transition: all ease 0.5s;
         border-radius: 5;
         .productItemContainer {
-          height: 40vh;
-          width: 90vw;
+          max-width: 95vw;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-wrap: wrap;
           flex-direction: row;
-          overflow-y: auto;
           @media (max-width: 500px) {
-            height: 37vh;
-            width: 80vw;
+            max-width: 90vw;
           }
           &::-webkit-scrollbar {
             width: 0;

@@ -1,16 +1,16 @@
 {
   "/_not-found": "app/_not-found.js",
-  "/api/addDetails/route": "app/api/addDetails/route.js",
   "/api/order/route": "app/api/order/route.js",
-  "/api/addToBag/route": "app/api/addToBag/route.js",
   "/contact/page": "app/contact/page.js",
-  "/logedIn/page": "app/logedIn/page.js",
-  "/login/page": "app/login/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/login/page": "app/login/page.js",
+  "/api/addToBag/route": "app/api/addToBag/route.js",
   "/page": "app/page.js",
   "/products/[productSlug]/page": "app/products/[productSlug]/page.js",
-  "/products/family/[familySlug]/page": "app/products/family/[familySlug]/page.js",
   "/products/page": "app/products/page.js",
+  "/logedIn/page": "app/logedIn/page.js",
   "/profile/page": "app/profile/page.js",
-  "/signup/page": "app/signup/page.js"
+  "/signup/page": "app/signup/page.js",
+  "/api/addDetails/route": "app/api/addDetails/route.js",
+  "/products/family/[familySlug]/page": "app/products/family/[familySlug]/page.js"
 }
