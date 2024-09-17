@@ -20,9 +20,14 @@
       transition: all ease 0.5s;
       &:hover {
         cursor: pointer;
-        color: black;
+        // color: black;
+        font-weight: 700;
         transition: all ease 0.5s;
       }
+    }
+    .active {
+      font-weight: 600;
+      color: black;
     }
   }
 }

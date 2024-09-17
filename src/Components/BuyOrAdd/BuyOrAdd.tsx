@@ -19,7 +19,7 @@ export const BuyOrAdd: FC<Props> = ({ productId }) => {
   const email = user ? JSON.parse(user).email : null;
   const metadata = [
     {
-      icon: `https://ik.imagekit.io/0vf688mrkg/thanal/svg/cart.svg`,
+      icon: `${process.env.NEXT_PUBLIC_IMAGE_URL}svg/cart.svg`,
       text: "Add To Cart",
       width: "100%",
       height: "95%",
@@ -27,7 +27,7 @@ export const BuyOrAdd: FC<Props> = ({ productId }) => {
       action: "cart",
     },
     {
-      icon: `https://ik.imagekit.io/0vf688mrkg/thanal/svg/buy.svg`,
+      icon: `${process.env.NEXT_PUBLIC_IMAGE_URL}svg/buy.svg`,
       text: "Buy Now",
       width: "100%",
       height: "95%",

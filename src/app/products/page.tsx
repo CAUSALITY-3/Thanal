@@ -15,7 +15,7 @@ export default async function Products() {
             className="imageStyle"
             loading="lazy"
             src={`${
-              process.env.IMAGE_URL
+              process.env.NEXT_PUBLIC_IMAGE_URL
             }${item.type.toLowerCase()}/${item.type.toLowerCase()}.webp`}
             alt="Picture of the author"
           /> */}
@@ -25,10 +25,10 @@ export default async function Products() {
               backgroundImage: `radial-gradient(circle at center,
                 transparent,
                 rgba(0, 0, 0, 0.7)), url(${
-                  process.env.IMAGE_URL
-                }${item.type.toLowerCase()}/${item.type.toLowerCase()}.webp)`,
+                  process.env.NEXT_PUBLIC_IMAGE_URL
+                }/products/${item.type.toLowerCase()}/${item.type.toLowerCase()}.webp)`,
               // `url(${
-              //   process.env.IMAGE_URL
+              //   process.env.NEXT_PUBLIC_IMAGE_URL
               // }${item.type.toLowerCase()}/${item.type.toLowerCase()}.webp)`,
               // background: radial-gradient(
               //   circle at center,
@@ -54,7 +54,7 @@ export default async function Products() {
                       <div className="product-imageContainer">
                         <img
                           loading="lazy"
-                          src={`${process.env.IMAGE_URL}${item.type}/${card.name}/1.jpg`}
+                          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/products/${item.type}/${card.name}/1.jpg`}
                           alt="Picture of the author"
                         />
                       </div>

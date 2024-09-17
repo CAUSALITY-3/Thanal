@@ -20,13 +20,13 @@ export const BuyCartButton: FC<Props> = ({ type, width, height }) => {
         {type === "buy" ? (
           <img
             loading="lazy"
-            src={"https://ik.imagekit.io/0vf688mrkg/thanal/svg/buy.svg"}
+            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}svg/buy.svg`}
             alt=""
           />
         ) : (
           <img
             loading="lazy"
-            src={`https://ik.imagekit.io/0vf688mrkg/thanal/svg/cart.svg`}
+            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}svg/cart.svg`}
             alt=""
           />
         )}
