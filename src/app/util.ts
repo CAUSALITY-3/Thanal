@@ -69,12 +69,14 @@ export async function getUserAuth() {
   if (!data) return null;
   const latestUserData = await getUserDetails(JSON.parse(data));
   const { newData, loginRequired, cache } = latestUserData;
+  const stringifiedCache = cache ? JSON.stringify(cache) : "";
   if (newData && cache) {
-    localStorage.setItem("user", JSON.stringify(cache));
-    return JSON.stringify(cache);
+    localStorage.setItem("user", stringifiedCache);
+    return stringifiedCache;
   }
   if (loginRequired) return null;
-  return JSON.stringify(cache);
+  isBrowser && document ? (document.cookie = "user=" + stringifiedCache) : null;
+  return stringifiedCache;
 }
 
 export function getCookieAndUpdateLocalStorage(name: string) {
