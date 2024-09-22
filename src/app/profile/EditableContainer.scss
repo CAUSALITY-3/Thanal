@@ -5,9 +5,10 @@
   align-items: center;
   margin: 10px 0;
   // width: 90vw;
-  .phoneNum {
+  .containerLabel {
     font-size: 16px;
     width: 200px;
+    margin-right: 3px;
     white-space: nowrap; /* Prevents the text from wrapping to the next line */
     overflow: hidden; /* Hides the overflowed content */
     text-overflow: ellipsis;

@@ -2,7 +2,8 @@ import { FC, ReactNode } from "react";
 import "./Button.scss";
 
 interface Props {
-  content: ReactNode | string;
+  content?: ReactNode | string;
+  children?: ReactNode;
   width?: string;
   height?: string;
   color?: string;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export const Button: FC<Props> = ({
+  children,
   content,
   color,
   width,
@@ -27,6 +29,7 @@ export const Button: FC<Props> = ({
   return (
     <div className="buttonContainer" style={style}>
       {content}
+      {children}
     </div>
   );
 };

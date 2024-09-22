@@ -64,7 +64,7 @@ function EditableContainer({ formData, setFormData, readOnly }: any) {
 
   return (
     <div className="detailsContainer">
-      <div className="phoneNum">{formData.label} : </div>
+      <div className="containerLabel">{formData.label} : </div>
       <div>
         <input
           className="formInput"
