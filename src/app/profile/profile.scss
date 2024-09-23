@@ -67,6 +67,9 @@
     }
     .profileBottomContainer {
       height: 500px;
+      @media screen and (max-width: 500px) {
+        height: 620px;
+      }
       max-width: 800px;
       display: flex;
       justify-content: center;
@@ -77,6 +80,7 @@
         // position: relative;
 
         // width: 100%;
+
         position: absolute;
         top: 0px;
         right: 0px;

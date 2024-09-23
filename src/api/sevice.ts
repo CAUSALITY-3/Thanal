@@ -22,7 +22,7 @@ export async function apiCall(
 ) {
   let updatedAt: string = "";
   const isBrowser = typeof window === "object" && typeof document === "object";
-  if (isBrowser && process.env.NODE_ENV === "test") {
+  if (isBrowser && process.env.NEXT_PUBLIC_NODE_ENV === "production") {
     const fullUrl = window.location.href;
     const currentBaseUrl = new URL(fullUrl).origin;
     baseUrl = currentBaseUrl + "/thanalApi/";

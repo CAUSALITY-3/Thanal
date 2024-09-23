@@ -2,7 +2,7 @@
 import { FC } from "react";
 import Link from "next/link";
 import Bag from "../ShoppingBag/bag";
-// import ScreenWidhChecker from "./screenWidthChecker";
+import ScreenWidhChecker from "./screenWidthChecker";
 import { getUserAuth } from "@/app/util";
 import { usePathname } from "next/navigation";
 import "./navbar.scss";
@@ -73,7 +73,7 @@ export const Navbar: FC = () => {
         )}
         <Bag numOfItems={user?.bag?.length} />
       </div>
-      {/* <ScreenWidhChecker /> */}
+      <ScreenWidhChecker />
     </nav>
   );
 };
