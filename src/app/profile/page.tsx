@@ -2,7 +2,11 @@
 import { FC, use, useEffect, useState } from "react";
 import React from "react";
 import "./profile.scss";
-import { getCookie, getCookieAndUpdateLocalStorage } from "../util";
+import {
+  getCookie,
+  getCookieAndUpdateLocalStorage,
+  getUserAuth,
+} from "../util";
 import { redirect } from "next/navigation";
 import EditableContainer from "./EditableContainer";
 import { Button } from "@/Components/Buttons/Button";
@@ -16,11 +20,28 @@ const Profile: FC = () => {
   const [valid, setValid] = useState<boolean>(false);
 
   useEffect(() => {
+    loadFunction();
+  }, [reset]);
+
+  useEffect(() => {
+    if (formData && Object.keys(formData).length > 0) {
+      const addressValid = Object.values(formData?.address).find(
+        (data: any) =>
+          data.editable &&
+          data?.validation.find((fn: Function) => !fn(data.value))
+      );
+      const phoneValid = formData?.phone?.value?.length !== 10;
+      const valid = !addressValid && !phoneValid;
+      setValid(valid);
+    }
+  }, [formData]);
+
+  const loadFunction = async () => {
     const isBrowser =
       typeof window === "object" && typeof document === "object";
     // if (!user) {
-    const data = getCookie("user");
-    const parsedUser = data ? JSON.parse(data) : null;
+    const data = await getUserAuth();
+    const parsedUser = data ? JSON.parse(data || "") : null;
     setUser(parsedUser);
     if (!parsedUser?.name && isBrowser) return redirect("/login");
     const form = {
@@ -96,21 +117,7 @@ const Profile: FC = () => {
       },
     };
     setFormData(form);
-  }, [reset]);
-
-  useEffect(() => {
-    if (formData && Object.keys(formData).length > 0) {
-      const addressValid = Object.values(formData?.address).find(
-        (data: any) =>
-          data.editable &&
-          data?.validation.find((fn: Function) => !fn(data.value))
-      );
-      const phoneValid = formData?.phone?.value?.length !== 10;
-      const valid = !addressValid && !phoneValid;
-      setValid(valid);
-    }
-  }, [formData]);
-
+  };
   const handleEditDetails = async () => {
     const payload = {
       phone: formData?.phone?.value,
