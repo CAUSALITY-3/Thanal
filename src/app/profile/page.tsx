@@ -2,15 +2,18 @@
 import { FC, use, useEffect, useState } from "react";
 import React from "react";
 import "./profile.scss";
-import { getCookie } from "../util";
+import { getCookie, getCookieAndUpdateLocalStorage } from "../util";
 import { redirect } from "next/navigation";
 import EditableContainer from "./EditableContainer";
 import { Button } from "@/Components/Buttons/Button";
+import { apiCall } from "@/api/sevice";
 
 const Profile: FC = () => {
   const [formData, setFormData] = useState<any>({});
   const [user, setUser] = useState<any>(null);
   const [readOnly, setReadOnly] = useState<boolean>(true);
+  const [reset, setReset] = useState<boolean>(true);
+  const [valid, setValid] = useState<boolean>(false);
 
   useEffect(() => {
     const isBrowser =
@@ -83,7 +86,7 @@ const Profile: FC = () => {
         pincode: {
           label: "Pincode",
           key: "pincode",
-          value: parsedUser?.address?.pincode || "",
+          value: String(parsedUser?.address?.pincode) || "",
           invalid: false,
           editable: true,
           validationArray: [{ method: "length", value: 6 }],
@@ -93,7 +96,48 @@ const Profile: FC = () => {
       },
     };
     setFormData(form);
-  }, []);
+  }, [reset]);
+
+  useEffect(() => {
+    if (formData && Object.keys(formData).length > 0) {
+      const addressValid = Object.values(formData?.address).find(
+        (data: any) =>
+          data.editable &&
+          data?.validation.find((fn: Function) => !fn(data.value))
+      );
+      const phoneValid = formData?.phone?.value?.length !== 10;
+      const valid = !addressValid && !phoneValid;
+      setValid(valid);
+    }
+  }, [formData]);
+
+  const handleEditDetails = async () => {
+    const payload = {
+      phone: formData?.phone?.value,
+      address: {
+        houseName: formData?.address?.house?.value,
+        landmark: formData?.address?.landmark?.value,
+        city: formData?.address?.city?.value,
+        state: formData?.address?.state?.value,
+        pincode: formData?.address?.pincode?.value,
+      },
+    };
+    const response: any = await apiCall(
+      "PUT",
+      "UPDATE_USER_BY_QUERY",
+      {},
+      `?email=${user?.email}`,
+      JSON.stringify(payload),
+      {
+        "Content-Type": "application/json",
+      }
+    );
+    if (response) {
+      getCookieAndUpdateLocalStorage("user");
+      setReadOnly(true);
+      setReset(!reset);
+    }
+  };
 
   return (
     <div className="profilePage">
@@ -102,10 +146,7 @@ const Profile: FC = () => {
           <>
             <div className="profileTopContainer">
               <div className="profileImage">
-                <img
-                  src={`${process.env.NEXT_PUBLIC_IMAGE_URL}profilePic.jpg`}
-                  alt=""
-                />
+                <img src={user.profilePic} alt="" />
               </div>
               <div className="profileDetails">
                 <div className="profileName">{user?.name}</div>
@@ -114,34 +155,34 @@ const Profile: FC = () => {
             </div>
 
             <div className="profileBottomContainer">
-              <div
-                className="editIcon"
-                onClick={() => {
-                  setReadOnly(!readOnly);
-                }}
-              >
-                <Button color={`${readOnly ? "#89CFF0" : ""}`}>
-                  <div className="editButton">
-                    <div className="editButtonText">{`${
-                      readOnly ? "Edit" : "Save"
-                    }`}</div>
+              {readOnly && (
+                <div
+                  className="editIcon"
+                  onClick={() => {
+                    setReadOnly(!readOnly);
+                  }}
+                >
+                  <Button color={"#89CFF0"}>
+                    <div className="editButton">
+                      <div className="editButtonText">Edit</div>
 
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      x="0px"
-                      y="0px"
-                      width="100"
-                      height="100"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M 19.171875 2 C 18.448125 2 17.724375 2.275625 17.171875 2.828125 L 16 4 L 20 8 L 21.171875 6.828125 C 22.275875 5.724125 22.275875 3.933125 21.171875 2.828125 C 20.619375 2.275625 19.895625 2 19.171875 2 z M 14.5 5.5 L 3 17 L 3 21 L 7 21 L 18.5 9.5 L 14.5 5.5 z"
-                        // fill={readOnly ? "grey" : "black"}
-                      ></path>
-                    </svg>
-                  </div>
-                </Button>
-              </div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        x="0px"
+                        y="0px"
+                        width="100"
+                        height="100"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M 19.171875 2 C 18.448125 2 17.724375 2.275625 17.171875 2.828125 L 16 4 L 20 8 L 21.171875 6.828125 C 22.275875 5.724125 22.275875 3.933125 21.171875 2.828125 C 20.619375 2.275625 19.895625 2 19.171875 2 z M 14.5 5.5 L 3 17 L 3 21 L 7 21 L 18.5 9.5 L 14.5 5.5 z"
+                          // fill={readOnly ? "grey" : "black"}
+                        ></path>
+                      </svg>
+                    </div>
+                  </Button>
+                </div>
+              )}
 
               <EditableContainer
                 setFormData={setFormData}
@@ -150,14 +191,30 @@ const Profile: FC = () => {
               />
               <div className="addressDiv">
                 <div className="addressTitle">Address</div>
-                {Object.values(formData.address).map((form: any) => (
+                {Object.values(formData.address).map((form: any, key) => (
                   <EditableContainer
                     setFormData={setFormData}
                     formData={form}
                     readOnly={readOnly}
+                    key={key}
                   />
                 ))}
               </div>
+              {!readOnly && (
+                <div className="save-cancel-buttons">
+                  <div
+                    onClick={() => {
+                      setReadOnly(!readOnly);
+                      setReset(!reset);
+                    }}
+                  >
+                    <Button content="Cancel" color="#f08080" />
+                  </div>
+                  <div onClick={handleEditDetails}>
+                    <Button content="Save" disabled={!valid} />
+                  </div>
+                </div>
+              )}
             </div>
           </>
         ) : (

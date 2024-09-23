@@ -22,7 +22,7 @@ export const Button: FC<Props> = ({
   const style = {
     width: width || "100px",
     height: height || "40px",
-    background: color || "#77DD77",
+    background: disabled ? "grey" : color || "#77DD77",
     cursor: disabled ? "not-allowed" : "pointer",
   };
 

@@ -74,12 +74,12 @@
       flex-direction: column;
       position: relative;
       .editIcon {
-        position: relative;
+        // position: relative;
 
         // width: 100%;
         position: absolute;
-        top: 20px;
-        right: 20px;
+        top: 0px;
+        right: 0px;
         margin-left: 20px;
         cursor: pointer;
         display: flex;
@@ -114,6 +114,15 @@
           font-weight: 600;
           color: rgba(78, 77, 77, 0.8);
         }
+      }
+      .save-cancel-buttons {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        width: 225px;
+        justify-content: space-between;
+        align-items: center;
       }
     }
   }
