@@ -13,6 +13,7 @@ import { Button } from "@/Components/Buttons/Button";
 import { apiCall } from "@/api/sevice";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Modal from "@/Components/Modal/Modal";
+import Tooltip from "@/Components/Tooltip/Tooltip";
 
 const Profile: FC = () => {
   const [formData, setFormData] = useState<any>({});
@@ -190,9 +191,11 @@ const Profile: FC = () => {
                 )}
               </div>
               <div className="wishlistContainer">
-                <button onClick={() => setIsOpen(true)}>
-                  Click to Open Modal
-                </button>
+                <Tooltip>
+                  <button onClick={() => setIsOpen(true)}>
+                    Click to Open Modal
+                  </button>
+                </Tooltip>
               </div>
             </div>
             <div className="profileBottomContainer">
