@@ -3,14 +3,16 @@ import { FC, use, useEffect, useState } from "react";
 import React from "react";
 import "./profile.scss";
 import {
-  getCookie,
+  deleteCookie,
   getCookieAndUpdateLocalStorage,
   getUserAuth,
 } from "../util";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import EditableContainer from "./EditableContainer";
 import { Button } from "@/Components/Buttons/Button";
 import { apiCall } from "@/api/sevice";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import Modal from "@/Components/Modal/Modal";
 
 const Profile: FC = () => {
   const [formData, setFormData] = useState<any>({});
@@ -18,17 +20,107 @@ const Profile: FC = () => {
   const [readOnly, setReadOnly] = useState<boolean>(true);
   const [reset, setReset] = useState<boolean>(true);
   const [valid, setValid] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
+  const { data, isLoading, isError } = useQuery({
+    queryFn: getUserAuth,
+    queryKey: ["user"], //Array according to Documentation
+  });
 
   useEffect(() => {
-    loadFunction();
-  }, [reset]);
+    const isBrowser =
+      typeof window === "object" && typeof document === "object";
+    // if (!user) {
+    const parsedUser = data ? JSON.parse(data || "") : null;
+    setUser(parsedUser);
+    if (!parsedUser?.name && isBrowser && !isLoading) {
+      router.push("/login");
+    }
+    if (data && !isLoading) {
+      const form = {
+        phone: {
+          label: "Phone (+91)",
+          key: "phone",
+          value: parsedUser?.phone,
+          invalid: false,
+          editable: true,
+          validationArray: [{ method: "length", value: 10 }],
+          validation: [(value: string) => value.length === 10],
+          message: "Please provide valid 10 digit phone number.",
+        },
+        address: {
+          house: {
+            label: "House | Building | Company",
+            key: "house",
+            value: parsedUser?.address?.houseName || "",
+            invalid: false,
+            editable: true,
+            validationArray: [{ method: "length", value: [2, 30] }],
+            validation: [
+              (value: string) => value.length > 2 && value.length < 30,
+            ],
+            message: "Invalid Entry",
+          },
+          landmark: {
+            label: "Landmark",
+            key: "landmark",
+            value: parsedUser?.address?.landmark || "",
+            invalid: false,
+            editable: true,
+            validationArray: [{ method: "length", value: [2, 30] }],
+            validation: [
+              (value: string) => value.length > 2 && value.length < 30,
+            ],
+            message: "Invalid Entry",
+          },
+          city: {
+            label: "City",
+            key: "city",
+            value: parsedUser?.address?.city || "",
+            invalid: false,
+            editable: true,
+            validationArray: [{ method: "dropDown" }],
+            validation: [
+              (value: string) => value.length > 2 && value.length < 30,
+            ],
+            message: "Invalid Entry",
+          },
+          state: {
+            label: "State",
+            key: "state",
+            value: "Kerala",
+            invalid: false,
+            editable: false,
+            validationArray: [{ method: "length", value: [2, 20] }],
+            validation: [
+              (value: string) => value.length > 2 && value.length < 20,
+            ],
+            message: "Invalid Entry",
+          },
+          pincode: {
+            label: "Pincode",
+            key: "pincode",
+            value: String(parsedUser?.address?.pincode) || "",
+            invalid: false,
+            editable: true,
+            validationArray: [{ method: "length", value: 6 }],
+            validation: [(value: string) => value.length === 6],
+            message: "Please provide valid 6 digit pincode.",
+          },
+        },
+      };
+      setFormData(form);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (formData && Object.keys(formData).length > 0) {
       const addressValid = Object.values(formData?.address).find(
-        (data: any) =>
-          data.editable &&
-          data?.validation.find((fn: Function) => !fn(data.value))
+        (addressData: any) =>
+          addressData.editable &&
+          addressData?.validation.find((fn: Function) => !fn(addressData.value))
       );
       const phoneValid = formData?.phone?.value?.length !== 10;
       const valid = !addressValid && !phoneValid;
@@ -36,88 +128,6 @@ const Profile: FC = () => {
     }
   }, [formData]);
 
-  const loadFunction = async () => {
-    const isBrowser =
-      typeof window === "object" && typeof document === "object";
-    // if (!user) {
-    const data = await getUserAuth();
-    const parsedUser = data ? JSON.parse(data || "") : null;
-    setUser(parsedUser);
-    if (!parsedUser?.name && isBrowser) return redirect("/login");
-    const form = {
-      phone: {
-        label: "Phone (+91)",
-        key: "phone",
-        value: parsedUser?.phone,
-        invalid: false,
-        editable: true,
-        validationArray: [{ method: "length", value: 10 }],
-        validation: [(value: string) => value.length === 10],
-        message: "Please provide valid 10 digit phone number.",
-      },
-      address: {
-        house: {
-          label: "House | Building | Company",
-          key: "house",
-          value: parsedUser?.address?.houseName || "",
-          invalid: false,
-          editable: true,
-          validationArray: [{ method: "length", value: [2, 30] }],
-          validation: [
-            (value: string) => value.length > 2 && value.length < 30,
-          ],
-          message: "Invalid Entry",
-        },
-        landmark: {
-          label: "Landmark",
-          key: "landmark",
-          value: parsedUser?.address?.landmark || "",
-          invalid: false,
-          editable: true,
-          validationArray: [{ method: "length", value: [2, 30] }],
-          validation: [
-            (value: string) => value.length > 2 && value.length < 30,
-          ],
-          message: "Invalid Entry",
-        },
-        city: {
-          label: "City",
-          key: "city",
-          value: parsedUser?.address?.city || "",
-          invalid: false,
-          editable: true,
-          validationArray: [{ method: "dropDown" }],
-          validation: [
-            (value: string) => value.length > 2 && value.length < 30,
-          ],
-          message: "Invalid Entry",
-        },
-        state: {
-          label: "State",
-          key: "state",
-          value: "Kerala",
-          invalid: false,
-          editable: false,
-          validationArray: [{ method: "length", value: [2, 20] }],
-          validation: [
-            (value: string) => value.length > 2 && value.length < 20,
-          ],
-          message: "Invalid Entry",
-        },
-        pincode: {
-          label: "Pincode",
-          key: "pincode",
-          value: String(parsedUser?.address?.pincode) || "",
-          invalid: false,
-          editable: true,
-          validationArray: [{ method: "length", value: 6 }],
-          validation: [(value: string) => value.length === 6],
-          message: "Please provide valid 6 digit pincode.",
-        },
-      },
-    };
-    setFormData(form);
-  };
   const handleEditDetails = async () => {
     const payload = {
       phone: formData?.phone?.value,
@@ -139,28 +149,52 @@ const Profile: FC = () => {
         "Content-Type": "application/json",
       }
     );
-    if (response) {
+    if (response && response.email) {
       getCookieAndUpdateLocalStorage("user");
+      queryClient.setQueryData(["user"], JSON.stringify(response));
       setReadOnly(true);
       setReset(!reset);
     }
   };
 
+  const handleLogout = () => {
+    deleteCookie("user");
+    localStorage.removeItem("user");
+    queryClient.invalidateQueries({ queryKey: ["user"] });
+    router.push("/");
+  };
+
   return (
     <div className="profilePage">
+      <div className="logoutButton" onClick={handleLogout}>
+        <Button color={"#BFEA7C"}>Logout</Button>
+      </div>
       <div className="profileOuter">
         {Object.keys(formData).length ? (
           <>
             <div className="profileTopContainer">
               <div className="profileImage">
-                <img src={user.profilePic} alt="" />
+                <img src={user?.profilePic} alt="" />
               </div>
               <div className="profileDetails">
                 <div className="profileName">{user?.name}</div>
                 <div className="profileEmail">{user?.email}</div>
               </div>
             </div>
-
+            <div className="profileMiddleContainer">
+              <div className="orderContainer">
+                {isOpen && (
+                  <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+                    This is Modal Content!
+                  </Modal>
+                )}
+              </div>
+              <div className="wishlistContainer">
+                <button onClick={() => setIsOpen(true)}>
+                  Click to Open Modal
+                </button>
+              </div>
+            </div>
             <div className="profileBottomContainer">
               {readOnly && (
                 <div
@@ -217,7 +251,7 @@ const Profile: FC = () => {
                   >
                     <Button content="Cancel" color="#f08080" />
                   </div>
-                  <div onClick={handleEditDetails}>
+                  <div onClick={valid ? handleEditDetails : () => {}}>
                     <Button content="Save" disabled={!valid} />
                   </div>
                 </div>

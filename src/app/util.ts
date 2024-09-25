@@ -85,3 +85,7 @@ export function getCookieAndUpdateLocalStorage(name: string) {
   localStorage.setItem("user", user);
   return user;
 }
+
+export const deleteCookie = (name: string) => {
+  document.cookie = name + "=; Max-Age=-99999999;";
+};
