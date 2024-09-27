@@ -18,12 +18,12 @@ export default async function RootLayout({
     <ReactQueryClientProvider>
       <html className="html" lang="en">
         <body className={`body ${roboto}`}>
-          <>
+          <div className="mainDiv">
             <div className="navbarOuter">
               <Navbar />
             </div>
             {children}
-          </>
+          </div>
         </body>
       </html>
     </ReactQueryClientProvider>

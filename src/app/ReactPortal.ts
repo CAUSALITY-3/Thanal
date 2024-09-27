@@ -2,13 +2,26 @@
 import { createPortal } from "react-dom";
 import { useState, useLayoutEffect } from "react";
 
-function createWrapperAndAppendToBody(wrapperId: string) {
+function createWrapperAndAppendToBody(wrapperId: string, style?: string) {
   const wrapperElement = document.createElement("div");
   wrapperElement.setAttribute("id", wrapperId);
+  style ? (wrapperElement.style.cssText = style) : null;
+  // const tooltipContent = document.getElementById("tooltipContent");
+  // const rect = tooltipContent?.getBoundingClientRect();
+  // if (rect) {
+  //   console.log("rect", rect);
+
+  //   wrapperElement.style.top = `${rect.height + rect.top}px`;
+  // }
+
   document.body.appendChild(wrapperElement);
   return wrapperElement;
 }
-function ReactPortal({ children, wrapperId = "react-portal-wrapper" }: any) {
+function ReactPortal({
+  children,
+  wrapperId = "react-portal-wrapper",
+  style = null,
+}: any) {
   const [wrapperElement, setWrapperElement] = useState<any>(null);
 
   useLayoutEffect(() => {
@@ -18,7 +31,7 @@ function ReactPortal({ children, wrapperId = "react-portal-wrapper" }: any) {
     // create and append to body
     if (!element) {
       systemCreated = true;
-      element = createWrapperAndAppendToBody(wrapperId);
+      element = createWrapperAndAppendToBody(wrapperId, style);
     }
     setWrapperElement(element);
 
