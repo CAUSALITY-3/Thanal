@@ -6,14 +6,6 @@ function createWrapperAndAppendToBody(wrapperId: string, style?: string) {
   const wrapperElement = document.createElement("div");
   wrapperElement.setAttribute("id", wrapperId);
   style ? (wrapperElement.style.cssText = style) : null;
-  // const tooltipContent = document.getElementById("tooltipContent");
-  // const rect = tooltipContent?.getBoundingClientRect();
-  // if (rect) {
-  //   console.log("rect", rect);
-
-  //   wrapperElement.style.top = `${rect.height + rect.top}px`;
-  // }
-
   document.body.appendChild(wrapperElement);
   return wrapperElement;
 }

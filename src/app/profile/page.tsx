@@ -168,8 +168,11 @@ const Profile: FC = () => {
   return (
     <div className="profilePage">
       <div className="logoutButton" onClick={handleLogout}>
-        <Button color={"#BFEA7C"}>Logout</Button>
+        <Tooltip content={"Logout"}>
+          <Button color={"#BFEA7C"}>Logout</Button>
+        </Tooltip>
       </div>
+
       <div className="profileOuter">
         {Object.keys(formData).length ? (
           <>
@@ -191,7 +194,7 @@ const Profile: FC = () => {
                 )}
               </div>
               <div className="wishlistContainer">
-                <Tooltip>
+                <Tooltip content={"Click to Open Modal"}>
                   <button onClick={() => setIsOpen(true)}>
                     Click to Open Modal
                   </button>
@@ -206,25 +209,27 @@ const Profile: FC = () => {
                     setReadOnly(!readOnly);
                   }}
                 >
-                  <Button color={"#89CFF0"}>
-                    <div className="editButton">
-                      <div className="editButtonText">Edit</div>
+                  <Tooltip content={"Edit Details"}>
+                    <Button color={"#89CFF0"}>
+                      <div className="editButton">
+                        <div className="editButtonText">Edit</div>
 
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        x="0px"
-                        y="0px"
-                        width="100"
-                        height="100"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M 19.171875 2 C 18.448125 2 17.724375 2.275625 17.171875 2.828125 L 16 4 L 20 8 L 21.171875 6.828125 C 22.275875 5.724125 22.275875 3.933125 21.171875 2.828125 C 20.619375 2.275625 19.895625 2 19.171875 2 z M 14.5 5.5 L 3 17 L 3 21 L 7 21 L 18.5 9.5 L 14.5 5.5 z"
-                          // fill={readOnly ? "grey" : "black"}
-                        ></path>
-                      </svg>
-                    </div>
-                  </Button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          x="0px"
+                          y="0px"
+                          width="100"
+                          height="100"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M 19.171875 2 C 18.448125 2 17.724375 2.275625 17.171875 2.828125 L 16 4 L 20 8 L 21.171875 6.828125 C 22.275875 5.724125 22.275875 3.933125 21.171875 2.828125 C 20.619375 2.275625 19.895625 2 19.171875 2 z M 14.5 5.5 L 3 17 L 3 21 L 7 21 L 18.5 9.5 L 14.5 5.5 z"
+                            // fill={readOnly ? "grey" : "black"}
+                          ></path>
+                        </svg>
+                      </div>
+                    </Button>
+                  </Tooltip>
                 </div>
               )}
 
