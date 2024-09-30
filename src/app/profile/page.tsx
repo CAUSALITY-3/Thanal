@@ -14,6 +14,7 @@ import { apiCall } from "@/api/sevice";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Modal from "@/Components/Modal/Modal";
 import Tooltip from "@/Components/Tooltip/Tooltip";
+import Toast from "@/Components/Toast/Toast";
 
 const Profile: FC = () => {
   const [formData, setFormData] = useState<any>({});
@@ -181,14 +182,26 @@ const Profile: FC = () => {
                 <img src={user?.profilePic} alt="" />
               </div>
               <div className="profileDetails">
-                <div className="profileName">{user?.name}</div>
-                <div className="profileEmail">{user?.email}</div>
+                <div
+                  className="profileName"
+                  onClick={() => {
+                    Toast();
+                    console.log("clicked");
+                  }}
+                >
+                  {user?.name}
+                </div>
+                <div id="profileEmail">{user?.email}</div>
               </div>
             </div>
             <div className="profileMiddleContainer">
               <div className="orderContainer">
                 {isOpen && (
-                  <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+                  <Modal
+                    handleClose={() => setIsOpen(false)}
+                    isOpen={isOpen}
+                    size={"l"}
+                  >
                     This is Modal Content!
                   </Modal>
                 )}

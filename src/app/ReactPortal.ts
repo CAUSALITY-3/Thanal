@@ -5,7 +5,10 @@ import { useState, useLayoutEffect } from "react";
 function createWrapperAndAppendToBody(wrapperId: string, style?: string) {
   const wrapperElement = document.createElement("div");
   wrapperElement.setAttribute("id", wrapperId);
-  style ? (wrapperElement.style.cssText = style) : null;
+  style
+    ? (wrapperElement.style.cssText =
+        "position: absolute; z-index: 9999;" + style)
+    : null;
   document.body.appendChild(wrapperElement);
   return wrapperElement;
 }

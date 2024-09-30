@@ -2,7 +2,6 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
 import "./Tooltip.scss";
 import ReactPortal from "@/app/ReactPortal";
-import { m } from "framer-motion";
 import Template from "@/app/template";
 
 function Tooltip({
@@ -28,6 +27,7 @@ function Tooltip({
   const [positionStyle, setPositionStyle] = useState("");
 
   useEffect(() => {
+    if (window.innerWidth < 768) return setShowTooltip(false);
     if (childDivRef.current) {
       const rect = childDivRef.current.getBoundingClientRect();
       const { top, left, width, height, right, bottom } = rect;
@@ -35,9 +35,9 @@ function Tooltip({
         if (left > 200 && window.innerWidth - right > 200) {
           console.log("a");
           setPositionStyle(
-            `position: absolute; top: ${
-              bottom + window.scrollY + 10
-            }px; left: ${left + width / 2}px; transform: translateX(-50%); `
+            `top: ${bottom + window.scrollY + 10}px; left: ${
+              left + width / 2
+            }px; transform: translateX(-50%); `
           );
           setArrowStyle({
             top: -10,
@@ -48,17 +48,15 @@ function Tooltip({
         } else if (left <= 100) {
           console.log("b");
           setPositionStyle(
-            `position: absolute; top: ${
-              bottom + window.scrollY + 10
-            }px; left: ${left}px; `
+            `top: ${bottom + window.scrollY + 10}px; left: ${left}px; `
           );
           setArrowStyle({ top: -10, left: 3, transform: "rotate(180deg)" });
         } else {
           console.log("c");
           setPositionStyle(
-            `position: absolute; top: ${
-              bottom + window.scrollY + 10
-            }px; right: ${window.innerWidth - right}px; `
+            `top: ${bottom + window.scrollY + 10}px; right: ${
+              window.innerWidth - right
+            }px; `
           );
           setArrowStyle({ top: -10, right: 3, transform: "rotate(180deg)" });
         }
@@ -67,25 +65,23 @@ function Tooltip({
         if (left > 200 && window.innerWidth - right > 200) {
           console.log("e");
           setPositionStyle(
-            `position: absolute; bottom: ${
-              window.innerHeight - top + 10
-            }px; left: ${left + width / 2}px; transform: translateX(-50%);`
+            `bottom: ${window.innerHeight - top + 10}px; left: ${
+              left + width / 2
+            }px; transform: translateX(-50%);`
           );
           setArrowStyle({ bottom: -6, left: "50%", right: "50%" });
         } else if (left <= 100) {
           console.log("f");
           setPositionStyle(
-            `position: absolute; bottom: ${
-              window.innerHeight - top + 10
-            }px; left: ${left}px; `
+            `bottom: ${window.innerHeight - top + 10}px; left: ${left}px; `
           );
           setArrowStyle({ bottom: -6, left: 3 });
         } else {
           console.log("g");
           setPositionStyle(
-            `position: absolute; bottom: ${
-              window.innerHeight - top + 10
-            }px;  right: ${window.innerWidth - right}px; `
+            `bottom: ${window.innerHeight - top + 10}px;  right: ${
+              window.innerWidth - right
+            }px; `
           );
           setArrowStyle({ bottom: -6, right: 3 });
         }
@@ -126,7 +122,6 @@ function Tooltip({
         ref={childDivRef}
         onMouseOver={() => {
           setMouseOn(true);
-          console.log("Hi");
         }}
         onMouseOut={() => {
           setMouseOn(false);
