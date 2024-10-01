@@ -1,4 +1,4 @@
-export default function Toast() {
+export default function Toast(type?: string, message?: string) {
   const id = `toast-${new Date().getTime()}`;
   let container = document.getElementById("toast-wrapper");
   if (!container) {
@@ -17,8 +17,12 @@ export default function Toast() {
 
         if (childElement) {
           setTimeout(() => {
+            childElement.classList.add("fade-out");
+          }, 3000);
+          setTimeout(() => {
+            childElement.classList.add("fade-out");
             container?.removeChild(childElement);
-          }, 1000);
+          }, 4000);
 
           observer.disconnect();
         }
@@ -32,7 +36,12 @@ export default function Toast() {
   observer.observe(targetNode, config);
   const childElement = document.createElement("div");
   childElement.className = "toast";
-  childElement.innerHTML = "This is the content!!!";
+  childElement.innerHTML =
+    type === "success"
+      ? "✅ " + (message || "Success")
+      : type === "failure"
+      ? "❌ " + (message || "Oops Something went wrong...")
+      : message || "Thanal is working on it!";
   // childElement.style.cssText =
   //   "width: 200px; height: 200px; top: 100px; left: 100px; background-color: red;";
   childElement.setAttribute("id", id);

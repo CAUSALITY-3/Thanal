@@ -359,6 +359,10 @@ const SingnupSection: FC = () => {
         JSON.stringify(payload),
         {
           "Content-Type": "application/json",
+        },
+        {
+          success: "Successfully updated data.",
+          failure: "Failed to update data.",
         }
       );
       if (response) {

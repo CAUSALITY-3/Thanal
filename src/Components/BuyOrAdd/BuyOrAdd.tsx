@@ -61,6 +61,10 @@ export const BuyOrAdd: FC<Props> = ({ productId }) => {
           JSON.stringify({ productId }),
           {
             "Content-Type": "application/json",
+          },
+          {
+            success: "Successfully added item to bag.",
+            failure: "Failed to add item to bag.",
           }
         );
         const user = data.email ? data : null;

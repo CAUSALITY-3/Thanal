@@ -19,6 +19,10 @@ function Payment() {
         JSON.stringify({ amount: parseFloat(amount) * 100 }),
         {
           "Content-Type": "application/json",
+        },
+        {
+          success: "Order ID generated successfully.",
+          failure: "Failed to generate order ID.",
         }
       );
       return response.id;
@@ -53,6 +57,10 @@ function Payment() {
             JSON.stringify(data),
             {
               "Content-Type": "application/json",
+            },
+            {
+              success: "Verification successful.",
+              failure: "Verification failed.",
             }
           );
           if (result.success) alert("payment succeed");

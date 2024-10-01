@@ -149,6 +149,10 @@ const Profile: FC = () => {
       JSON.stringify(payload),
       {
         "Content-Type": "application/json",
+      },
+      {
+        success: "Successfully updated data.",
+        failure: "Failed to update data.",
       }
     );
     if (response && response.email) {
@@ -185,13 +189,21 @@ const Profile: FC = () => {
                 <div
                   className="profileName"
                   onClick={() => {
-                    Toast();
+                    Toast("success", "Successfully updated data.");
                     console.log("clicked");
                   }}
                 >
                   {user?.name}
                 </div>
-                <div id="profileEmail">{user?.email}</div>
+                <div
+                  id="profileEmail"
+                  onClick={() => {
+                    Toast("failure", "Oops Something went wrong");
+                    console.log("clicked");
+                  }}
+                >
+                  {user?.email}
+                </div>
               </div>
             </div>
             <div className="profileMiddleContainer">

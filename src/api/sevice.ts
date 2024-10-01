@@ -2,6 +2,7 @@ import { apiPaths } from "./types";
 import { logger } from "./lib";
 import { revalidateCache } from "./utils";
 import { getCookie, getCookieAndUpdateLocalStorage } from "@/app/util";
+import Toast from "@/Components/Toast/Toast";
 
 let baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 const timeout = +(process.env.API_TIME_OUT || 15000);
@@ -18,6 +19,7 @@ export async function apiCall(
   params: string = "",
   body?: any,
   headers?: any,
+  toast?: { success: string; failure: string },
   errorReplacer?: any
 ) {
   let updatedAt: string = "";
@@ -64,6 +66,9 @@ export async function apiCall(
     );
 
     if (isBrowser) {
+      if (toast) {
+        Toast("success", toast?.success);
+      }
       const user = isBrowser ? getCookie("user") : null;
       if (user) {
         const userData = JSON.parse(user);
@@ -74,8 +79,10 @@ export async function apiCall(
     }
     return responseData;
   } catch (error) {
-    console.log("Sasi", error);
     logger("ERROR", error, "Error on DB service call, error ");
+    if (toast && typeof window === "object" && typeof document === "object") {
+      Toast("failure", toast.failure);
+    }
     if (errorReplacer) return errorReplacer;
     throw error;
   }
