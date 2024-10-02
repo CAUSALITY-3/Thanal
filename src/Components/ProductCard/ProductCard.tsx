@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import "./ProductCard.scss";
 import { Ratings } from "../Ratings/Ratings";
+import Tooltip from "../Tooltip/Tooltip";
 
 interface Props {
   props: {
@@ -23,9 +24,16 @@ export const ProductCard: FC<Props> = ({ props, type }) => {
       </div>
 
       <div className="productDetails">
-        <p className="productName">{props.name}</p>
-        <p className="productPrice">₹{props.price}</p>
+        <div className="productNameContainer">
+          <div className="productName">{props.name}</div>
+        </div>
+        <Tooltip content={props.description}>
+          <div className="productDescription">{props.description}</div>
+        </Tooltip>
+        {/* <div className="productCardLowerdiv"> */}
+        <div className="productPrice">₹ {props.price}</div>
         <Ratings ratings={props.ratings} size="s" type="star" />
+        {/* </div> */}
       </div>
     </div>
   );

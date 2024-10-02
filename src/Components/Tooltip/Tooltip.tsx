@@ -48,14 +48,22 @@ function Tooltip({
         } else if (left <= 100) {
           console.log("b");
           setPositionStyle(
-            `top: ${bottom + window.scrollY + 10}px; left: ${left}px; `
+            `top: ${bottom + window.scrollY + 10}px; left: ${
+              left < 0 ? right - 14 : left
+            }px; `
           );
-          setArrowStyle({ top: -10, left: 3, transform: "rotate(180deg)" });
+          setArrowStyle({
+            top: -10,
+            left: 3,
+            transform: "rotate(180deg)",
+          });
         } else {
           console.log("c");
           setPositionStyle(
             `top: ${bottom + window.scrollY + 10}px; right: ${
-              window.innerWidth - right
+              window.innerWidth - right < 0
+                ? window.innerWidth - left - 14
+                : window.innerWidth - right
             }px; `
           );
           setArrowStyle({ top: -10, right: 3, transform: "rotate(180deg)" });
@@ -65,35 +73,47 @@ function Tooltip({
         if (left > 200 && window.innerWidth - right > 200) {
           console.log("e");
           setPositionStyle(
-            `bottom: ${window.innerHeight - top + 10}px; left: ${
-              left + width / 2
-            }px; transform: translateX(-50%);`
+            `bottom: ${
+              window.innerHeight - top - window.scrollY + 10
+            }px; left: ${left + width / 2}px; transform: translateX(-50%);`
           );
           setArrowStyle({ bottom: -6, left: "50%", right: "50%" });
         } else if (left <= 100) {
           console.log("f");
           setPositionStyle(
-            `bottom: ${window.innerHeight - top + 10}px; left: ${left}px; `
+            `bottom: ${
+              window.innerHeight - top - window.scrollY + 10
+            }px; left: ${left < 0 ? right - 14 : left}px; `
           );
           setArrowStyle({ bottom: -6, left: 3 });
         } else {
           console.log("g");
           setPositionStyle(
-            `bottom: ${window.innerHeight - top + 10}px;  right: ${
-              window.innerWidth - right
+            `bottom: ${
+              window.innerHeight - top - window.scrollY + 10
+            }px;  right: ${
+              window.innerWidth - right < 0
+                ? window.innerWidth - left - 14
+                : window.innerWidth - right
             }px; `
           );
           setArrowStyle({ bottom: -6, right: 3 });
         }
       }
 
-      console.log(
-        "Item detail",
-        window.scrollY,
-        window.innerWidth,
-        window.innerHeight,
-        { top, left, width, height, right, bottom }
-      );
+      console.log("Item detail", {
+        scrollY: window.scrollY,
+        innerWidth: window.innerWidth,
+        innerHeight: window.innerHeight,
+        top,
+        left,
+        width,
+        height,
+        right,
+        bottom,
+        positionStyle,
+        arrowStyle,
+      });
     }
     if (mouseOn) {
       setShowTooltip(true);
