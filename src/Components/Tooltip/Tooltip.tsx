@@ -103,6 +103,8 @@ function Tooltip({
           setArrowStyle({ bottom: -6, right: 3 });
         }
       }
+      setPositionStyle((prev) => "position: absolute; z-index: 9999;" + prev);
+      setArrowStyle((prev) => ({ ...prev, zIndex: 9999 }));
 
       console.log("Item detail", {
         scrollY: window.scrollY,

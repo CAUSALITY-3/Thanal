@@ -8,12 +8,12 @@
   justify-content: center;
   transition: all 0.3s ease-in-out;
   overflow: hidden;
-  z-index: 100;
+  // z-index: 999;
   padding: 40px 20px 20px;
 
   .modal-content {
-    background-color: #282c34;
-    color: #fff;
+    background-color: #f2fff1;
+    color: #141414;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,13 +28,12 @@
       cursor: pointer;
       width: 25px;
       height: 25px;
-      border-radius: 2px;
+      border-radius: 3px;
       display: flex;
       align-items: center;
       justify-content: center;
       &:hover {
-        background-color: #fff;
-        color: #282c34;
+        background-color: #d0d0d0;
       }
     }
   }

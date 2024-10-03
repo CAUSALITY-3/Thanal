@@ -15,6 +15,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Tooltip from "@/Components/Tooltip/Tooltip";
 import Toast from "@/Components/Toast/Toast";
 import DeliveryAddress from "@/Components/DeliveryAddress/DeliveryAddress";
+import Modal from "@/Components/Modal/Modal";
+import EditDeliveryAddress from "@/Components/DeliveryAddress/EditDeliveryAddress";
 
 const Profile: FC = () => {
   const [formData, setFormData] = useState<any>({});
@@ -312,7 +314,12 @@ const Profile: FC = () => {
                   <div className="deliveryAddressTitle">
                     <div>Delivery Address</div>
 
-                    <div className="deliveryAddressEdit">
+                    <div
+                      className="deliveryAddressEdit"
+                      onClick={() => {
+                        setIsOpen(true);
+                      }}
+                    >
                       <Tooltip content={"Edit Delivery Address"}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -339,6 +346,12 @@ const Profile: FC = () => {
           <>Loading</>
         )}
       </div>
+
+      {isOpen && (
+        <Modal isOpen={isOpen} handleClose={() => setIsOpen(false)}>
+          <EditDeliveryAddress />
+        </Modal>
+      )}
     </div>
   );
 };
