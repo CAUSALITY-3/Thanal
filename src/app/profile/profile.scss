@@ -71,7 +71,7 @@
         }
       }
     }
-    .profileBottomContainer {
+    .profileMiddleContainer {
       height: 500px;
       @media screen and (max-width: 500px) {
         height: 620px;
@@ -141,6 +141,44 @@
         width: 225px;
         justify-content: space-between;
         align-items: center;
+      }
+    }
+    .profileBottomContainer {
+      width: 550px;
+      @media screen and (max-width: 500px) {
+        width: 90vw;
+      }
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      // background-color: antiquewhite;
+      flex-direction: column;
+      position: relative;
+      .deliveryAddressdiv {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+        width: -webkit-fill-available;
+        .deliveryAddressTitle {
+          margin: 10px 0;
+          font-size: 20px;
+          font-weight: 600;
+          color: rgba(78, 77, 77, 0.8);
+          width: -webkit-fill-available;
+          display: flex;
+          justify-content: space-between;
+          .deliveryAddressEdit {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-right: 20px;
+            svg {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
       }
     }
   }

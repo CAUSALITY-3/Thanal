@@ -2,9 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 70vw;
   min-height: 70vh;
   margin: 30px 0;
+  @media (max-width: 500px) {
+    width: 100vw;
+  }
   .loginContainer {
     display: flex;
     align-items: center;
@@ -34,7 +37,7 @@
     }
     .formContainer {
       width: 70%;
-      .formControl {
+      .formSubmitButtons {
         display: flex;
         padding-top: 16px;
         align-items: center;

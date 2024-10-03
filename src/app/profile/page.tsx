@@ -12,9 +12,9 @@ import EditableContainer from "./EditableContainer";
 import { Button } from "@/Components/Buttons/Button";
 import { apiCall } from "@/api/sevice";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import Modal from "@/Components/Modal/Modal";
 import Tooltip from "@/Components/Tooltip/Tooltip";
 import Toast from "@/Components/Toast/Toast";
+import DeliveryAddress from "@/Components/DeliveryAddress/DeliveryAddress";
 
 const Profile: FC = () => {
   const [formData, setFormData] = useState<any>({});
@@ -131,7 +131,7 @@ const Profile: FC = () => {
   }, [formData]);
 
   const handleEditDetails = async () => {
-    const payload = {
+    const payload: any = {
       phone: formData?.phone?.value,
       address: {
         houseName: formData?.address?.house?.value,
@@ -141,6 +141,22 @@ const Profile: FC = () => {
         pincode: formData?.address?.pincode?.value,
       },
     };
+    if (!user.deliveryAddress.length) {
+      payload["deliveryAddress"] = [
+        {
+          name: user?.name,
+          phone: formData?.phone?.value,
+          email: user?.email,
+          address: {
+            houseName: formData?.address?.house?.value,
+            landmark: formData?.address?.landmark?.value,
+            city: formData?.address?.city?.value,
+            state: formData?.address?.state?.value,
+            pincode: formData?.address?.pincode?.value,
+          },
+        },
+      ];
+    }
     const response: any = await apiCall(
       "PUT",
       "UPDATE_USER_BY_QUERY",
@@ -206,8 +222,8 @@ const Profile: FC = () => {
                 </div>
               </div>
             </div>
-            <div className="profileMiddleContainer">
-              <div className="orderContainer">
+            {/* <div className="profileMiddleContainer"> */}
+            {/* <div className="orderContainer">
                 {isOpen && (
                   <Modal
                     handleClose={() => setIsOpen(false)}
@@ -224,9 +240,9 @@ const Profile: FC = () => {
                     Click to Open Modal
                   </button>
                 </Tooltip>
-              </div>
-            </div>
-            <div className="profileBottomContainer">
+              </div> */}
+            {/* </div> */}
+            <div className="profileMiddleContainer">
               {readOnly && (
                 <div
                   className="editIcon"
@@ -287,6 +303,44 @@ const Profile: FC = () => {
                   <div onClick={valid ? handleEditDetails : () => {}}>
                     <Button content="Save" disabled={!valid} />
                   </div>
+                </div>
+              )}
+            </div>
+            <div className="profileBottomContainer">
+              {user.deliveryAddress.length > 0 && (
+                <div className="deliveryAddressdiv">
+                  <div className="deliveryAddressTitle">
+                    <div>Delivery Address</div>
+
+                    <div className="deliveryAddressEdit">
+                      <Tooltip content={"Edit Delivery Address"}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          x="0px"
+                          y="0px"
+                          width="100"
+                          height="100"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M 19.171875 2 C 18.448125 2 17.724375 2.275625 17.171875 2.828125 L 16 4 L 20 8 L 21.171875 6.828125 C 22.275875 5.724125 22.275875 3.933125 21.171875 2.828125 C 20.619375 2.275625 19.895625 2 19.171875 2 z M 14.5 5.5 L 3 17 L 3 21 L 7 21 L 18.5 9.5 L 14.5 5.5 z"
+                            // fill={readOnly ? "grey" : "black"}
+                          ></path>
+                        </svg>
+                      </Tooltip>
+                    </div>
+                  </div>
+                  <DeliveryAddress
+                    deliveryAddress={[
+                      ...user.deliveryAddress,
+                      ...user.deliveryAddress,
+                      ...user.deliveryAddress,
+                      ...user.deliveryAddress,
+                      ...user.deliveryAddress,
+                      ...user.deliveryAddress,
+                      ...user.deliveryAddress,
+                    ]}
+                  />
                 </div>
               )}
             </div>

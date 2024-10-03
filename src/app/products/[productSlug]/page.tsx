@@ -37,19 +37,18 @@ export default async function ProductDetail({ params }: any) {
             <div className="productName">{product.name}</div>
             <Ratings
               ratings={product.ratings}
-              size="m"
+              size="s"
               reviewCount={product?.reviews?.length}
             />
+            <div className="description">{product.description}</div>
             <div className="featureContainer">
               <ProductFeatures features={product.features} />
             </div>
-            <div className="descriptionContainer">
-              <div className="descriptionTitle">Description</div>
-              <div className="description">{product.description}</div>
-            </div>
-            <div style={{ marginBottom: "40px" }}>
+
+            <div style={{ marginBottom: "40px" }} className="stock">
               Available Quantity: {product.stock}
             </div>
+            <div className="productPrice">₹ {product.price}</div>
           </div>
           <div className="buyOrAddMobile">
             <div className="buyOrAddMobileOuter">

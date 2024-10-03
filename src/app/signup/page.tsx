@@ -15,7 +15,7 @@ const SingnupSection: FC = () => {
 
   const [submit, setSubmit] = useState(false);
   const [lastOne, setLastOne] = useState(false);
-  // const [user, setUser] = useState<any>(null);
+  const [userData, setUserData] = useState<any>(null);
   const [formData, setFormData] = useState<any>(null);
   // useEffect(() => {
   //   if (formDataProp) {
@@ -33,7 +33,7 @@ const SingnupSection: FC = () => {
       } else if (user.phone) {
         redirect("/");
       }
-
+      setUserData(user);
       const formDataMain: formData = {
         name: {
           required: true,
@@ -80,7 +80,7 @@ const SingnupSection: FC = () => {
         },
         house: {
           required: true,
-          label: "House, Building, Company",
+          label: "House | Building | Company",
           key: "house",
           value: "",
           type: "input",
@@ -340,7 +340,7 @@ const SingnupSection: FC = () => {
     console.log("details", formData);
     if (submit) {
       const email = formData.email.value;
-      const payload = {
+      const payload: any = {
         phone: formData.phone.value,
         address: {
           houseName: formData.house.value,
@@ -350,7 +350,14 @@ const SingnupSection: FC = () => {
           pincode: formData.pincode.value,
         },
       };
-
+      if (!userData.deliveryAddress.length) {
+        payload["deliveryAddress"] = [
+          {
+            name: userData?.name,
+            ...payload,
+          },
+        ];
+      }
       const response: any = await apiCall(
         "PUT",
         "UPDATE_USER_BY_QUERY",
@@ -400,14 +407,7 @@ const SingnupSection: FC = () => {
                       lastOne={lastOne}
                     />
                   ))}
-                  <div className="formControl">
-                    <div onClick={handleSubmit}>
-                      <Button
-                        content="Add Details"
-                        color={!submit ? "grey" : ""}
-                        disabled={!submit}
-                      />
-                    </div>
+                  <div className="formSubmitButtons">
                     <Link
                       prefetch={false}
                       style={{ cursor: "pointer", textDecoration: "none" }}
@@ -415,6 +415,13 @@ const SingnupSection: FC = () => {
                     >
                       <Button content="Skip" color="#00aaee" />
                     </Link>
+                    <div onClick={handleSubmit}>
+                      <Button
+                        content="Add Details"
+                        color={!submit ? "grey" : ""}
+                        disabled={!submit}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

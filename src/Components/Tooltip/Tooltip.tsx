@@ -27,7 +27,7 @@ function Tooltip({
   const [positionStyle, setPositionStyle] = useState("");
 
   useEffect(() => {
-    if (window.innerWidth < 768) return setShowTooltip(false);
+    if (window.innerWidth < 500) return setShowTooltip(false);
     if (childDivRef.current) {
       const rect = childDivRef.current.getBoundingClientRect();
       const { top, left, width, height, right, bottom } = rect;
@@ -42,8 +42,7 @@ function Tooltip({
           setArrowStyle({
             top: -10,
             left: "50%",
-            right: "50%",
-            transform: "rotate(180deg)",
+            transform: "rotate(180deg) translateX(50%)",
           });
         } else if (left <= 100) {
           console.log("b");
@@ -77,7 +76,11 @@ function Tooltip({
               window.innerHeight - top - window.scrollY + 10
             }px; left: ${left + width / 2}px; transform: translateX(-50%);`
           );
-          setArrowStyle({ bottom: -6, left: "50%", right: "50%" });
+          setArrowStyle({
+            bottom: -6,
+            left: "50%",
+            transform: "translateX(-50%)",
+          });
         } else if (left <= 100) {
           console.log("f");
           setPositionStyle(
