@@ -6,16 +6,17 @@ function DeliveryAddress({ deliveryAddress }: any) {
   return (
     <div className="deliveryAddressOuterContainer">
       <Carousel>
-        {deliveryAddress.map((data: any, key: any) => (
+        {deliveryAddress.map((data: any, index: any) => (
           <div
+            key={index}
             className={`deliveryAddressContainer ${
-              key === 0 ? "defaultAddress" : ""
+              index === 0 ? "defaultAddress" : ""
             }`}
             onClick={() => {
-              console.log({ key });
+              console.log({ index });
             }}
           >
-            {key === 0 && (
+            {index === 0 && (
               <div className="deliverydefaultTick">
                 <Tooltip content={"Default Address"}>
                   <div>✅</div>

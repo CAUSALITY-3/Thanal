@@ -141,7 +141,7 @@ const Profile: FC = () => {
         pincode: formData?.address?.pincode?.value,
       },
     };
-    if (!user.deliveryAddress.length) {
+    if (!user?.deliveryAddress.length) {
       payload["deliveryAddress"] = [
         {
           name: user?.name,
@@ -307,7 +307,7 @@ const Profile: FC = () => {
               )}
             </div>
             <div className="profileBottomContainer">
-              {user.deliveryAddress.length > 0 && (
+              {user?.deliveryAddress?.length > 0 && (
                 <div className="deliveryAddressdiv">
                   <div className="deliveryAddressTitle">
                     <div>Delivery Address</div>
@@ -330,17 +330,7 @@ const Profile: FC = () => {
                       </Tooltip>
                     </div>
                   </div>
-                  <DeliveryAddress
-                    deliveryAddress={[
-                      ...user.deliveryAddress,
-                      ...user.deliveryAddress,
-                      ...user.deliveryAddress,
-                      ...user.deliveryAddress,
-                      ...user.deliveryAddress,
-                      ...user.deliveryAddress,
-                      ...user.deliveryAddress,
-                    ]}
-                  />
+                  <DeliveryAddress deliveryAddress={user.deliveryAddress} />
                 </div>
               )}
             </div>
