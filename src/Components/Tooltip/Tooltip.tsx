@@ -28,6 +28,7 @@ function Tooltip({
 
   useEffect(() => {
     if (window.innerWidth < 500) return setShowTooltip(false);
+    if (!mouseOn) return setShowTooltip(false);
     if (childDivRef.current) {
       const rect = childDivRef.current.getBoundingClientRect();
       const { top, left, width, height, right, bottom } = rect;

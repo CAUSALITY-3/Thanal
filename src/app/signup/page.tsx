@@ -354,7 +354,9 @@ const SingnupSection: FC = () => {
         payload["deliveryAddress"] = [
           {
             name: userData?.name,
-            ...payload,
+            phone: payload?.phone,
+            email: userData?.email,
+            ...payload?.address,
           },
         ];
       }

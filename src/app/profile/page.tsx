@@ -149,13 +149,11 @@ const Profile: FC = () => {
           name: user?.name,
           phone: formData?.phone?.value,
           email: user?.email,
-          address: {
-            houseName: formData?.address?.house?.value,
-            landmark: formData?.address?.landmark?.value,
-            city: formData?.address?.city?.value,
-            state: formData?.address?.state?.value,
-            pincode: formData?.address?.pincode?.value,
-          },
+          houseName: formData?.address?.house?.value,
+          landmark: formData?.address?.landmark?.value,
+          city: formData?.address?.city?.value,
+          state: formData?.address?.state?.value,
+          pincode: formData?.address?.pincode?.value,
         },
       ];
     }
@@ -348,8 +346,11 @@ const Profile: FC = () => {
       </div>
 
       {isOpen && (
-        <Modal isOpen={isOpen} handleClose={() => setIsOpen(false)}>
-          <EditDeliveryAddress />
+        <Modal isOpen={isOpen} size={"l"} handleClose={() => setIsOpen(false)}>
+          <EditDeliveryAddress
+            deliveryAddress={user.deliveryAddress}
+            index={3}
+          />
         </Modal>
       )}
     </div>

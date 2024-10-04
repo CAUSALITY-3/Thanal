@@ -2,7 +2,12 @@ import React from "react";
 import "./DeliveryAddress.scss";
 import { Carousel } from "../Carousel/Carousel";
 import Tooltip from "../Tooltip/Tooltip";
-function DeliveryAddress({ deliveryAddress }: any) {
+function DeliveryAddress({
+  deliveryAddress,
+  defaultIndex = 0,
+  selected = null,
+  setSelected = null,
+}: any) {
   return (
     <div className="deliveryAddressOuterContainer">
       <Carousel>
@@ -10,13 +15,14 @@ function DeliveryAddress({ deliveryAddress }: any) {
           <div
             key={index}
             className={`deliveryAddressContainer ${
-              index === 0 ? "defaultAddress" : ""
-            }`}
+              index === defaultIndex ? "defaultAddress" : ""
+            } ${index === selected ? "selectedAddress" : ""}`}
             onClick={() => {
+              selected !== index && selected !== null && setSelected(index);
               console.log({ index });
             }}
           >
-            {index === 0 && (
+            {index === defaultIndex && (
               <div className="deliverydefaultTick">
                 <Tooltip content={"Default Address"}>
                   <div>✅</div>
@@ -26,11 +32,11 @@ function DeliveryAddress({ deliveryAddress }: any) {
             <div className="deliveryName">{data.name}</div>
             <div className="deliveryPhone">{data.phone}</div>
             <div className="deliveryAddressSection">
-              <div className="deliveryhouse">{data.address.houseName}</div>
-              <div className="deliverylandmark">{data.address.landmark}</div>
-              <div className="deliverycity">{data.address.city}</div>
-              <div className="deliverystate">{data.address.state}</div>
-              <div className="deliveryPincode">{data.address.pincode}</div>
+              <div className="deliveryhouse">{data.houseName}</div>
+              <div className="deliverylandmark">{data.landmark}</div>
+              <div className="deliverycity">{data.city}</div>
+              <div className="deliverystate">{data.state}</div>
+              <div className="deliveryPincode">{data.pincode}</div>
             </div>
           </div>
         ))}
