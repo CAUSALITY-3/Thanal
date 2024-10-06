@@ -1,15 +1,20 @@
 "use client";
 import React, { useState } from "react";
 import "./EditableContainer.scss";
-function EditableContainer({ formData, setFormData, readOnly }: any) {
+function EditableContainer({
+  formData,
+  setFormData,
+  readOnly,
+  notProfileEdit,
+}: any) {
   const [blur, setBlur] = useState<boolean>(false);
   // console.log("sebastian", formData);
   const handleChange = (fieldName: string, inputValue: string) => {
-    console.log(fieldName, inputValue);
+    console.log("Sasi", fieldName, inputValue);
     if ("phone pincode".includes(fieldName)) {
       inputValue = inputValue.replace(/[^\d]/, "");
     }
-    if ("phone name".includes(fieldName)) {
+    if ("phone name".includes(fieldName) || notProfileEdit) {
       setFormData((prevState: any) => {
         prevState[fieldName].value = inputValue;
         return {
@@ -33,11 +38,12 @@ function EditableContainer({ formData, setFormData, readOnly }: any) {
   const handleBlur = (fieldName: string, inputValue: string) => {
     // handleValidation(fieldName, inputValue);
     // setBlured(true);
+
     const isInValid = !!formData.validation.find(
       (fn: any) => fn(inputValue) === false
     );
     // if (isInValid) {
-    if ("phone name".includes(fieldName)) {
+    if ("phone name".includes(fieldName) || notProfileEdit) {
       setFormData((prevState: any) => ({
         ...prevState,
         [fieldName]: {

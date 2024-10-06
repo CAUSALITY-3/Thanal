@@ -1,4 +1,7 @@
-export default function Toast(type?: string, message?: string) {
+export default function Toast(
+  type?: "success" | "failure" | "info",
+  message?: string
+) {
   const id = `toast-${new Date().getTime()}`;
   let container = document.getElementById("toast-wrapper");
   if (!container) {
@@ -31,6 +34,7 @@ export default function Toast(type?: string, message?: string) {
   });
 
   const targetNode: any = document.getElementById("toast-wrapper");
+  targetNode.style.cssText = "z-index: 99999; ";
   const config = { childList: true };
 
   observer.observe(targetNode, config);
@@ -38,12 +42,11 @@ export default function Toast(type?: string, message?: string) {
   childElement.className = "toast";
   childElement.innerHTML =
     type === "success"
-      ? "✅ " + (message || "Success")
+      ? "✅  " + (message || "Success")
       : type === "failure"
-      ? "❌ " + (message || "Oops Something went wrong...")
-      : message || "Thanal is working on it!";
-  // childElement.style.cssText =
-  //   "width: 200px; height: 200px; top: 100px; left: 100px; background-color: red;";
+      ? "❌  " + (message || "Oops Something went wrong...")
+      : "ⓘ  " + message || "Thanal is working on it!";
+
   childElement.setAttribute("id", id);
   container?.appendChild(childElement);
   return container;

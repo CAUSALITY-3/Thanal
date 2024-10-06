@@ -349,7 +349,7 @@ const Profile: FC = () => {
         <Modal isOpen={isOpen} size={"l"} handleClose={() => setIsOpen(false)}>
           <EditDeliveryAddress
             deliveryAddress={user.deliveryAddress}
-            index={3}
+            handleClose={() => setIsOpen(false)}
           />
         </Modal>
       )}
