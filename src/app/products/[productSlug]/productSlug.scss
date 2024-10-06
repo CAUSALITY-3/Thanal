@@ -13,8 +13,18 @@
     .routeLink {
       margin: 10px 0;
       padding: 0 0 0 10px;
-      color: rgb(88, 88, 88);
+
       width: 100%;
+      .routeLinkItem {
+        color: rgb(88, 88, 88, 0.8);
+        text-decoration: none;
+        &:hover {
+          cursor: pointer;
+          color: rgba(0, 0, 0, 0.8);
+          font-weight: bolder;
+          transition: all ease 1s;
+        }
+      }
     }
     .productDetailContainer {
       border-radius: 5px;

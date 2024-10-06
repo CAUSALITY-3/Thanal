@@ -4,6 +4,7 @@ import { ProductFeatures } from "@Components/ProductFeatures/ProductFeatures";
 import { BuyOrAdd } from "@Components/BuyOrAdd/BuyOrAdd";
 import { apiCall } from "@/api/sevice";
 import "./productSlug.scss";
+import Link from "next/link";
 
 export default async function ProductDetail({ params }: any) {
   const product = await apiCall(
@@ -12,17 +13,26 @@ export default async function ProductDetail({ params }: any) {
     {},
     `?id=${params.productSlug}`
   );
-  // const path = `?path=products/${product.category}/${product.name}`;
-  // const imageFiles = await apiCall("get", "GET_IMAGES", {}, path);
-  // const images = imageFiles.map((file: string) => {
-  //   return `${process.env.API_BASE_URL}images/getImage${path}/${file}`;
-  // });
   const routeLinkText = `Products > ${product.category} > ${product.name}`;
 
   return (
     <div className="productDetailOuter">
       <div className="productDetail">
-        <div className="routeLink">{routeLinkText}</div>
+        <div className="routeLink">
+          <Link className="routeLinkItem" prefetch={false} href="/products">
+            Products /{" "}
+          </Link>
+          <Link className="routeLinkItem" prefetch={false} href={`/products`}>
+            {product.category} /{" "}
+          </Link>
+          <Link
+            className="routeLinkItem"
+            prefetch={false}
+            href={`/products/family/${product.family}`}
+          >
+            {product.name}
+          </Link>
+        </div>
         <div className="productDetailContainer">
           <div className="productImageSection">
             <div className="imageSliderContainerStyles">
