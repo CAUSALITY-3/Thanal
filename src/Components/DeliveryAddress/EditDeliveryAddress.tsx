@@ -305,8 +305,8 @@ function EditDeliveryAddress({ index = 0, deliveryAddress, handleClose }: any) {
         "Content-Type": "application/json",
       },
       {
-        success: "Successfully updated data.",
-        failure: "Failed to update data.",
+        success: "Successfully updated Delivery Address.",
+        failure: "Failed to update Delivery Address.",
       }
     );
     if (response && response.email) {
@@ -352,11 +352,11 @@ function EditDeliveryAddress({ index = 0, deliveryAddress, handleClose }: any) {
             content={
               deliveryAddressState.length <= 1
                 ? "Minimum 1 address need to be added"
-                : "Rmove address"
+                : "Rmove selected address"
             }
           >
             <Button
-              color={"#ffabc0b3"}
+              color={"#f08080"}
               disabled={deliveryAddressState.length <= 1}
             >
               <div className="addNewAddress">
@@ -399,6 +399,7 @@ function EditDeliveryAddress({ index = 0, deliveryAddress, handleClose }: any) {
       />
       <div className="editDeliveryAddressSection">
         <div className="toggleDefault">
+          <div className="toggleDefaultText">Set as Default Address</div>
           <ToggleButton
             initialToggle={selectedToggle}
             handler={handleDefaultAddress}

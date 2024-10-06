@@ -19,7 +19,6 @@ const ToggleButton = ({ initialToggle, handler }: any) => {
         <input type="checkbox" checked={isToggled} onChange={handleToggle} />
         <span className="toggle-slider"></span>
       </label>
-      <p>{isToggled ? "On" : "Off"}</p>
     </div>
   );
 };

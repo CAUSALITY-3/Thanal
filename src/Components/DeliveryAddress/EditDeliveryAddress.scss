@@ -18,6 +18,20 @@
   @media screen and (max-width: 500px) {
     width: 90vw;
   }
+
+  .editDeliveryAddressSection {
+    margin: 10px 0;
+    .toggleDefault {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .toggleDefaultText {
+        font-size: 16px;
+        margin-right: 20px;
+      }
+    }
+  }
+
   .add-remove-address {
     display: flex;
     gap: 20px;
@@ -26,7 +40,7 @@
       display: flex;
       justify-content: end;
       align-items: center;
-      padding: 0 20px 10px 20px;
+      margin: 10px 0;
       .addNewAddress {
         display: flex;
         justify-content: center;
@@ -49,60 +63,10 @@
 
   .Delivery-save-cancel-buttons {
     display: flex;
-    margin: 20px 0;
+    margin: 40px 30px 40px 0;
     width: -webkit-fill-available;
-    justify-content: space-evenly;
+    justify-content: end;
+    gap: 30px;
     align-items: center;
   }
-}
-
-.toggle-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.toggle-switch {
-  position: relative;
-  display: inline-block;
-  width: 40px; /* Reduced width */
-  height: 20px; /* Reduced height */
-}
-
-.toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 20px; /* Adjusted for smaller size */
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 16px; /* Reduced size */
-  width: 16px; /* Reduced size */
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #2196f3;
-}
-
-input:checked + .slider:before {
-  transform: translateX(20px); /* Adjusted for smaller size */
 }
