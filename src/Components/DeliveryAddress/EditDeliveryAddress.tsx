@@ -343,7 +343,7 @@ function EditDeliveryAddress({ index = 0, deliveryAddress, handleClose }: any) {
         <div
           className="addNewAddressBtnDiv"
           onClick={
-            deliveryAddressState.length < 5
+            deliveryAddressState.length >= 1
               ? () => handleRemoveAddress()
               : () => {}
           }
@@ -368,7 +368,7 @@ function EditDeliveryAddress({ index = 0, deliveryAddress, handleClose }: any) {
         <div
           className="addNewAddressBtnDiv"
           onClick={
-            deliveryAddressState.length > 1
+            deliveryAddressState.length <= 5
               ? () => handleAddNewAddress()
               : () => {}
           }
