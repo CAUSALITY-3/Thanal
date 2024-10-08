@@ -62,7 +62,7 @@ function EditDeliveryAddress({ index = 0, deliveryAddress, handleClose }: any) {
           invalid: false,
           editable: true,
           validationArray: [{ method: "length", value: 10 }],
-          validation: [(value: string) => value.length === 10],
+          validation: [(value: string) => value?.length === 10],
           message: "Please provide valid 10 digit phone number.",
         },
         houseName: {
@@ -73,7 +73,7 @@ function EditDeliveryAddress({ index = 0, deliveryAddress, handleClose }: any) {
           editable: true,
           validationArray: [{ method: "length", value: [2, 30] }],
           validation: [
-            (value: string) => value.length > 2 && value.length < 30,
+            (value: string) => value?.length > 2 && value?.length < 30,
           ],
           message: "Invalid Entry",
         },
@@ -85,7 +85,7 @@ function EditDeliveryAddress({ index = 0, deliveryAddress, handleClose }: any) {
           editable: true,
           validationArray: [{ method: "length", value: [2, 30] }],
           validation: [
-            (value: string) => value.length > 2 && value.length < 30,
+            (value: string) => value?.length > 2 && value?.length < 30,
           ],
           message: "Invalid Entry",
         },
@@ -97,7 +97,7 @@ function EditDeliveryAddress({ index = 0, deliveryAddress, handleClose }: any) {
           editable: true,
           validationArray: [{ method: "dropDown" }],
           validation: [
-            (value: string) => value.length > 2 && value.length < 30,
+            (value: string) => value?.length > 2 && value?.length < 30,
           ],
           message: "Invalid Entry",
         },
@@ -109,18 +109,18 @@ function EditDeliveryAddress({ index = 0, deliveryAddress, handleClose }: any) {
           editable: false,
           validationArray: [{ method: "length", value: [2, 20] }],
           validation: [
-            (value: string) => value.length > 2 && value.length < 20,
+            (value: string) => value?.length > 2 && value?.length < 20,
           ],
           message: "Invalid Entry",
         },
         pincode: {
           label: "Pincode",
           key: "pincode",
-          value: String(deliveryAddressState?.[selected]?.pincode) || "",
+          value: String(deliveryAddressState?.[selected]?.pincode || ""),
           invalid: false,
           editable: true,
           validationArray: [{ method: "length", value: 6 }],
-          validation: [(value: string) => value.length === 6],
+          validation: [(value: string) => value?.length === 6],
           message: "Please provide valid 6 digit pincode.",
         },
       });
@@ -218,7 +218,7 @@ function EditDeliveryAddress({ index = 0, deliveryAddress, handleClose }: any) {
         pincode: {
           label: "Pincode",
           key: "pincode",
-          value: String(deliveryAddressState?.[selected]?.pincode) || "",
+          value: String(deliveryAddressState?.[selected]?.pincode || ""),
           invalid: false,
           editable: true,
           validationArray: [{ method: "length", value: 6 }],

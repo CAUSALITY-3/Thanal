@@ -80,7 +80,7 @@ export const BuyOrAdd: FC<Props> = ({ productId }) => {
         router.push("/login");
       }
     } else {
-      router.push("/contact");
+      router.push("/buy/" + productId);
     }
   };
   return (

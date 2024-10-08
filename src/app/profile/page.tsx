@@ -38,6 +38,20 @@ const Profile: FC = () => {
       typeof window === "object" && typeof document === "object";
     // if (!user) {
     const parsedUser = data ? JSON.parse(data || "") : null;
+    if (!parsedUser?.deliveryAddress?.length && parsedUser?.phone) {
+      parsedUser["deliveryAddress"] = [
+        {
+          name: parsedUser?.name,
+          phone: parsedUser?.phone,
+          email: parsedUser?.email,
+          houseName: parsedUser?.address?.houseName,
+          landmark: parsedUser?.address?.landmark,
+          city: parsedUser?.address?.city,
+          state: parsedUser?.address?.state,
+          pincode: parsedUser?.address?.pincode,
+        },
+      ];
+    }
     setUser(parsedUser);
     if (!parsedUser?.name && isBrowser && !isLoading) {
       router.push("/login");
@@ -106,7 +120,7 @@ const Profile: FC = () => {
           pincode: {
             label: "Pincode",
             key: "pincode",
-            value: String(parsedUser?.address?.pincode) || "",
+            value: String(parsedUser?.address?.pincode || ""),
             invalid: false,
             editable: true,
             validationArray: [{ method: "length", value: 6 }],

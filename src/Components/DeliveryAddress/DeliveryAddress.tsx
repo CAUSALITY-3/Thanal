@@ -29,14 +29,14 @@ function DeliveryAddress({
                 </Tooltip>
               </div>
             )}
-            <div className="deliveryName">{data.name}</div>
-            <div className="deliveryPhone">{data.phone}</div>
+            <div className="deliveryName">{data?.name}</div>
+            <div className="deliveryPhone">{data?.phone}</div>
             <div className="deliveryAddressSection">
-              <div className="deliveryhouse">{data.houseName}</div>
-              <div className="deliverylandmark">{data.landmark}</div>
-              <div className="deliverycity">{data.city}</div>
-              <div className="deliverystate">{data.state}</div>
-              <div className="deliveryPincode">{data.pincode}</div>
+              <div className="deliveryhouse">{data?.houseName}</div>
+              <div className="deliverylandmark">{data?.landmark}</div>
+              <div className="deliverycity">{data?.city}</div>
+              <div className="deliverystate">{data?.state}</div>
+              <div className="deliveryPincode">{data?.pincode}</div>
             </div>
           </div>
         ))}
