@@ -7,7 +7,7 @@
   background-color: rgba(0, 0, 0, 0.03);
   //   border: 1px solid rgba(78, 77, 77, 0.8);
   border-radius: 5px;
-  padding: 10px;
+  padding: 10px 10px 0 10px;
 
   .deliveryAddressContainer {
     min-width: 150px;
@@ -17,9 +17,9 @@
     flex-direction: column;
     margin: 5px;
     width: fit-content;
-    background-color: #dce9e9;
+    background-color: rgb(238, 238, 238, 0.5);
     max-width: 500px;
-    border: 1px solid rgba(78, 77, 77, 0.8);
+    border: 4px solid rgba(187, 192, 188, 0.8);
     border-radius: 5px;
     position: relative;
     .deliveryName {
@@ -42,6 +42,7 @@
   }
   .selectedAddress {
     border: 4px solid rgba(111, 185, 255, 0.8);
+    background-color: rgba(223, 242, 253, 0.8);
   }
   .defaultAddress {
     // background-color: rgb(215, 235, 219);

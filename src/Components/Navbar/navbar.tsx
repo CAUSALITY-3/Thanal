@@ -17,7 +17,6 @@ export const Navbar: FC = () => {
 
   console.log("ha ha", { data });
   const user = data ? JSON.parse(data) : null;
-  console.log("kuttu", data);
   const navbarItemStyle = {
     margin: "0 10px",
     height: 27,

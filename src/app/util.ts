@@ -37,7 +37,6 @@ export function getCookie(name: string) {
   const isBrowser = typeof window === "object" && typeof document === "object";
   if (!isBrowser || !document) return null;
   const value = `; ${document?.cookie}`;
-  console.log("&&&&&", value);
   const parts = value?.split(`; ${name}=`);
   if (parts.length === 2) {
     const userCookie = parts.pop()?.split(";").shift();

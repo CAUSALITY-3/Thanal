@@ -65,7 +65,7 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
   return (
     <div className="mainContainer">
       <div className="imageTemplateContainer">
-        {slides.map((slide, slideIndex: number) => (
+        {slides?.map((slide, slideIndex: number) => (
           <div
             key={slideIndex}
             className={
