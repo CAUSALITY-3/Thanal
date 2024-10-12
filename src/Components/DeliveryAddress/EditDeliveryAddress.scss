@@ -13,7 +13,7 @@
   &::-webkit-scrollbar {
     display: none;
   }
-  width: fit-content;
+  width: 90%;
   overflow-y: scroll;
   @media screen and (max-width: 500px) {
     width: 90vw;

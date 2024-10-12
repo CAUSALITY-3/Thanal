@@ -5,6 +5,12 @@
     justify-content: space-around;
     overflow: scroll;
     white-space: nowrap;
+    width: -webkit-fill-available;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 .carousel-title{
         margin-left: 10px;

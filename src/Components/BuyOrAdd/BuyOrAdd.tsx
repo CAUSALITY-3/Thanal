@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation";
 import { count } from "@/app/signal";
 import "./BuyOrAdd.scss";
 import { apiCall } from "@/api/sevice";
-import { useQueryClient } from "@tanstack/react-query";
-import { getCookie } from "@/app/util";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getUserAuth } from "@/app/util";
+import Toast from "../Toast/Toast";
 
 interface Props {
   productId: string;
@@ -15,8 +16,13 @@ interface Props {
 export const BuyOrAdd: FC<Props> = ({ productId }) => {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const user = getCookie("user");
-  const email = user ? JSON.parse(user).email : null;
+  const { data, isLoading, isError } = useQuery({
+    queryFn: getUserAuth,
+    queryKey: ["user"], //Array according to Documentation
+    staleTime: 3600000,
+  });
+  const user: any = data ? JSON.parse(data) : null;
+  const email = user ? user.email : null;
   const metadata = [
     {
       icon: `${process.env.NEXT_PUBLIC_IMAGE_URL}svg/cart.svg`,
@@ -45,37 +51,36 @@ export const BuyOrAdd: FC<Props> = ({ productId }) => {
   const handleClick = async (action: string) => {
     if (action === "cart") {
       if (email) {
-        // const body: any = JSON.stringify({ productId, email });
-        // console.log("payload", body, "email", email);
-        // await fetch("/api/addToBag", {
-        //   method: "POST",
-        //   body,
-        // });
+        const bag = user.bag;
+        console.log("ADD_TO_BAG", { productId }, bag);
+        if (bag.includes(productId)) {
+          Toast("info", "Already added in bag.");
+        } else {
+          console.log("ADD_TO_BAG", { productId }, email);
 
-        console.log("ADD_TO_BAG", { productId }, email);
-        const data = await apiCall(
-          "POST",
-          "ADD_TO_BAG",
-          {},
-          `?email=${email}`,
-          JSON.stringify({ productId }),
-          {
-            "Content-Type": "application/json",
-          },
-          {
-            success: "Successfully added item to bag.",
-            failure: "Failed to add item to bag.",
+          const data = await apiCall(
+            "POST",
+            "ADD_TO_BAG",
+            {},
+            `?email=${email}`,
+            JSON.stringify({ productId }),
+            {
+              "Content-Type": "application/json",
+            },
+            {
+              success: "Successfully added item to bag.",
+              failure: "Failed to add item to bag.",
+            }
+          );
+          const userResp = data.email ? data : null;
+
+          if (userResp) {
+            localStorage.setItem("user", JSON.stringify(data));
+            queryClient.setQueryData(["user"], JSON.stringify(data));
+            // const ct = count.value;
+            console.log("sasi", count.value);
           }
-        );
-        const user = data.email ? data : null;
-
-        if (user) {
-          localStorage.setItem("user", JSON.stringify(data));
-          queryClient.setQueryData(["user"], JSON.stringify(data));
-          // const ct = count.value;
-          console.log("sasi", count.value);
         }
-        router.push("/");
       } else {
         router.push("/login");
       }
