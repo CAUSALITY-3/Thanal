@@ -63,7 +63,7 @@ export const BuyOrAdd: FC<Props> = ({ productId }) => {
             "ADD_TO_BAG",
             {},
             `?email=${email}`,
-            JSON.stringify({ productId }),
+            { productId },
             {
               "Content-Type": "application/json",
             },

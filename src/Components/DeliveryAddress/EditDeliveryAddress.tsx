@@ -300,7 +300,7 @@ function EditDeliveryAddress({ index = 0, deliveryAddress, handleClose }: any) {
       "UPDATE_USER_BY_QUERY",
       {},
       `?email=${user?.email}`,
-      JSON.stringify({ deliveryAddress: deliveryAddressPayload }),
+      { deliveryAddress: deliveryAddressPayload },
       {
         "Content-Type": "application/json",
       },

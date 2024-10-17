@@ -16,7 +16,7 @@ function Payment() {
         "GET_ORDER_ID",
         {},
         "",
-        JSON.stringify({ amount: parseFloat(amount) * 100 }),
+        { amount: parseFloat(amount) * 100 },
         {
           "Content-Type": "application/json",
         },
@@ -54,7 +54,7 @@ function Payment() {
             "VERIFY_ORDER",
             {},
             "",
-            JSON.stringify(data),
+            data,
             {
               "Content-Type": "application/json",
             },

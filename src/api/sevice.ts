@@ -37,7 +37,7 @@ export async function apiCall(
     const options = {
       method,
       headers,
-      body,
+      body: JSON.stringify(body),
       next: {
         revalidate: nextOptions?.revalidate,
         tags: nextOptions?.tags,
@@ -55,6 +55,7 @@ export async function apiCall(
     logger("INFO", { url, ...options }, "calling DB service, http options ");
     const response = await fetch(url, options);
     if (!response.ok) {
+      if (errorReplacer) return { error: "Network response was not ok" };
       throw new Error("Network response was not ok");
     }
     const responseData = await response.json();

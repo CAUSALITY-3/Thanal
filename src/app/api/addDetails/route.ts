@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     "UPDATE_USER_BY_QUERY",
     {},
     `?email=${email}`,
-    JSON.stringify(payload),
+    payload,
     {
       "Content-Type": "application/json",
     },

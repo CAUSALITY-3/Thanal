@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     "ADD_TO_BAG",
     {},
     `?email=${email}`,
-    JSON.stringify({ productId }),
+    { productId },
     {
       "Content-Type": "application/json",
     },

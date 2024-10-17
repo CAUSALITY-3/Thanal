@@ -1,0 +1,10 @@
+.bag-items-outer-container {
+  width: 100%;
+
+  .bag-items-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

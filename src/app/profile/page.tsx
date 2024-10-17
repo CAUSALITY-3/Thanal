@@ -38,6 +38,9 @@ const Profile: FC = () => {
       typeof window === "object" && typeof document === "object";
     // if (!user) {
     const parsedUser = data ? JSON.parse(data || "") : null;
+    if (!parsedUser?.phone && isBrowser && !isLoading) {
+      setReadOnly(false);
+    }
     if (!parsedUser?.deliveryAddress?.length && parsedUser?.phone) {
       parsedUser["deliveryAddress"] = [
         {
@@ -176,7 +179,7 @@ const Profile: FC = () => {
       "UPDATE_USER_BY_QUERY",
       {},
       `?email=${user?.email}`,
-      JSON.stringify(payload),
+      payload,
       {
         "Content-Type": "application/json",
       },

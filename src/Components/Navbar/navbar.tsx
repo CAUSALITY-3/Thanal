@@ -70,7 +70,17 @@ export const Navbar: FC = () => {
             Login
           </Link>
         )}
-        <Bag numOfItems={user?.bag?.length} />
+        {user?.bag?.length ? (
+          <Link
+            href="/bag"
+            className={`navBarItems ${pathname === "/bag" ? "active" : ""}`}
+            prefetch={false}
+          >
+            <Bag numOfItems={user?.bag?.length} />
+          </Link>
+        ) : (
+          <Bag numOfItems={user?.bag?.length} />
+        )}
       </div>
       <ScreenWidhChecker />
     </nav>

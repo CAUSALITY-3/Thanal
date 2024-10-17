@@ -1,0 +1,11 @@
+.bag-page-outer-container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .bag-page-container {
+    max-width: 700px;
+    width: 97vw;
+  }
+}
