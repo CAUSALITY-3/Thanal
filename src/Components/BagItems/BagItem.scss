@@ -54,6 +54,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         text-decoration: none;
+        user-select: none;
         &::first-letter {
           text-transform: uppercase;
         }
@@ -88,6 +89,7 @@
         align-items: center;
         justify-content: center;
         // flex-direction: column;
+        user-select: none;
         gap: 3px;
         @media screen and (max-width: 600px) {
           gap: 2px;
@@ -98,12 +100,18 @@
           justify-content: center;
           width: 20px;
           height: 20px;
-          border-radius: 50%;
+          border-radius: 3px;
+          user-select: none;
           // border: 1px solid rgba(78, 77, 77, 0.8);
           cursor: pointer;
           @media screen and (max-width: 600px) {
             width: 16px;
             height: 16px;
+          }
+
+          &:hover {
+            background-color: rgb(41, 41, 41, 0.2);
+            transition: background-color 400ms ease-in-out;
           }
         }
         .qty-value {

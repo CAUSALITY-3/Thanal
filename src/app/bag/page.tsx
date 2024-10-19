@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { getUserAuth } from "../util";
 import "./bag.scss";
 import BagItems from "@/Components/BagItems/BagItems";
+import Template from "../template";
 
 function Bag({ product }: any) {
   // const [products, setProducts] = useState<any>([]);
@@ -50,9 +51,11 @@ function Bag({ product }: any) {
     <div className="bag-page-outer-container">
       <div className="bag-page-container">
         {!productsLoading && (!!product || productsData?.length > 0) ? (
-          <BagItems
-            products={getProducts ? productsData : product ? [product] : []}
-          />
+          <Template>
+            <BagItems
+              products={getProducts ? productsData : product ? [product] : []}
+            />
+          </Template>
         ) : (
           <div className="no-products">Bag is empty</div>
         )}

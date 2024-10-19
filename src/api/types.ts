@@ -9,6 +9,7 @@ export const apiPaths: { [key: string]: string } = {
   PRODUCT_FAMILY: "products/getAllUnderFamily",
   GET_ORDER_ID: "payments/createOrder",
   ADD_TO_BAG: "users/addToBag",
+  REMOVE_FROM_BAG: "users/removeFromBag",
   GET_USER_DETAILS: "auth/getUserDetails",
   VERIFY_ORDER: "payments/verifyPayment",
   GET_PRODUCT_FULL_LIST: "products/getProductFullList",

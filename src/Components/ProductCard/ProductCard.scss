@@ -32,6 +32,7 @@
     flex-direction: column;
     justify-content: space-around;
     flex-grow: 1;
+    user-select: none;
     .productNameContainer {
       // display: flex;
       // align-items: center;

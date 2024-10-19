@@ -33,6 +33,7 @@
           font-weight: 600;
           font-size: 28px;
           width: fit-content;
+          user-select: none;
           &::first-letter {
             text-transform: uppercase;
           }
@@ -132,6 +133,7 @@
               }
               .productName {
                 white-space: nowrap;
+                user-select: none;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 color: white;
