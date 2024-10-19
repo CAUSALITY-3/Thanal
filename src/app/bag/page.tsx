@@ -1,6 +1,6 @@
 "use client";
 import React, { use, useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { apiCall } from "@/api/sevice";
 import { useRouter } from "next/navigation";
 import { getUserAuth } from "../util";
@@ -8,57 +8,54 @@ import "./bag.scss";
 import BagItems from "@/Components/BagItems/BagItems";
 
 function Bag({ product }: any) {
-  const [products, setProducts] = useState<any>([]);
+  // const [products, setProducts] = useState<any>([]);
   const router = useRouter();
 
-  let user: any = null;
-  useEffect(() => {
-    getUserAuth().then((data: any) => {
-      user = data ? JSON.parse(data || "") : null;
-      if (!user.email) {
-        router.push("/login");
-      }
-      if (product) {
-        setProducts([product]);
-      } else if (!user) {
-        router.push("/login");
-      } else {
-        if (user?.bag?.length) {
-          const getProductByIds = async () => {
-            const data = await apiCall(
-              "post",
-              "GET_PRODUCT_BY_IDS",
-              {},
-              "",
-              {
-                ids: user?.bag,
-              },
-              {
-                "Content-Type": "application/json",
-              }
-            );
-            console.log("GET_PRODUCT_BY_ID", data);
+  const { data } = useSuspenseQuery({
+    queryFn: getUserAuth,
+    queryKey: ["user"], //Array according to Documentation
+  });
 
-            return data;
-          };
-
-          getProductByIds()
-            .then((data) => {
-              setProducts(data);
-            })
-            .catch((err) => {
-              console.log(err);
-              setProducts([]);
-            });
-        }
+  const user = data ? JSON.parse(data) : null;
+  const getProductByIds = async () => {
+    const data = await apiCall(
+      "post",
+      "GET_PRODUCT_BY_IDS",
+      {},
+      "",
+      {
+        ids: user?.bag,
+      },
+      {
+        "Content-Type": "application/json",
       }
-    });
-  }, []);
+    );
+    console.log("GET_PRODUCT_BY_ID", data);
+
+    return data;
+  };
+
+  const getProducts = user?.bag?.length > 0 && !product;
+  const { data: productsData, isLoading: productsLoading } = useQuery({
+    queryFn: getProductByIds,
+    queryKey: user?.bag,
+    enabled: getProducts,
+  });
+
+  if (!user?.email) {
+    router.push("/login");
+  }
 
   return (
     <div className="bag-page-outer-container">
       <div className="bag-page-container">
-        <BagItems products={products} />
+        {!productsLoading && (!!product || productsData?.length > 0) ? (
+          <BagItems
+            products={getProducts ? productsData : product ? [product] : []}
+          />
+        ) : (
+          <div className="no-products">Bag is empty</div>
+        )}
       </div>
     </div>
   );

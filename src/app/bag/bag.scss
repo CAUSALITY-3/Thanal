@@ -7,5 +7,13 @@
   .bag-page-container {
     max-width: 700px;
     width: 97vw;
+    .no-products {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      height: 100vh;
+    }
   }
 }
