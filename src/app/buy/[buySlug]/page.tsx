@@ -3,12 +3,13 @@ import { apiCall } from "@/api/sevice";
 import { getUserAuth } from "@/app/util";
 import EditDeliveryAddress from "@/Components/DeliveryAddress/EditDeliveryAddress";
 import Modal from "@/Components/Modal/Modal";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import React, { use, useEffect, useState } from "react";
 import "./buy.scss";
 import DeliveryAddress from "@/Components/DeliveryAddress/DeliveryAddress";
 import Tooltip from "@/Components/Tooltip/Tooltip";
 import { Button } from "@/Components/Buttons/Button";
+import BagItems from "@/Components/BagItems/BagItems";
 
 function Buy({ params }: any) {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,12 +27,12 @@ function Buy({ params }: any) {
 
     return data;
   };
-  const productApi = useQuery({
+  const productApi = useSuspenseQuery({
     queryFn: getProductById,
     queryKey: [params.buySlug],
   });
 
-  const userData: any = useQuery({
+  const userData: any = useSuspenseQuery({
     queryFn: getUserAuth,
     queryKey: ["user"],
   });
@@ -90,6 +91,7 @@ function Buy({ params }: any) {
         setSelected={setSelected}
       />
       {isOpen && step1()}
+      {!productApi.isLoading && <BagItems products={[productApi.data]} />}
     </div>
   );
 

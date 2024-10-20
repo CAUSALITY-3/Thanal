@@ -6,14 +6,16 @@ import { Button } from "../Buttons/Button";
 import Toast from "../Toast/Toast";
 import { apiCall } from "@/api/sevice";
 import { useQueryClient } from "@tanstack/react-query";
+import { console } from "inspector";
 
-function BagItem({ product, key }: any) {
+function BagItem({ product, key, handleQtyChange }: any) {
   const [qty, setQty] = useState(1);
   const queryClient = useQueryClient();
 
   const handleQtyIncrease = () => {
     if (qty < product.stock) {
       setQty(qty + 1);
+      handleQtyChange(product._id, 1, product.price);
     } else {
       Toast("failure", "Maximum quantity reached");
     }
@@ -22,6 +24,7 @@ function BagItem({ product, key }: any) {
   const handleQtyDecrease = () => {
     if (qty > 1) {
       setQty(qty - 1);
+      handleQtyChange(product._id, -1, -product.price);
     } else {
       Toast("failure", "Minimum quantity reached");
     }
@@ -93,7 +96,9 @@ function BagItem({ product, key }: any) {
 
           <div className="bag-qty-remove-btn" onClick={removeItemFromBag}>
             <Tooltip content={"Remove item from bag"}>
-              <Button color={"#b9deff"}>Remove</Button>
+              <Button color={"#b9deff"} width="60px" height="25px">
+                <div className="bag-qty-remove-btn-txt">Remove</div>
+              </Button>
             </Tooltip>
           </div>
         </div>

@@ -5,8 +5,10 @@
   align-items: center;
   flex-direction: column;
   .bag-page-container {
-    max-width: 700px;
     width: 97vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .no-products {
       display: flex;
       justify-content: center;

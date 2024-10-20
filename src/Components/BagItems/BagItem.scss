@@ -17,13 +17,13 @@
     gap: 10px;
 
     .bag-item-image {
-      width: 100px;
-      height: 100px;
+      width: 75px;
+      height: 75px;
       position: relative;
       text-decoration: none;
       @media screen and (max-width: 600px) {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
       }
       img {
         width: 100%;
@@ -41,15 +41,15 @@
       flex-direction: column;
       justify-content: center;
       gap: 5px;
-      width: 160px;
+      width: 120px;
       @media screen and (max-width: 600px) {
         gap: 3px;
       }
       .bag-item-name {
-        font-size: 20px;
+        font-size: 16px;
         font-weight: bold;
         color: rgba(78, 77, 77, 0.8);
-        max-width: 150px;
+        max-width: 100px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -67,11 +67,11 @@
         }
       }
       .bag-item-price {
-        font-size: 18px;
+        font-size: 14px;
         font-weight: bold;
         color: rgba(76, 109, 77, 0.8);
         @media screen and (max-width: 600px) {
-          font-size: 14px;
+          font-size: 12px;
         }
       }
     }
@@ -79,9 +79,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 16px;
       @media screen and (max-width: 600px) {
-        gap: 10px;
+        gap: 8px;
       }
 
       .bag-qty {
@@ -121,12 +121,19 @@
           width: 40px;
           text-align: center;
           height: 20px;
-          border: 1px solid rgba(78, 77, 77, 0.8);
+          border-radius: 3px;
+          border: 2px solid rgba(78, 77, 77, 0.8);
           @media screen and (max-width: 600px) {
             font-size: 14px;
             width: 24px;
             height: 16px;
           }
+        }
+      }
+
+      .bag-qty-remove-btn {
+        .bag-qty-remove-btn-txt {
+          font-size: 14px;
         }
       }
     }
