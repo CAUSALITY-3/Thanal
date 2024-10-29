@@ -10,12 +10,14 @@ import DeliveryAddress from "@/Components/DeliveryAddress/DeliveryAddress";
 import Tooltip from "@/Components/Tooltip/Tooltip";
 import { Button } from "@/Components/Buttons/Button";
 import BagItems from "@/Components/BagItems/BagItems";
+import { useRouter } from "next/navigation";
 
 function Buy({ params }: any) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(0);
   const steps = ["Address", "Order Summary", "Payment"];
   const [currentStep, setCurrentStep] = useState(0);
+  const router = useRouter();
   const getProductById = async () => {
     const data = await apiCall(
       "get",
@@ -41,11 +43,24 @@ function Buy({ params }: any) {
 
   const deliveryAddress = parsedUser?.deliveryAddress;
 
+  const checkoutFn = () => {
+    setCurrentStep(currentStep + 1);
+  };
+
+  const handleEditDeliveryAddress = () => {
+    parsedUser?.deliveryAddress?.length ? setIsOpen(false) : router.back();
+  };
+
   const step1 = () => (
-    <Modal isOpen={isOpen} size={"l"} handleClose={() => setIsOpen(false)}>
+    <Modal
+      isOpen={isOpen}
+      size={"l"}
+      handleClose={handleEditDeliveryAddress}
+      title={"Add Delivery Address"}
+    >
       <EditDeliveryAddress
         deliveryAddress={parsedUser?.deliveryAddress || []}
-        handleClose={() => setIsOpen(false)}
+        handleClose={handleEditDeliveryAddress}
         index={selected}
       />
     </Modal>
@@ -53,7 +68,6 @@ function Buy({ params }: any) {
 
   const step2 = () => (
     <div className="selectAddressSection">
-      <p>Delivery Address</p>
       <div className="edit-or-change"></div>
       <div className="deliveryAddressEdit">
         <div className="selection-text">Please Select Address</div>
@@ -84,14 +98,21 @@ function Buy({ params }: any) {
           </Button>
         </Tooltip>
       </div>
-      <DeliveryAddress
-        deliveryAddress={parsedUser?.deliveryAddress}
-        defaultIndex={0}
-        selected={selected}
-        setSelected={setSelected}
-      />
-      {isOpen && step1()}
-      {!productApi.isLoading && <BagItems products={[productApi.data]} />}
+      <div className="address-and-bagItems">
+        <DeliveryAddress
+          deliveryAddress={parsedUser?.deliveryAddress}
+          defaultIndex={0}
+          selected={selected}
+          setSelected={setSelected}
+        />
+        {isOpen && step1()}
+        {!productApi.isLoading && (
+          <div className="buy-page-checkout-items">
+            <div className="checkout-items-title">Checkout Item</div>
+            <BagItems products={[productApi.data]} checkoutFn={checkoutFn} />
+          </div>
+        )}
+      </div>
     </div>
   );
 
@@ -113,7 +134,7 @@ function Buy({ params }: any) {
     } else if (!deliveryAddress?.length && !parsedUser?.phone) {
       setIsOpen(true);
       setCurrentStep(0);
-    } else {
+    } else if (currentStep !== 2) {
       setCurrentStep(1);
     }
   }, [currentStep]);

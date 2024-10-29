@@ -5,7 +5,7 @@ import ReactPortal from "@/app/ReactPortal";
 import Template from "@/app/template";
 import Tooltip from "../Tooltip/Tooltip";
 
-function Modal({ children, isOpen, handleClose, size = "m" }: any) {
+function Modal({ children, isOpen, handleClose, size = "m", title = "" }: any) {
   useEffect(() => {
     const closeOnEscapeKey = (e: any) =>
       e.key === "Escape" ? handleClose() : null;
@@ -30,6 +30,7 @@ function Modal({ children, isOpen, handleClose, size = "m" }: any) {
       <Template>
         <div className="modal">
           <div className={`modal-content modal-${size}`}>
+            <div className="modal-title">{title}</div>
             <div onClick={handleClose} className="close-btn">
               <Tooltip content={"Close"}>
                 <svg

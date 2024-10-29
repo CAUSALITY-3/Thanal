@@ -7,9 +7,16 @@ import { getUserAuth } from "../util";
 import "./bag.scss";
 import BagItems from "@/Components/BagItems/BagItems";
 import Template from "../template";
+import Modal from "@/Components/Modal/Modal";
+import EditDeliveryAddress from "@/Components/DeliveryAddress/EditDeliveryAddress";
+import DeliveryAddress from "@/Components/DeliveryAddress/DeliveryAddress";
+import Tooltip from "@/Components/Tooltip/Tooltip";
+import { Button } from "@/Components/Buttons/Button";
 
 function Bag({ product }: any) {
   // const [products, setProducts] = useState<any>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState(0);
   const router = useRouter();
 
   const { data } = useSuspenseQuery({
@@ -43,6 +50,10 @@ function Bag({ product }: any) {
     enabled: getProducts,
   });
 
+  const checkoutFn = () => {
+    setIsOpen(true);
+  };
+
   if (!user?.email) {
     router.push("/login");
   }
@@ -51,11 +62,52 @@ function Bag({ product }: any) {
     <div className="bag-page-outer-container">
       <div className="bag-page-container">
         {!productsLoading && (!!product || productsData?.length > 0) ? (
-          <Template>
-            <BagItems
-              products={getProducts ? productsData : product ? [product] : []}
-            />
-          </Template>
+          <>
+            <Template>
+              <BagItems
+                products={getProducts ? productsData : product ? [product] : []}
+                checkoutFn={checkoutFn}
+              />
+            </Template>
+            {user?.deliveryAddress?.length > 0 ? (
+              <Modal
+                isOpen={isOpen}
+                size={"m"}
+                title={"Select the Delivery Address"}
+                handleClose={() => setIsOpen(false)}
+              >
+                <DeliveryAddress
+                  deliveryAddress={user?.deliveryAddress}
+                  defaultIndex={0}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <div
+                  className="address-selected-btn-bag"
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                >
+                  <Button color={"#89CFF0"}>
+                    <div>Done</div>
+                  </Button>
+                </div>
+              </Modal>
+            ) : (
+              <Modal
+                isOpen={isOpen}
+                size={"l"}
+                handleClose={() => setIsOpen(false)}
+                title={"Add Delivery Address"}
+              >
+                <EditDeliveryAddress
+                  deliveryAddress={user?.deliveryAddress || []}
+                  handleClose={() => setIsOpen(false)}
+                  index={selected}
+                />
+              </Modal>
+            )}
+          </>
         ) : (
           <div className="no-products">Bag is empty</div>
         )}

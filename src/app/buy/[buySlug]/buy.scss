@@ -23,8 +23,16 @@
     }
   }
   .buyPageAddressSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     .selectAddressSection {
-      width: -webkit-fill-available;
+      width: fit-content;
+      @media screen and (max-width: 600px) {
+        width: -webkit-fill-available;
+      }
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -40,7 +48,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 10px 30px;
+        padding: 10px 0;
         .selection-text {
           font-size: 18px;
           font-weight: 400;
@@ -73,6 +81,25 @@
             }
             width: 16px;
             height: 16px;
+          }
+        }
+      }
+      .address-and-bagItems {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: -webkit-fill-available;
+        .buy-page-checkout-items {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          .checkout-items-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: rgba(78, 77, 77, 0.8);
+            @media screen and (max-width: 500px) {
+              font-size: 16px;
+            }
           }
         }
       }

@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from "react";
 import "./BagItems.scss";
 import BagItem from "./BagItem";
+import Tooltip from "../Tooltip/Tooltip";
+import { Button } from "../Buttons/Button";
 
-function BagItems({ products }: any) {
+function BagItems({ products, checkoutFn }: any) {
   const [productQty, setProductQty] = useState<any>({});
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
     products.forEach((product: any) => {
-      setProductQty((prev: any) => ({ ...prev, [product._id]: 1 }));
-      setTotalAmount((prev: any) => prev + product.price);
+      setProductQty((prev: any) => {
+        let total = 0;
+        products.forEach((product: any) => {
+          total += product.price * 1;
+        });
+        setTotalAmount(total);
+        return { ...prev, [product._id]: 1 };
+      });
     });
+    getTotalAmount();
   }, [products]);
+
+  const getTotalAmount = () => {};
 
   useEffect(() => {
     console.log({ productQty });
@@ -47,16 +58,36 @@ function BagItems({ products }: any) {
               </div>
 
               <div className="total-amount-item-price">
-                {product.price * productQty[product._id]}
+                {parseFloat(
+                  (product.price * productQty[product._id]).toFixed(2)
+                )}
               </div>
             </div>
           ))}
 
           <div className="total-amount-item-total">
             <div className="total-amount-item-name">Total</div>
-            <div className="total-amount-item-price">{totalAmount}</div>
+            <div className="total-amount-item-price">
+              {parseFloat(totalAmount.toFixed(2))}
+            </div>
           </div>
         </div>
+        <Tooltip content={"Checkout items"}>
+          <div
+            className="bag-item-checkout-btn"
+            onClick={() => {
+              checkoutFn();
+            }}
+          >
+            <Button
+              color={"#0ce9007d"}
+              width="fit-content"
+              height="fit-content"
+            >
+              <div className="checkout-btn-text">CHECK OUT</div>
+            </Button>
+          </div>
+        </Tooltip>
       </div>
     </div>
   );

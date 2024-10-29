@@ -15,13 +15,37 @@
   .total-amount-container {
     width: 300px;
     min-height: fit-content;
-    background-color: rgb(236, 255, 235);
-    border-radius: 3px;
-    padding: 10px;
+
     @media screen and (max-width: 600px) {
       width: 90vw;
     }
+    .bag-item-checkout-btn {
+      margin-top: 20px;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      padding-right: 10px;
+      width: -webkit-fill-available;
+      .checkout-btn-text {
+        font-size: 20px;
+        font-weight: bold;
+        color: rgba(51, 51, 51, 0.8);
+        width: 200px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @media screen and (max-width: 500px) {
+          font-size: 16px;
+          width: 150px;
+          height: 50px;
+        }
+      }
+    }
     .total-amount-items {
+      background-color: rgb(236, 255, 235);
+      border-radius: 3px;
+      padding: 10px;
       display: flex;
       flex-direction: column;
       gap: 5px;
