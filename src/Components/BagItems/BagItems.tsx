@@ -24,10 +24,6 @@ function BagItems({ products, checkoutFn }: any) {
 
   const getTotalAmount = () => {};
 
-  useEffect(() => {
-    console.log({ productQty });
-  }, [productQty]);
-
   const handleQtyChange = (id: any, qty: any, price: number) => {
     console.log({ id, qty });
     setProductQty((prev: any) => ({ ...prev, [id]: prev[id] + qty }));
@@ -76,7 +72,10 @@ function BagItems({ products, checkoutFn }: any) {
           <div
             className="bag-item-checkout-btn"
             onClick={() => {
-              checkoutFn();
+              checkoutFn({
+                quantities: productQty,
+                totalAmount: totalAmount,
+              });
             }}
           >
             <Button

@@ -11,12 +11,14 @@ import Tooltip from "@/Components/Tooltip/Tooltip";
 import { Button } from "@/Components/Buttons/Button";
 import BagItems from "@/Components/BagItems/BagItems";
 import { useRouter } from "next/navigation";
+import Payment from "@/Components/Payment/Payment";
 
 function Buy({ params }: any) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(0);
   const steps = ["Address", "Order Summary", "Payment"];
   const [currentStep, setCurrentStep] = useState(0);
+  const [orderDetails, setOrderDetails] = useState<any>({});
   const router = useRouter();
   const getProductById = async () => {
     const data = await apiCall(
@@ -43,7 +45,8 @@ function Buy({ params }: any) {
 
   const deliveryAddress = parsedUser?.deliveryAddress;
 
-  const checkoutFn = () => {
+  const checkoutFn = (data: any) => {
+    setOrderDetails(data);
     setCurrentStep(currentStep + 1);
   };
 
@@ -116,7 +119,13 @@ function Buy({ params }: any) {
     </div>
   );
 
-  const step3 = () => <div>Payment</div>;
+  const step3 = () => (
+    <Payment
+      name={parsedUser?.name}
+      email={parsedUser.email}
+      orderDetails={orderDetails}
+    />
+  );
 
   useEffect(() => {
     if (!deliveryAddress?.length && parsedUser?.phone) {

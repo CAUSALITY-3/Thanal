@@ -17,6 +17,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 30px;
     // width: 100%;
     // height: 100%;
     // background-color: rgb(225, 244, 225);
@@ -72,13 +73,13 @@
       }
     }
     .profileMiddleContainer {
-      height: 500px;
+      height: 440px;
       @media screen and (max-width: 500px) {
         height: 620px;
       }
       max-width: 800px;
       display: flex;
-      justify-content: center;
+      justify-content: start;
       align-items: center;
       flex-direction: column;
       position: relative;

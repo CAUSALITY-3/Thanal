@@ -25,6 +25,9 @@ export default function Toast(
           setTimeout(() => {
             childElement.classList.add("fade-out");
             container?.removeChild(childElement);
+            if (container?.children?.length === 0) {
+              container?.remove();
+            }
           }, 4000);
 
           observer.disconnect();
