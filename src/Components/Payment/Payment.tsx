@@ -44,22 +44,26 @@ function Payment({ name, email, orderDetails }: any) {
             razorpaySignature: response.razorpay_signature,
           };
 
-          const result = await apiCall(
-            "POST",
-            "VERIFY_ORDER",
-            {},
-            "",
-            data,
-            {
-              "Content-Type": "application/json",
-            },
-            {
-              success: "Verification successful.",
-              failure: "Verification failed.",
-            }
-          );
+          const result = await apiCall("POST", "VERIFY_ORDER", {}, "", data, {
+            "Content-Type": "application/json",
+          });
           if (result.success) {
             console.log("payment succeed", orderDetails);
+            await apiCall(
+              "POST",
+              "SAVE_ORDER",
+              {},
+              "",
+              { ...orderDetails, email },
+              {
+                "Content-Type": "application/json",
+              },
+              {
+                success: "Order successfully placed!",
+                failure: "Order verification failed.",
+              }
+            );
+
             router.push("/profile");
           } else {
             alert("payment failed");

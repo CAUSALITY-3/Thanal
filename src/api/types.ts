@@ -13,6 +13,7 @@ export const apiPaths: { [key: string]: string } = {
   GET_USER_DETAILS: "auth/getUserDetails",
   VERIFY_ORDER: "payments/verifyPayment",
   GET_PRODUCT_FULL_LIST: "products/getProductFullList",
+  SAVE_ORDER: "orders/saveOrder",
 };
 
 export interface ProductMainList {
