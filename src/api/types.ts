@@ -14,6 +14,8 @@ export const apiPaths: { [key: string]: string } = {
   VERIFY_ORDER: "payments/verifyPayment",
   GET_PRODUCT_FULL_LIST: "products/getProductFullList",
   SAVE_ORDER: "orders/saveOrder",
+  ADD_TO_WISHLIST: "users/favoriteItem",
+  REMOVE_FROM_WISHLIST: "users/unFavoriteItem",
 };
 
 export interface ProductMainList {

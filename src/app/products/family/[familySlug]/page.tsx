@@ -1,6 +1,7 @@
 import { apiCall } from "@/api/sevice";
 import { ProductCard } from "@/Components/ProductCard/ProductCard";
 import "./family.scss";
+import Link from "next/link";
 
 export default async function ProductFamily({ params }: any) {
   const familyData: any = await apiCall(
@@ -15,7 +16,7 @@ export default async function ProductFamily({ params }: any) {
       description: item.description,
       image: item.image,
       price: item.price,
-      productId: item.productId,
+      productId: item._id,
       ratings: item.ratings,
       category: item.category,
     };
@@ -24,7 +25,14 @@ export default async function ProductFamily({ params }: any) {
   return (
     <div className="prouctItemContainer">
       {formattedData.map((product: any, key: any) => (
-        <ProductCard key={key} props={product} type={product.category} />
+        <Link
+          key={key}
+          href={`/products/${product.productId}`}
+          style={{ textDecoration: "none", color: "inherit" }}
+          prefetch={false}
+        >
+          <ProductCard key={key} props={product} type={product.category} />
+        </Link>
       ))}
     </div>
   );

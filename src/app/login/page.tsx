@@ -7,27 +7,26 @@ import Link from "next/link";
 
 const Login: FC = () => {
   return (
-    <>
-      <Link
-        className="loginOuterDiv"
-        // onClick={() =>
-        //   signIn("google", { callbackUrl: "http://loalhost:5000/signup" })
-        // }
-        prefetch={false}
-        href={"/thanalApi/auth/google"}
-      >
-        <div className="loginContainer">
-          <div className="loginWithhGooleButton">
-            <div className="loginWithhGooleText">Login/SingnUp with Google</div>
-            {/* <img
-              src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/images/getImage?path=products/plants/plants.jpg`}
-              alt=""
-              className="loginWithhGooleIcon"
-            /> */}
+    <div className="login-outer-container">
+      <div className="select-login-provider">
+        <div className="login-provider-text">Please Select login provider</div>
+
+        <Link
+          className="login-providers"
+          prefetch={false}
+          href={"/thanalApi/auth/google"}
+        >
+          <div className="login-provider-logo">
+            <img
+              loading="lazy"
+              src="https://lh3.googleusercontent.com/C_Ty0alIJNrRQz5pNFmgA1rsRnhZDj67eVCCHXoJFFot0FQEZydARPRKbBADyHQoA0_Dj6gLITCshiJq6C-H-QM_U2mJwJZVLOQPnwvCL2RerGMEhw0"
+              alt="Google"
+            />
           </div>
-        </div>
-      </Link>
-    </>
+          <div className="login-provider-name">Google</div>
+        </Link>
+      </div>
+    </div>
   );
 };
 

@@ -57,6 +57,9 @@ function BagItem({ product, key, handleQtyChange }: any) {
 
   return (
     <div className="bag-item">
+      {!product.stock && (
+        <div className="out-of-stock-overlay">Out of stock</div>
+      )}
       <div className="bag-item-container">
         <Link
           href={`/products/${product._id}`}

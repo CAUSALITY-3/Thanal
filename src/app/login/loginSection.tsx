@@ -13,12 +13,12 @@ export const LoginSection = ({ provider }: any) => {
             // onClick={() => signIn(provider.id)}
           >
             <div className="loginWithhGooleText">Login/SingnUp with Google</div>
-            {/* <img
+            <img
               loading="lazy"
-              src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/images/getImage?path=products/plants/plants.jpg`}
+              src="https://lh3.googleusercontent.com/C_Ty0alIJNrRQz5pNFmgA1rsRnhZDj67eVCCHXoJFFot0FQEZydARPRKbBADyHQoA0_Dj6gLITCshiJq6C-H-QM_U2mJwJZVLOQPnwvCL2RerGMEhw0"
               alt=""
               className="loginWithhGooleIcon"
-            /> */}
+            />
           </div>
         </div>
       </div>

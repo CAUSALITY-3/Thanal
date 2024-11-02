@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import "./ProductCard.scss";
 import { Ratings } from "../Ratings/Ratings";
 import Tooltip from "../Tooltip/Tooltip";
+import FavoriteIconOverlay from "../FavoriteIconOverlay/FavoriteIconOverlay";
 
 interface Props {
   props: {
@@ -20,6 +21,7 @@ export const ProductCard: FC<Props> = ({ props, type }) => {
   return (
     <div className="productCardBox">
       <div className="product-card-imageContainer">
+        <FavoriteIconOverlay id={props.productId} />
         <img loading="lazy" src={img} alt="Picture of the author" />
       </div>
 
@@ -30,10 +32,8 @@ export const ProductCard: FC<Props> = ({ props, type }) => {
         <Tooltip content={props.description}>
           <div className="productDescription">{props.description}</div>
         </Tooltip>
-        {/* <div className="productCardLowerdiv"> */}
         <div className="productPrice">₹ {props.price}</div>
         <Ratings ratings={props.ratings} size="s" type="star" />
-        {/* </div> */}
       </div>
     </div>
   );

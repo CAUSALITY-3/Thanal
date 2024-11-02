@@ -11,9 +11,10 @@ import Toast from "../Toast/Toast";
 
 interface Props {
   productId: string;
+  disabled?: boolean;
 }
 
-export const BuyOrAdd: FC<Props> = ({ productId }) => {
+export const BuyOrAdd: FC<Props> = ({ productId, disabled = false }) => {
   const router = useRouter();
   const queryClient = useQueryClient();
   const { data, isLoading, isError } = useQuery({
@@ -94,9 +95,10 @@ export const BuyOrAdd: FC<Props> = ({ productId }) => {
         <div
           className="buttonBox"
           key={index}
-          onClick={() => handleClick(type.action)}
+          onClick={() => (disabled ? null : handleClick(type.action))}
         >
           <Button
+            disabled={disabled}
             content={
               <>
                 <div className="buttonIcon">

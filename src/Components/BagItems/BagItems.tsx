@@ -10,19 +10,20 @@ function BagItems({ products, checkoutFn }: any) {
 
   useEffect(() => {
     products.forEach((product: any) => {
-      setProductQty((prev: any) => {
-        let total = 0;
-        products.forEach((product: any) => {
-          total += product.price * 1;
+      if (product.stock) {
+        setProductQty((prev: any) => {
+          let total = 0;
+          products.forEach((product: any) => {
+            if (product.stock) {
+              total += product.price * 1;
+            }
+          });
+          setTotalAmount(total);
+          return { ...prev, [product._id]: 1 };
         });
-        setTotalAmount(total);
-        return { ...prev, [product._id]: 1 };
-      });
+      }
     });
-    getTotalAmount();
   }, [products]);
-
-  const getTotalAmount = () => {};
 
   const handleQtyChange = (id: any, qty: any, price: number) => {
     console.log({ id, qty });
@@ -44,22 +45,26 @@ function BagItems({ products, checkoutFn }: any) {
 
       <div className="total-amount-container">
         <div className="total-amount-items">
-          {products.map((product: any) => (
-            <div key={product._id} className="total-amount-item">
-              <div className="total-amount-item-name-container">
-                <div className="total-amount-item-qty">
-                  {`${productQty[product._id]}x`}
+          {products.map((product: any) =>
+            product.stock ? (
+              <div key={product._id} className="total-amount-item">
+                <div className="total-amount-item-name-container">
+                  <div className="total-amount-item-qty">
+                    {`${productQty[product._id]}x`}
+                  </div>
+                  <div className="total-amount-item-name"> {product.name}</div>
                 </div>
-                <div className="total-amount-item-name"> {product.name}</div>
-              </div>
 
-              <div className="total-amount-item-price">
-                {parseFloat(
-                  (product.price * productQty[product._id]).toFixed(2)
-                )}
+                <div className="total-amount-item-price">
+                  {parseFloat(
+                    (product.price * productQty[product._id]).toFixed(2)
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ) : (
+              ""
+            )
+          )}
 
           <div className="total-amount-item-total">
             <div className="total-amount-item-name">Total</div>
@@ -68,20 +73,29 @@ function BagItems({ products, checkoutFn }: any) {
             </div>
           </div>
         </div>
-        <Tooltip content={"Checkout items"}>
+        <Tooltip
+          content={
+            Object.keys(productQty).length === 0
+              ? "No items to checkout"
+              : "Checkout items"
+          }
+        >
           <div
             className="bag-item-checkout-btn"
             onClick={() => {
-              checkoutFn({
-                quantities: productQty,
-                totalAmount: totalAmount,
-              });
+              Object.keys(productQty).length === 0
+                ? null
+                : checkoutFn({
+                    quantities: productQty,
+                    totalAmount: totalAmount,
+                  });
             }}
           >
             <Button
               color={"#0ce9007d"}
               width="fit-content"
               height="fit-content"
+              disabled={Object.keys(productQty).length === 0}
             >
               <div className="checkout-btn-text">CHECK OUT</div>
             </Button>

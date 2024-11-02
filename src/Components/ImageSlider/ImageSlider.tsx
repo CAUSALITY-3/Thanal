@@ -1,12 +1,14 @@
 "use client";
 import { FC, useEffect, useState } from "react";
 import "./ImageSlider.scss";
+import FavoriteIconOverlay from "../FavoriteIconOverlay/FavoriteIconOverlay";
 
 interface Props {
   slides: string[];
+  id: string;
 }
 
-export const ImageSlider: FC<Props> = ({ slides }) => {
+export const ImageSlider: FC<Props> = ({ slides, id }) => {
   const getCookieValue = (name: string) =>
     document.cookie.match("(^|;)\\s*" + name + "\\s*=\\s*([^;]+)")?.pop() || "";
 
@@ -86,6 +88,7 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
         onTouchEnd={onTouchEnd}
       >
         <div className="slider-imageContainer">
+          <FavoriteIconOverlay id={id} />
           <img
             loading="lazy"
             src={slides[currentIndex]}

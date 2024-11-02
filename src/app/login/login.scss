@@ -1,40 +1,73 @@
-.loginOuterDiv {
+.login-outer-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 70vh;
-  .loginContainer {
+  width: 100vw;
+  height: -webkit-fill-available;
+  .select-login-provider {
+    padding: 40px 0;
     display: flex;
-    align-items: center;
-    padding: 10px 20px;
     flex-direction: column;
-    background: rgba(0, 0, 0, 0.03);
-    justify-content: center;
-    width: 100%;
-    max-width: 500px;
-    height: 60%;
-    .loginWithhGooleButton {
+    align-items: start;
+    justify-content: start;
+    gap: 20px;
+    width: 450px;
+    @media screen and (max-width: 500px) {
+      width: 90vw;
+    }
+    .login-provider-text {
+      width: -webkit-fill-available;
+      font-size: 24px;
+      font-weight: 600;
+      height: 40px;
+      border-radius: 5px;
+      padding: 10px;
       display: flex;
-      padding: 5px 10px;
-      background: rgba(0, 0, 0, 0.05);
-      border-radius: 3px;
-      &:hover {
-        cursor: pointer;
-        background: rgba(0, 0, 0, 0.1);
+      align-items: center;
+      justify-content: center;
+
+      color: rgba(78, 77, 77, 0.8);
+      @media screen and (max-width: 500px) {
+        font-size: 20px;
       }
-      .loginWithhGooleText {
-        margin-right: 20px;
+    }
+    .login-providers {
+      display: flex;
+      padding: 20px;
+      align-items: center;
+      justify-content: space-evenly;
+      width: -webkit-fill-available;
+      gap: 10px;
+      border-radius: 5px;
+      color: rgba(78, 77, 77, 0.8);
+      background-color: rgba(235, 235, 235, 0.8);
+      border: 2px solid rgba(139, 139, 139, 0.8);
+      text-decoration: none;
+      cursor: pointer;
+      @media screen and (max-width: 500px) {
+        padding: 15px;
       }
-      .loginWithhGooleIcon {
-        width: 18px;
-        height: 18px;
+      .login-provider-logo {
+        width: 50px;
+        height: 50px;
+        @media screen and (max-width: 500px) {
+          width: 40px;
+          height: 40px;
+        }
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+      }
+      .login-provider-name {
+        font-size: 20px;
+        font-weight: 600;
+        @media screen and (max-width: 500px) {
+          font-size: 18px;
+        }
       }
     }
   }
-}
-
-.steps {
-  color: grey;
-  margin-bottom: 25px;
 }

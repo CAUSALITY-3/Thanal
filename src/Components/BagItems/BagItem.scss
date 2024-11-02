@@ -9,6 +9,22 @@
   margin: 0 0 6px 0;
   border-radius: 5px;
   border: 1px solid rgba(78, 77, 77, 0.8);
+  position: relative;
+  .out-of-stock-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(218, 218, 218, 0.6);
+    color: rgba(255, 20, 20, 0.5);
+    font-size: larger;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  }
   .bag-item-container {
     width: 100%;
     display: flex;
@@ -21,6 +37,7 @@
       height: 75px;
       position: relative;
       text-decoration: none;
+      z-index: 10;
       @media screen and (max-width: 600px) {
         width: 60px;
         height: 60px;
@@ -134,6 +151,7 @@
       .bag-qty-remove-btn {
         .bag-qty-remove-btn-txt {
           font-size: 14px;
+          z-index: 10;
         }
       }
     }

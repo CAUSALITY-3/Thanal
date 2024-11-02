@@ -1,0 +1,40 @@
+.favorite-icon-overlay-outer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+
+  .favoriteIconOverlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+    .favoriteIcon path {
+      fill: rgba(255, 0, 0, 0.7);
+      stroke: #eaffe4b3;
+      stroke-width: 2;
+    }
+    .unfavoriteIcon path {
+      fill: transparent;
+      stroke: rgb(234, 255, 228, 0.7);
+      stroke-width: 2;
+    }
+    svg:hover path {
+      fill: rgb(255, 47, 47, 0.4);
+    }
+  }
+}
+.favorite-icon-overlay-outer:hover .favoriteIconOverlay {
+  display: flex;
+}

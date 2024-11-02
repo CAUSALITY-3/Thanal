@@ -49,11 +49,17 @@ export default function ProductDetail({ params }: any) {
           <div className="productDetailContainer">
             <div className="productImageSection">
               <div className="imageSliderContainerStyles">
-                <ImageSlider slides={productResp.data.images} />
+                <ImageSlider
+                  slides={productResp.data.images}
+                  id={params.productSlug}
+                />
               </div>
 
               <div className="buyOrAdd">
-                <BuyOrAdd productId={params.productSlug} />
+                <BuyOrAdd
+                  productId={params.productSlug}
+                  disabled={productResp.data.stock === 0}
+                />
               </div>
             </div>
             <div className="productDetails">
@@ -63,6 +69,10 @@ export default function ProductDetail({ params }: any) {
                 size="s"
                 reviewCount={productResp.data?.reviews?.length}
               />
+
+              {productResp.data.stock === 0 && (
+                <div className="outOfStock">Out of Stock</div>
+              )}
               <div className="description">{productResp.data.description}</div>
               <div className="featureContainer">
                 <ProductFeatures features={productResp.data.features} />
@@ -75,7 +85,10 @@ export default function ProductDetail({ params }: any) {
             </div>
             <div className="buyOrAddMobile">
               <div className="buyOrAddMobileOuter">
-                <BuyOrAdd productId={params.productSlug} />
+                <BuyOrAdd
+                  productId={params.productSlug}
+                  disabled={productResp.data.stock === 0}
+                />
               </div>
             </div>
           </div>
