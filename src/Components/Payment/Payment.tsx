@@ -3,8 +3,10 @@ import "./Payment.scss";
 import { apiCall } from "@/api/sevice";
 import Script from "next/script";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 function Payment({ name, email, orderDetails }: any) {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const createOrderId = async () => {
     try {
       const response = await apiCall(
@@ -63,7 +65,9 @@ function Payment({ name, email, orderDetails }: any) {
                 failure: "Order verification failed.",
               }
             );
-
+            queryClient.invalidateQueries({
+              queryKey: ["bag", "product", "user"],
+            });
             router.push("/profile");
           } else {
             alert("payment failed");

@@ -45,8 +45,6 @@ export default function FavoriteIconOverlay({ id }: any) {
       localStorage.setItem("user", JSON.stringify(data));
       queryClient.setQueryData(["user"], JSON.stringify(data));
       let canvas = document.createElement("canvas");
-      canvas.style.position = "absolute";
-      canvas.style.borderRadius = "50%";
       canvas.width = 1000;
       canvas.height = 1000;
       const container: any = document.getElementById(`confetti-button-${id}`);

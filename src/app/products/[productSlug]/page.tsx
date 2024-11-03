@@ -6,7 +6,7 @@ import { BuyOrAdd } from "@Components/BuyOrAdd/BuyOrAdd";
 import { apiCall } from "@/api/sevice";
 import "./productSlug.scss";
 import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 export default function ProductDetail({ params }: any) {
   const getProductById = async () => {
@@ -21,10 +21,10 @@ export default function ProductDetail({ params }: any) {
     return data;
   };
 
-  const productResp = useQuery({
+  const productResp = useSuspenseQuery({
     queryFn: getProductById,
-    queryKey: [params.productSlug],
-    staleTime: 3600000,
+    queryKey: [params.productSlug, "product"],
+    staleTime: 30000,
   });
 
   return (
@@ -50,7 +50,7 @@ export default function ProductDetail({ params }: any) {
             <div className="productImageSection">
               <div className="imageSliderContainerStyles">
                 <ImageSlider
-                  slides={productResp.data.images}
+                  slides={productResp.data.images || []}
                   id={params.productSlug}
                 />
               </div>
@@ -65,7 +65,7 @@ export default function ProductDetail({ params }: any) {
             <div className="productDetails">
               <div className="productName">{productResp.data.name}</div>
               <Ratings
-                ratings={productResp.data.ratings}
+                ratings={productResp.data.ratings || { average: 0, count: 0 }}
                 size="s"
                 reviewCount={productResp.data?.reviews?.length}
               />
@@ -75,7 +75,7 @@ export default function ProductDetail({ params }: any) {
               )}
               <div className="description">{productResp.data.description}</div>
               <div className="featureContainer">
-                <ProductFeatures features={productResp.data.features} />
+                <ProductFeatures features={productResp.data.features || []} />
               </div>
 
               <div style={{ marginBottom: "40px" }} className="stock">

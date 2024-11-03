@@ -47,7 +47,7 @@ function Bag({ product }: any) {
   const getProducts = user?.bag?.length > 0 && !product;
   const { data: productsData, isLoading: productsLoading } = useQuery({
     queryFn: getProductByIds,
-    queryKey: user?.bag,
+    queryKey: ["bag"],
     enabled: getProducts,
   });
 

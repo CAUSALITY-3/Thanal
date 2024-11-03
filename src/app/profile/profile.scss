@@ -14,7 +14,7 @@
   }
   .profileOuter {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     flex-direction: column;
     gap: 30px;
@@ -72,111 +72,157 @@
         }
       }
     }
-    .profileMiddleContainer {
-      height: 440px;
-      @media screen and (max-width: 500px) {
-        height: 620px;
-      }
-      max-width: 800px;
+    .profileNav {
       display: flex;
-      justify-content: start;
+      justify-content: center;
       align-items: center;
-      flex-direction: column;
-      position: relative;
-      .editIcon {
-        // position: relative;
-
-        // width: 100%;
-
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        margin-left: 20px;
-        cursor: pointer;
+      gap: 20px;
+      // background-color: rgb(30, 146, 248);
+      width: -webkit-fill-available;
+      .profileNavItems {
         display: flex;
         justify-content: center;
         align-items: center;
-        .editButton {
+        background-color: rgba(158, 158, 158, 0.1);
+        padding: 10px;
+        border-radius: 5px;
+        width: 100px;
+        cursor: pointer;
+        @media screen and (max-width: 500px) {
+          padding: 5px;
+        }
+        -webkit-transition-property: box-shadow;
+        -webkit-transition-duration: 400ms;
+        &:hover {
+          @media screen and (min-width: 500px) {
+            background-color: rgba(21, 255, 0, 0.2);
+          }
+          box-shadow: 3px 3px 6px 1px rgb(41, 41, 41, 0.2);
+        }
+      }
+      .profileNavItemsActive {
+        background-color: rgba(21, 255, 0, 0.4);
+        &:hover {
+          @media screen and (min-width: 500px) {
+            background-color: rgba(21, 255, 0, 0.4);
+          }
+          box-shadow: 3px 3px 6px 1px rgb(41, 41, 41, 0.2);
+        }
+      }
+    }
+    .profileMiddleContainer {
+      background-color: rgba(158, 158, 158, 0.1);
+      padding: 20px;
+      border-radius: 5px;
+      @media screen and (max-width: 500px) {
+        padding: 20px 10px;
+      }
+      .profileBioTopContainer {
+        height: 500px;
+        @media screen and (max-width: 500px) {
+          height: 620px;
+        }
+        max-width: 800px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        .editIcon {
+          // position: relative;
+
+          // width: 100%;
+
+          position: absolute;
+          top: 0px;
+          right: 0px;
+          margin-left: 20px;
+          cursor: pointer;
           display: flex;
           justify-content: center;
           align-items: center;
+          .editButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-          width: 200px;
-          .editButtonText {
-            font-size: 18px;
-            @media screen and (max-width: 500px) {
-              font-size: 14px;
+            width: 200px;
+            .editButtonText {
+              font-size: 18px;
+              @media screen and (max-width: 500px) {
+                font-size: 14px;
+              }
+              font-size: 16px;
+              margin-right: 5px;
+              &:hover {
+              }
             }
-            font-size: 16px;
-            margin-right: 5px;
-            &:hover {
-            }
-          }
-          svg {
-            @media screen and (max-width: 500px) {
-              width: 14px;
-              height: 14px;
-            }
-            width: 16px;
-            height: 16px;
-          }
-        }
-      }
-      .addressDiv {
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: start;
-        flex-direction: column;
-        .addressTitle {
-          font-size: 20px;
-          font-weight: 600;
-          color: rgba(78, 77, 77, 0.8);
-        }
-      }
-      .save-cancel-buttons {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        display: flex;
-        width: 225px;
-        justify-content: space-between;
-        align-items: center;
-      }
-    }
-    .profileBottomContainer {
-      width: 550px;
-      @media screen and (max-width: 500px) {
-        width: 90vw;
-      }
-      display: flex;
-      justify-content: center;
-      align-items: start;
-      // background-color: antiquewhite;
-      flex-direction: column;
-      position: relative;
-      .deliveryAddressdiv {
-        display: flex;
-        justify-content: center;
-        align-items: start;
-        flex-direction: column;
-        width: -webkit-fill-available;
-        .deliveryAddressTitle {
-          margin: 10px 0;
-          font-size: 20px;
-          font-weight: 600;
-          color: rgba(78, 77, 77, 0.8);
-          width: -webkit-fill-available;
-          display: flex;
-          justify-content: space-between;
-          .deliveryAddressEdit {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            margin-right: 20px;
             svg {
+              @media screen and (max-width: 500px) {
+                width: 14px;
+                height: 14px;
+              }
+              width: 16px;
+              height: 16px;
+            }
+          }
+        }
+        .addressDiv {
+          margin-top: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: start;
+          flex-direction: column;
+          .addressTitle {
+            font-size: 20px;
+            font-weight: 600;
+            color: rgba(78, 77, 77, 0.8);
+          }
+        }
+        .save-cancel-buttons {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          display: flex;
+          width: 225px;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+      .profileBioBottomContainer {
+        width: 550px;
+        @media screen and (max-width: 500px) {
+          width: 90vw;
+        }
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        // background-color: antiquewhite;
+        flex-direction: column;
+        position: relative;
+        .deliveryAddressdiv {
+          display: flex;
+          justify-content: center;
+          align-items: start;
+          flex-direction: column;
+          width: -webkit-fill-available;
+          .deliveryAddressTitle {
+            margin: 10px 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: rgba(78, 77, 77, 0.8);
+            width: -webkit-fill-available;
+            display: flex;
+            justify-content: space-between;
+            .deliveryAddressEdit {
               width: 20px;
               height: 20px;
+              cursor: pointer;
+              margin-right: 20px;
+              svg {
+                width: 20px;
+                height: 20px;
+              }
             }
           }
         }
