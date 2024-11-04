@@ -64,11 +64,12 @@ function Bag({ product }: any) {
     <div className="bag-page-outer-container">
       <div className="bag-page-container">
         {!productsLoading && (!!product || productsData?.length > 0) ? (
-          orderDetails?.totalAmount ? (
+          orderDetails?.totalAmount && user?.deliveryAddress.length ? (
             <Payment
               name={user?.name}
               email={user?.email}
               orderDetails={orderDetails}
+              deliveryAddress={user?.deliveryAddress[selected]}
             />
           ) : (
             <>

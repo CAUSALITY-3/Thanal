@@ -4,7 +4,7 @@ import { apiCall } from "@/api/sevice";
 import Script from "next/script";
 import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-function Payment({ name, email, orderDetails }: any) {
+function Payment({ name, email, orderDetails, deliveryAddress }: any) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const createOrderId = async () => {
@@ -56,7 +56,7 @@ function Payment({ name, email, orderDetails }: any) {
               "SAVE_ORDER",
               {},
               "",
-              { ...orderDetails, email },
+              { ...orderDetails, email, deliveryAddress },
               {
                 "Content-Type": "application/json",
               },
@@ -66,7 +66,7 @@ function Payment({ name, email, orderDetails }: any) {
               }
             );
             queryClient.invalidateQueries({
-              queryKey: ["bag", "product", "user"],
+              queryKey: ["bag", "product", "user", "orders"],
             });
             router.push("/profile");
           } else {

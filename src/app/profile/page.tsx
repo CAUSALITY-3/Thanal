@@ -16,6 +16,8 @@ import Tooltip from "@/Components/Tooltip/Tooltip";
 import DeliveryAddress from "@/Components/DeliveryAddress/DeliveryAddress";
 import Modal from "@/Components/Modal/Modal";
 import EditDeliveryAddress from "@/Components/DeliveryAddress/EditDeliveryAddress";
+import Orders from "@/Components/Orders/Orders";
+import Wishlists from "@/Components/Wishlists/Wishlists";
 
 const Profile: FC = () => {
   const [formData, setFormData] = useState<any>({});
@@ -308,7 +310,14 @@ const Profile: FC = () => {
 
   const profileActivity = () => (
     <div className="profileActivityContainer">
-      <div className="profileActivityTitle">Profile Activity</div>
+      <div className="profile-orders-wishlists-container">
+        <div className="profile-orders-wishlists-title">Orders</div>
+        <Orders orderIds={user?.orders} />
+      </div>
+      <div className="profile-orders-wishlists-container">
+        <div className="profile-orders-wishlists-title">Wishlists</div>
+        <Wishlists wishlistIds={user?.wishlists} />
+      </div>
     </div>
   );
   return (

@@ -44,6 +44,9 @@ export default function FavoriteIconOverlay({ id }: any) {
     if (userResp) {
       localStorage.setItem("user", JSON.stringify(data));
       queryClient.setQueryData(["user"], JSON.stringify(data));
+      queryClient.invalidateQueries({
+        queryKey: ["wishlists"],
+      });
       let canvas = document.createElement("canvas");
       canvas.width = 1000;
       canvas.height = 1000;
