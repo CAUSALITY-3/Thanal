@@ -27,6 +27,23 @@ function Orders({ orderIds }: any) {
     }).format(date);
     return formattedDate;
   };
+  const getDeliveryAddress = (address: any) => {
+    let addressSring = "";
+    const addressArray: string[] = [
+      "name",
+      "phone",
+      "houseName",
+      "landmark",
+      "city",
+      "state",
+      "pincode",
+    ];
+    for (const val of addressArray) {
+      addressSring += address[val] + "\n";
+    }
+
+    return addressSring;
+  };
   const { data: orders } = useSuspenseQuery({
     queryFn: () => getOrderByIds(orderIds),
     queryKey: ["orders"],
@@ -80,6 +97,17 @@ function Orders({ orderIds }: any) {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="order-item-bottom-section">
+            <div className="order-item-delivery-address-section">
+              <div className="order-item-delivery-address-title">
+                Delivery Address
+              </div>
+              <pre className="order-item-delivery-address">
+                {getDeliveryAddress(order.deliveryAddress)}
+              </pre>
+            </div>
+            <div className="order-item-total">Total: ₹ {order.totalPrice}</div>
           </div>
         </div>
       ))}

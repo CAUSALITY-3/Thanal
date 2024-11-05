@@ -14,7 +14,6 @@ export default function FavoriteIconOverlay({ id }: any) {
   });
 
   const user = userData?.data ? JSON.parse(userData?.data) : null;
-  console.log("user", user);
   if (!user?.email) return null;
 
   const favoritedItems = user?.wishlists || [];
@@ -45,7 +44,7 @@ export default function FavoriteIconOverlay({ id }: any) {
       localStorage.setItem("user", JSON.stringify(data));
       queryClient.setQueryData(["user"], JSON.stringify(data));
       queryClient.invalidateQueries({
-        queryKey: ["wishlists"],
+        queryKey: ["wishlists", "user"],
       });
       let canvas = document.createElement("canvas");
       canvas.width = 1000;

@@ -4,7 +4,6 @@
   align-items: center;
   flex-direction: column;
   width: -webkit-fill-available;
-  padding: 10px;
   gap: 10px;
   .order-item {
     display: flex;
@@ -177,6 +176,47 @@
               }
             }
           }
+        }
+      }
+    }
+    .order-item-bottom-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+      width: -webkit-fill-available;
+      .order-item-delivery-address-section {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+        gap: 5px;
+
+        .order-item-delivery-address-title {
+          color: rgba(51, 51, 51, 0.8);
+          font-size: 16px;
+          font-weight: bold;
+        }
+        .order-item-delivery-address {
+          background-color: rgb(171, 192, 197, 0.5);
+          padding: 10px;
+          border-radius: 5px;
+          font-size: 14px;
+          margin: 0;
+          color: rgba(51, 51, 51, 0.8);
+          font-family: var(--font-roboto);
+
+          @media screen and (max-width: 600px) {
+            font-size: 12px;
+          }
+        }
+      }
+      .order-item-total {
+        font-size: 18px;
+        font-weight: bold;
+        color: rgba(51, 51, 51, 0.8);
+        @media screen and (max-width: 600px) {
+          font-size: 16px;
         }
       }
     }

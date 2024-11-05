@@ -124,6 +124,7 @@ function Buy({ params }: any) {
       name={parsedUser?.name}
       email={parsedUser.email}
       orderDetails={orderDetails}
+      deliveryAddress={deliveryAddress[selected]}
     />
   );
 

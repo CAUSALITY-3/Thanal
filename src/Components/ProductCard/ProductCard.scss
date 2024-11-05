@@ -26,6 +26,14 @@
       width: 200px;
     }
   }
+  .product-card-imageContainer-s {
+    height: 150px;
+    width: 150px;
+    img {
+      height: 150px;
+      width: 150px;
+    }
+  }
   .productDetails {
     padding: 10px 5px;
     display: flex;
@@ -74,4 +82,24 @@
       align-items: center;
     }
   }
+  .productDetails-s {
+    padding: 6px 3px;
+    .productNameContainer-s {
+      .productName-s {
+        font-size: 14px;
+      }
+    }
+
+    .productDescription-s {
+      font-size: 10px;
+    }
+    .productPrice-s {
+      padding: 3px;
+      font-size: 13px;
+    }
+  }
+}
+.productCardBox-s {
+  width: 150px;
+  height: 225px;
 }
