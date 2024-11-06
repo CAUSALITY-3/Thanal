@@ -8,6 +8,7 @@ import {
   getUserAuth,
 } from "../util";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import EditableContainer from "./EditableContainer";
 import { Button } from "@/Components/Buttons/Button";
 import { apiCall } from "@/api/sevice";
@@ -29,6 +30,15 @@ const Profile: FC = () => {
   const [profileNav, setProfileNav] = useState<"bio" | "activity">("bio");
   const router = useRouter();
   const queryClient = useQueryClient();
+  const searchParams = useSearchParams();
+
+  const tab = searchParams.get("tab");
+
+  useEffect(() => {
+    if (tab) {
+      setProfileNav(tab as "bio" | "activity");
+    }
+  }, [tab]);
 
   const { data } = useSuspenseQuery({
     queryFn: getUserAuth,

@@ -68,7 +68,7 @@ function Payment({ name, email, orderDetails, deliveryAddress }: any) {
             queryClient.invalidateQueries({
               queryKey: ["bag", "product", "user", "orders"],
             });
-            router.push("/profile");
+            router.push("/profile?tab=activity");
           } else {
             alert("payment failed");
           }
