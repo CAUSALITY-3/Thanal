@@ -5,6 +5,31 @@
   flex-direction: column;
   width: -webkit-fill-available;
   gap: 10px;
+  .no-orders {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: -webkit-fill-available;
+    .no-orders-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: rgba(78, 77, 77, 0.8);
+      @media screen and (max-width: 600px) {
+        font-size: 16px;
+      }
+    }
+    .no-orders-link {
+      font-size: 18px;
+      font-weight: 600;
+      color: rgba(4, 89, 168, 0.8);
+      cursor: pointer;
+      text-decoration: none;
+      @media screen and (max-width: 600px) {
+        font-size: 16px;
+      }
+    }
+  }
   .order-item {
     display: flex;
     justify-content: center;

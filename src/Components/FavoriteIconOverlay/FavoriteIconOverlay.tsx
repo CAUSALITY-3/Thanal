@@ -54,16 +54,16 @@ export default function FavoriteIconOverlay({ id }: any) {
       let confetti_button: any = confetti.create(canvas);
       confetti_button({
         particleCount: 500,
-        startVelocity: 10,
+        startVelocity: 7,
         spread: 360,
         ticks: 30,
         origin: {
           x: 0.5,
-          y: 0.5,
+          y: 0.48,
         },
         colors: [`${favoritedItems.includes(id) ? "#eaffe4b3" : "#ff0000"}`],
         shapes: ["circle"],
-        scalar: 0.2, // This makes the confetti smaller
+        scalar: 0.3, // This makes the confetti smaller
       }).then(() => container.removeChild(canvas));
     }
   };

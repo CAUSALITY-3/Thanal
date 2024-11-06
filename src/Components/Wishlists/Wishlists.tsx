@@ -4,6 +4,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import React from "react";
 import { ProductCard } from "../ProductCard/ProductCard";
 import "./Wishlists.scss";
+import Link from "next/link";
 
 function Wishlists({ wishlistIds }: any) {
   async function getProductByIds(ids: string[]) {
@@ -39,14 +40,23 @@ function Wishlists({ wishlistIds }: any) {
 
   return (
     <div className="wishlistsContainer">
-      {formattedProducts?.map((product: any, key: any) => (
-        <ProductCard
-          key={key}
-          props={product}
-          type={product.category}
-          size="s"
-        />
-      ))}
+      {formattedProducts?.length === 0 ? (
+        <div className="no-wishlists">
+          <p className="no-wishlists-text">Nothing in wishlists</p>
+          <Link className="no-wishlists-link" href={"/products"}>
+            Add some products to wishlists!
+          </Link>
+        </div>
+      ) : (
+        formattedProducts?.map((product: any, key: any) => (
+          <ProductCard
+            key={key}
+            props={product}
+            type={product.category}
+            size="s"
+          />
+        ))
+      )}
     </div>
   );
 }
