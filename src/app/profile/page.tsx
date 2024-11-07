@@ -358,7 +358,7 @@ const Profile: FC = () => {
                     ? "profileNavItems profileNavItemsActive"
                     : "profileNavItems"
                 }`}
-                onClick={() => setProfileNav("bio")}
+                onClick={() => router.push("/profile?tab=bio")}
               >
                 Bio
               </div>
@@ -368,7 +368,7 @@ const Profile: FC = () => {
                     ? "profileNavItems profileNavItemsActive"
                     : "profileNavItems"
                 }`}
-                onClick={() => setProfileNav("activity")}
+                onClick={() => router.push("/profile?tab=activity")}
               >
                 Activity
               </div>

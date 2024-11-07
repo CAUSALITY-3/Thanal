@@ -45,6 +45,12 @@ export function getCookie(name: string) {
   return null;
 }
 
+export function getParsedCookie(name: string) {
+  const cookie = getCookie(name);
+  if (!cookie) return null;
+  return JSON.parse(cookie);
+}
+
 export async function getUserDetails(
   data: any
 ): Promise<{ newData: boolean; loginRequired: boolean; cache: any }> {

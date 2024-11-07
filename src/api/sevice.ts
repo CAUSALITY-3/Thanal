@@ -1,7 +1,11 @@
 import { apiPaths } from "./types";
 import { logger } from "./lib";
 import { revalidateCache } from "./utils";
-import { getCookie, getCookieAndUpdateLocalStorage } from "@/app/util";
+import {
+  deleteCookie,
+  getCookie,
+  getCookieAndUpdateLocalStorage,
+} from "@/app/util";
 import Toast from "@/Components/Toast/Toast";
 
 let baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -36,7 +40,12 @@ export async function apiCall(
     const url = baseUrl + apiPaths[path] + params;
     const options = {
       method,
-      headers,
+      headers: {
+        ...headers,
+        user: isBrowser ? getCookie("user") : null,
+        noAuth:
+          process.env.NEXT_PUBLIC_NODE_ENV !== "production" ? true : false,
+      },
       body: JSON.stringify(body),
       next: {
         revalidate: nextOptions?.revalidate,
@@ -56,6 +65,13 @@ export async function apiCall(
     const response = await fetch(url, options);
     if (!response.ok) {
       if (errorReplacer) return { error: "Network response was not ok" };
+      if (response.status == 401) {
+        deleteCookie("user");
+        localStorage.removeItem("user");
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 2000);
+      }
       throw new Error("Network response was not ok");
     }
     const responseData = await response.json();
@@ -75,6 +91,7 @@ export async function apiCall(
         const userData = JSON.parse(user);
         if (updatedAt !== userData?.updatedAt) {
           getCookieAndUpdateLocalStorage("user");
+          console.log("Localstorage updated", updatedAt);
         }
       }
     }

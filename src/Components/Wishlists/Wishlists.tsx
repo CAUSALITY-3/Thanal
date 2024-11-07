@@ -5,8 +5,10 @@ import React from "react";
 import { ProductCard } from "../ProductCard/ProductCard";
 import "./Wishlists.scss";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function Wishlists({ wishlistIds }: any) {
+  const router = useRouter();
   async function getProductByIds(ids: string[]) {
     return await apiCall(
       "POST",
@@ -49,12 +51,17 @@ function Wishlists({ wishlistIds }: any) {
         </div>
       ) : (
         formattedProducts?.map((product: any, key: any) => (
-          <ProductCard
+          <div
             key={key}
-            props={product}
-            type={product.category}
-            size="s"
-          />
+            onClick={() => router.push("/products/" + product.productId)}
+          >
+            <ProductCard
+              key={key}
+              props={product}
+              type={product.category}
+              size="s"
+            />
+          </div>
         ))
       )}
     </div>
