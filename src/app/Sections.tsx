@@ -1,8 +1,12 @@
-import React, { FC } from "react";
+"use client";
+import React from "react";
 import { Carousel } from "@/Components/Carousel/Carousel";
 import { ProductCard } from "@/Components/ProductCard/ProductCard";
 import { ProductCardWrapper } from "@/Components/ProductCard/ProductCardWrapper";
 import "./Sections.scss";
+import { apiCall } from "@/api/sevice";
+import { useQuery } from "@tanstack/react-query";
+import ShimmerLoading from "@/Components/ShimmerLoading/ShimmerLoading";
 
 interface ProductMainList {
   type: string;
@@ -19,9 +23,16 @@ interface ProductMainList {
   };
 }
 
-export async function Sections({ mainData }: any) {
+export async function Sections() {
+  const { data, isLoading, isError } = useQuery({
+    queryFn: () => apiCall("get", "PRODUCT_MAINLIST"),
+    queryKey: ["mainList"], //Array according to Documentation
+    staleTime: 3600000,
+  });
+  const mainData: ProductMainList[] = data || [];
   return (
     <div className="sections">
+      {isLoading && <ShimmerLoading />}
       {mainData.map((item: ProductMainList, key: any) => (
         <div className="section" key={key}>
           <p className="title">{item.type}</p>

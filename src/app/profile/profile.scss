@@ -237,23 +237,49 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        max-width: 800px;
+        width: 75vw;
         gap: 20px;
-        .profile-orders-wishlists-container {
+        @media screen and (max-width: 800px) {
+          width: -webkit-fill-available;
+        }
+        .profile-orders-container {
           width: -webkit-fill-available;
           display: flex;
           justify-content: center;
           align-items: start;
           flex-direction: column;
           gap: 10px;
-          background-color: rgba(173, 214, 255, 0.3);
-          padding: 20px;
+          // background-color: rgba(173, 214, 255, 0.3);
+          padding: 20px 0;
           border-radius: 5px;
-          border: 2px solid rgba(173, 214, 255, 0.7);
-          .profile-orders-wishlists-title {
+          // border: 2px solid rgba(173, 214, 255, 0.7);
+          .profile-orders-title {
             font-size: 22px;
             font-weight: 600;
             color: rgba(63, 63, 63, 0.8);
+            width: -webkit-fill-available;
+            text-align: center;
+            padding: 0 0 20px 0;
+          }
+        }
+        .profile-wishlists-container {
+          width: -webkit-fill-available;
+          display: flex;
+          justify-content: center;
+          align-items: start;
+          flex-direction: column;
+          gap: 10px;
+          background-color: rgba(210, 232, 255, 0.3);
+          padding: 20px;
+          border-radius: 5px;
+          border: 2px solid rgba(173, 214, 255, 0.2);
+          .profile-wishlists-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: rgba(63, 63, 63, 0.8);
+            width: -webkit-fill-available;
+            text-align: center;
+            padding: 0 0 20px 0;
           }
         }
       }

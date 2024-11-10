@@ -79,7 +79,11 @@ export async function getUserAuth() {
     localStorage.setItem("user", stringifiedCache);
     return stringifiedCache;
   }
-  if (loginRequired) return null;
+  if (loginRequired) {
+    localStorage.removeItem("user");
+    deleteCookie("user");
+    return null;
+  }
   isBrowser && document ? (document.cookie = "user=" + stringifiedCache) : null;
   return stringifiedCache;
 }

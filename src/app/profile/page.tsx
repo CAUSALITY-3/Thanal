@@ -1,5 +1,5 @@
 "use client";
-import { FC, useEffect, useState } from "react";
+import { FC, Suspense, useEffect, useState } from "react";
 import React from "react";
 import "./profile.scss";
 import {
@@ -19,6 +19,7 @@ import Modal from "@/Components/Modal/Modal";
 import EditDeliveryAddress from "@/Components/DeliveryAddress/EditDeliveryAddress";
 import Orders from "@/Components/Orders/Orders";
 import Wishlists from "@/Components/Wishlists/Wishlists";
+import ShimmerLoading from "@/Components/ShimmerLoading/ShimmerLoading";
 
 const Profile: FC = () => {
   const [formData, setFormData] = useState<any>({});
@@ -27,7 +28,9 @@ const Profile: FC = () => {
   const [reset, setReset] = useState<boolean>(true);
   const [valid, setValid] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [profileNav, setProfileNav] = useState<"bio" | "activity">("bio");
+  const [profileNav, setProfileNav] = useState<"bio" | "orders" | "wishlists">(
+    "bio"
+  );
   const router = useRouter();
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();
@@ -36,7 +39,7 @@ const Profile: FC = () => {
 
   useEffect(() => {
     if (tab) {
-      setProfileNav(tab as "bio" | "activity");
+      setProfileNav(tab as "bio" | "orders" | "wishlists");
     }
   }, [tab]);
 
@@ -318,18 +321,37 @@ const Profile: FC = () => {
     </>
   );
 
-  const profileActivity = () => (
+  const profileOrders = () => (
     <div className="profileActivityContainer">
-      <div className="profile-orders-wishlists-container">
-        <div className="profile-orders-wishlists-title">Orders</div>
+      <div className="profile-orders-container">
+        <div className="profile-orders-title">Orders</div>
         <Orders orderIds={user?.orders} />
       </div>
-      <div className="profile-orders-wishlists-container">
-        <div className="profile-orders-wishlists-title">Wishlists</div>
+    </div>
+  );
+
+  const profileWishlists = () => (
+    <div className="profileActivityContainer">
+      <div className="profile-wishlists-container">
+        <div className="profile-wishlists-title">Wishlists</div>
         <Wishlists wishlistIds={user?.wishlists} />
       </div>
     </div>
   );
+
+  function switchCase(profileNav: string): React.ReactNode {
+    switch (profileNav) {
+      case "bio":
+        return profileBio();
+      case "orders":
+        return profileOrders();
+      case "wishlists":
+        return profileWishlists();
+      default:
+        return profileBio();
+    }
+  }
+
   return (
     <div className="profilePage">
       <div className="logoutButton" onClick={handleLogout}>
@@ -364,18 +386,30 @@ const Profile: FC = () => {
               </div>
               <div
                 className={`${
-                  profileNav === "activity"
+                  profileNav === "orders"
                     ? "profileNavItems profileNavItemsActive"
                     : "profileNavItems"
                 }`}
-                onClick={() => router.push("/profile?tab=activity")}
+                onClick={() => router.push("/profile?tab=orders")}
               >
-                Activity
+                Orders{`(${user?.orders?.length})`}
+              </div>
+              <div
+                className={`${
+                  profileNav === "wishlists"
+                    ? "profileNavItems profileNavItemsActive"
+                    : "profileNavItems"
+                }`}
+                onClick={() => router.push("/profile?tab=wishlists")}
+              >
+                Wishlists{`(${user?.wishlists?.length})`}
               </div>
             </div>
 
             <div className="profileMiddleContainer">
-              {profileNav === "bio" ? profileBio() : profileActivity()}
+              <Suspense fallback={<ShimmerLoading shimmerCount={2} />}>
+                {switchCase(profileNav)}
+              </Suspense>
             </div>
           </>
         ) : (

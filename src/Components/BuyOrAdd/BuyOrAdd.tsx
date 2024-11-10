@@ -86,7 +86,11 @@ export const BuyOrAdd: FC<Props> = ({ productId, disabled = false }) => {
         router.push("/login");
       }
     } else {
-      router.push("/buy/" + productId);
+      if (email) {
+        router.push("/buy/" + productId);
+      } else {
+        router.push("/login");
+      }
     }
   };
   return (
