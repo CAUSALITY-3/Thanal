@@ -17,6 +17,7 @@ export const apiPaths: { [key: string]: string } = {
   ADD_TO_WISHLIST: "users/favoriteItem",
   REMOVE_FROM_WISHLIST: "users/unFavoriteItem",
   GET_ORDER_BY_IDS: "orders/getOrderByIds",
+  REVIEW_PRODUCT: "orders/reviewOrders",
 };
 
 export interface ProductMainList {

@@ -47,7 +47,7 @@ function Modal({ children, isOpen, handleClose, size = "m", title = "" }: any) {
                 </svg>
               </Tooltip>
             </div>
-            {children}
+            <div className="modal-children-content">{children}</div>
           </div>
         </div>
       </Template>

@@ -325,7 +325,7 @@ const Profile: FC = () => {
     <div className="profileActivityContainer">
       <div className="profile-orders-container">
         <div className="profile-orders-title">Orders</div>
-        <Orders orderIds={user?.orders} />
+        <Orders orderIds={user?.orders} email={user?.email} name={user?.name} />
       </div>
     </div>
   );

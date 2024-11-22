@@ -1,7 +1,7 @@
 .modal {
   position: fixed;
   inset: 0; /* inset sets all 4 values (top right bottom left) much like how we set padding, margin etc., */
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,7 +25,7 @@
     .modal-title {
       font-weight: bold;
       padding: 10px;
-      font-size: 20px;
+      font-size: 24px;
     }
     .close-btn {
       position: absolute;
@@ -41,6 +41,13 @@
       &:hover {
         background-color: #d0d0d0;
       }
+    }
+    .modal-children-content {
+      height: -webkit-fill-available;
+      width: -webkit-fill-available;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 

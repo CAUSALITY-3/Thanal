@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 
 function Wishlists({ wishlistIds }: any) {
   const router = useRouter();
-  async function getProductByIds(ids: string[]) {
+  async function getProductByIds() {
     return await apiCall(
       "POST",
       "GET_PRODUCT_BY_IDS",
@@ -23,7 +23,7 @@ function Wishlists({ wishlistIds }: any) {
   }
 
   const { data: products } = useSuspenseQuery({
-    queryFn: () => getProductByIds(wishlistIds),
+    queryFn: () => getProductByIds(),
     queryKey: ["wishlists"],
     staleTime: 30000,
   });

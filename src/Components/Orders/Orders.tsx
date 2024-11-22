@@ -1,11 +1,15 @@
+"use client";
 import { apiCall } from "@/api/sevice";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import "./Orders.scss";
-import { Button } from "../Buttons/Button";
 import Link from "next/link";
+import Modal from "../Modal/Modal";
+import Review from "../Review/Review";
 
-function Orders({ orderIds }: any) {
+function Orders({ orderIds, email, name }: any) {
+  const [openReviewPage, setOpenReviewPage] = useState(false);
+  const [reviewPayload, setReviewPayload] = useState({});
   async function getOrderByIds(ids: string[]) {
     return await apiCall(
       "POST",
@@ -51,6 +55,11 @@ function Orders({ orderIds }: any) {
     queryKey: ["orders"],
     staleTime: 30000,
   });
+
+  const openReviewPageFn = (orderId: string, productId: string) => {
+    setReviewPayload({ orderId, productId, userEmail: email, userName: name });
+    setOpenReviewPage(true);
+  };
 
   return (
     <div className="orders-container">
@@ -100,9 +109,18 @@ function Orders({ orderIds }: any) {
                       {!["cancelled", "delivered"].includes(item.status) && (
                         <div className="order-cancel-text">Cancel</div>
                       )}
-                      {item.status === "delivered" && (
-                        <div className="order-review-text">Rate & Review</div>
-                      )}
+                      {item.status === "delivered" &&
+                        (item.review?.rating === undefined ||
+                          !item.review?.review) && (
+                          <div
+                            className="order-review-text"
+                            onClick={() =>
+                              openReviewPageFn(order._id, item.productId)
+                            }
+                          >
+                            Rate & Review
+                          </div>
+                        )}
                     </div>
                   </div>
                 </div>
@@ -121,6 +139,16 @@ function Orders({ orderIds }: any) {
                 Total: ₹ {order.totalPrice}
               </div>
             </div>
+            {openReviewPage && (
+              <Modal
+                isOpen={openReviewPage}
+                size={"m"}
+                handleClose={() => setOpenReviewPage(false)}
+                title={"Rate & Review"}
+              >
+                <Review reviewPayload={reviewPayload} />
+              </Modal>
+            )}
           </div>
         ))
       )}
