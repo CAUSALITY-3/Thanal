@@ -24,6 +24,11 @@
         top: 0;
         z-index: 100;
       }
+      .main-footer {
+        position: static;
+        bottom: 0;
+        width: -webkit-fill-available;
+      }
     }
   }
   #toast-wrapper {

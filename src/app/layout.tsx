@@ -3,6 +3,7 @@ import "./homeLayout.scss";
 import { ReactQueryClientProvider } from "./queryClient";
 import Navbar from "@/Components/Navbar/navbar";
 import { roboto } from "../utils/fonts";
+import Footer from "@/Components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Thanal",
@@ -23,6 +24,9 @@ export default async function RootLayout({
               <Navbar />
             </div>
             {children}
+            <div className="main-footer">
+              <Footer />
+            </div>
           </div>
         </body>
       </html>
